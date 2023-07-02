@@ -1,4 +1,4 @@
-import "./TweetBox.css"
+// import "./TweetBox.css"
 
 function TweetBox ({ tweet: { text, author }}) {
   const { username } = author;

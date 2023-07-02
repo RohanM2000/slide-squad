@@ -12,6 +12,9 @@ const validateLoginInput = require('../../validations/login');
 /* GET users listing. */
 router.get('/current', restoreUser, (req, res) => {
   if (!isProduction) {
+    // In development, allow React server to gain access to the CSRF token
+    // whenever the current user information is first loaded into the
+    // React application
     const csrfToken = req.csrfToken();
     res.cookie("CSRF-TOKEN", csrfToken);
   }
@@ -21,7 +24,7 @@ router.get('/current', restoreUser, (req, res) => {
     username: req.user.username,
     email: req.user.email
   });
-});
+})
 
 router.post('/register', validateRegisterInput, async (req, res, next) => {
   const user = await User.findOne({
