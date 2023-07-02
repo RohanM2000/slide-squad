@@ -8,6 +8,7 @@ const csurf = require('csurf');
 const debug = require('debug');
 
 require('./models/User');
+require('./models/Tweet');
 require('./config/passport');
 const passport = require('passport');
 
