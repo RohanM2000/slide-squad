@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import PresentationBox from './PresentationBox';
 import './PresentationCompose.css';
 import SlideText from '../SlideElements/SlideText';
+import SlideRectangle from '../SlideElements/SlideRectangle';
 function PresentationCompose () {
   const [text, setText] = useState('');
   const dispatch = useDispatch();
@@ -11,7 +12,7 @@ function PresentationCompose () {
   // const newPresentation = useSelector(state => state.presentations.new);
   // const errors = useSelector(state => state.errors.presentations);
   const [presentationState, setPresentationState] =useState({
-    1:{id:1, startLeft:0,startTop:0, text:''}
+    1:{id:1, startLeft:0,startTop:0, text:'', type: "text"}
   });
   const [slideNumber,setSlideNumber] = useState(1);
   // when the arrow is pressed, the next slide will be displayed
@@ -32,22 +33,29 @@ function PresentationCompose () {
   //   dispatch(composePresentation({ text })); 
   //   setText('');
   // };
-const nextId = Object.values(presentationState).length+1;
- const addTextElement = (event) =>{
+  const nextId = Object.values(presentationState).length+1;
+  const addTextElement = (event) =>{
   event.preventDefault();
   setPresentationState(state=>{
-    return {...state,[nextId]: {text: 'added text',startLeft:0,startTop:0,id: nextId}}
+    return {...state,[nextId]: {text: 'added text',startLeft:0,startTop:0,id: nextId, type: "text"}}
   })
- } 
+  } 
+
+  const addRectangleElement = (event) =>{
+    event.preventDefault();
+    setPresentationState(state=>{
+      return {...state,[nextId]: {startWidth:50,startHeight:50,startLeft:0,startTop:0,id: nextId, type: "rectangle"}}
+    })
+    } 
  
- const handleSave = ()=>{
+  const handleSave = ()=>{
     console.log('saved');
     let savedObject={};
     Object.values(presentationState).forEach((ele)=>{
       savedObject[ele.id] = ele;
     })
     console.log(savedObject);
- }
+  }
   // slidetext: click and drag, when placed within the presentation canvas (top > canvas top, bottom < canvas bottom, right < canvas right, left > canvas left)
   // spawn it into the center
   // when SlideText is out of the slidetext container, render a new one
@@ -62,13 +70,16 @@ const nextId = Object.values(presentationState).length+1;
         <button onClick={event=>addTextElement(event)}>
           add a text element
         </button>
-     
+        <button onClick={event=>addRectangleElement(event)}>
+          add a rectangle element
+        </button>
       </div>
       {/* canvas frame to house the canvas and display possible overflows */}
       <div className='canvas-frame'>
         <div className='presentation-canvas' >
-            {Object.values(presentationState).map((text)=>{
-              return <SlideText setPresentationState={setPresentationState} id={text.id} text={text.text} startLeft={text.startLeft} startTop={text.startTop} />
+            {Object.values(presentationState).map((obj)=>{
+              if (obj.type === "text") return <SlideText setPresentationState={setPresentationState} id={obj.id} text={obj.text} startLeft={obj.startLeft} startTop={obj.startTop} />
+              if (obj.type === "rectangle") return <SlideRectangle setPresentationState={setPresentationState} id={obj.id} startHeight={obj.startHeight} startWidth={obj.startWidth} startLeft={obj.startLeft} startTop={obj.startTop} />
             })}
         </div>
       </div>
