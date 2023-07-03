@@ -9,16 +9,20 @@ const handleValidationErrors = require('./handleValidationError');
 //     handleValidationErrors
 // ];
 
-// module.exports = validateTweetInput;
+// module.exports = validateTweetInput;  
 
 const validatePresentationInput = [
     check('title')
       .exists({ checkFalsy: true })
       .isLength({ min: 5 })
       .withMessage("Presentation title must be at least 5 characters"),
-    check('slides')
-      .isArray({ min: 1 })
-      .withMessage("At least one slide is required"),
+      check('slides')
+      .custom((slides) => {
+        if (!slides || slides.size === 0) {
+          throw new Error("At least one slide is required");
+        }
+        return true;
+      }),
     check('slides.*.title')
       .exists({ checkFalsy: true })
       .withMessage("Slide title is required"),

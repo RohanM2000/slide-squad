@@ -55,6 +55,7 @@ router.get('/', async (req, res) => {
 //     }
 // });
 
+// Get presentation of a specific user by their id. 
 router.get('/user/:userId', async (req, res, next) => {
     let user;
     try {
@@ -122,12 +123,17 @@ router.get('/:id', async (req, res, next) => {
 //     }
 // });
 
-// router.post('/', requireUser, validatePresentationInput, async (req, res, next) => {
-router.post('/', requireUser, async (req, res, next) => {
+router.post('/', requireUser, validatePresentationInput, async (req, res, next) => {
+// router.post('/', requireUser, async (req, res, next) => {
     try {
+
+        const { title, category, slides } = req.body;
+
         const newPresentation = new Presentation({
-            text: req.body.text,
-            author: req.user._id
+            title,
+            category,
+            author: req.user._id,
+            slides
         });
 
         const presentation = await newPresentation.save();

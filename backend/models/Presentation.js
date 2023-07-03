@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+// const User = require('./User');
 const Schema = mongoose.Schema;
 
 // const tweetSchema = new Schema({
@@ -15,49 +16,39 @@ const Schema = mongoose.Schema;
 // });
 
 // module.exports = mongoose.model("Tweet", tweetSchema);
-
-const slideSchema = new Schema({
-    title: {
-      type: String,
-      required: true
-    },
-    content: {
-      type: String,
-      required: true
-    },
-    image: {
-      type: String
-    }
-    // videoUrl: {
-    //     type: String
-    // }
-  });
   
   const presentationSchema = new Schema({
     title: {
       type: String,
       required: true
     },
-    slides: [slideSchema],
+    category: {
+      type: String,
+      required: true
+    },
     author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: true
     },
-    // videoUrl: {
-    //   type: String
-    // },
-    category: {
-       type: String,
-       required: true
-    },
-    createdAt: {
-      type: Date,
-      default: Date.now
+    slides: {
+      type: Map,
+      of: new Schema({
+        id: {
+          type: Number,
+          required: true
+        },
+        text: {
+          type: String,
+          required: true
+        }
+      }, { _id: false })
     }
-  });
+  }, { timestamps: true });
   
   const Presentation = mongoose.model('Presentation', presentationSchema);
   
   module.exports = Presentation;
+  
+
   
