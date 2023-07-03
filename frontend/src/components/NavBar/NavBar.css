@@ -48,6 +48,10 @@
     text-decoration: none;
 }
 
+.profile-dropdown {
+    display: flex;
+}
+
 .profile-button {
     border: 1px solid black;
     background-color: rgb(255, 119, 119);
@@ -68,9 +72,10 @@
     border-radius: 8px;
     flex-direction: column;
     width: 2%;
-  }
+    margin-left: 10px;
+}
   
-  .dropdown-content {
+.dropdown-content {
     display: none;
     position: absolute;
     background-color: #fdf9f9;
@@ -81,4 +86,4 @@
     width: 100%;
     color: black;
     transform: translateX(calc(30% + 8px));
-  }
+}
