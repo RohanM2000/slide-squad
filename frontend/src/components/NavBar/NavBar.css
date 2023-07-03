@@ -80,7 +80,7 @@
     margin-left: 10px;
   }
   
-  .dropdown-content {
+.dropdown-content {
     display: none;
     position: absolute;
     background-color: #fdf9f9;
