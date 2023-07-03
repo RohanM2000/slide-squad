@@ -48,6 +48,7 @@ function LoginForm () {
         />
       </label>
       <input
+        className='session-form-button'
         type="submit"
         value="Log In"
         disabled={!email || !password}
