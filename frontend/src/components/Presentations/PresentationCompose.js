@@ -1,33 +1,81 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearPresentationErrors, composePresentation } from '../../store/presentations';
+// import { clearPresentationErrors, composePresentation } from '../../store/presentations';
 import PresentationBox from './PresentationBox';
-// import './PresentationCompose.css';
-
+import './PresentationCompose.css';
+import SlideText from '../SlideElements/SlideText';
 function PresentationCompose () {
   const [text, setText] = useState('');
   const dispatch = useDispatch();
-  const author = useSelector(state => state.session.user);
-  const newPresentation = useSelector(state => state.presentations.new);
-  const errors = useSelector(state => state.errors.presentations);
+  // const author = useSelector(state => state.session.user);
+  // const newPresentation = useSelector(state => state.presentations.new);
+  // const errors = useSelector(state => state.errors.presentations);
+  const [presentationState, setPresentationState] =useState({
+    1:{id:1, startLeft:0,startTop:0, text:''}
+  });
+  const [slideNumber,setSlideNumber] = useState(1);
+  // when the arrow is pressed, the next slide will be displayed
+  // need to work out presentation preview or show presentaiton data
 
-  useEffect(() => {
-    return () => dispatch(clearPresentationErrors());
-  }, [dispatch]);
+  
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    dispatch(composePresentation({ text })); 
-    setText('');
-  };
+  // need to append child to div, that way when we submit, we can pass the children 
+  // and parse the data into the backend
+  // when user presses another page, add to the presentationState??
+  
+  // useEffect(() => {
+  //   return () => dispatch(clearPresentationErrors());
+  // }, [dispatch]);
 
-  const update = e => setText(e.currentTarget.value);
+  // const handleSubmit = e => {
+  //   e.preventDefault();
+  //   dispatch(composePresentation({ text })); 
+  //   setText('');
+  // };
+const nextId = Object.values(presentationState).length+1;
+ const addTextElement = (event) =>{
+  event.preventDefault();
+  setPresentationState(state=>{
+    return {...state,[nextId]: {text: 'added text',startLeft:0,startTop:0,id: nextId}}
+  })
+ } 
+ 
+ const handleSave = ()=>{
+    console.log('saved');
+    let savedObject={};
+    Object.values(presentationState).forEach((ele)=>{
+      savedObject[ele.id] = ele;
+    })
+    console.log(savedObject);
+ }
+  // slidetext: click and drag, when placed within the presentation canvas (top > canvas top, bottom < canvas bottom, right < canvas right, left > canvas left)
+  // spawn it into the center
+  // when SlideText is out of the slidetext container, render a new one
+  // when dragged into canvas, append to the canvas, then onChange, we can iterate through the canvas's children to record changes to presentation state? 
+  // check children right, left, top, bottom, type, width, height, (rotation??)
 
   return (
     <>
-      <form className="compose-presentation" onSubmit={handleSubmit}>
+      {/* <form className="compose-presentation" onSubmit={handleSubmit}> */}
       {/* decide how the input will be taken */}
-        <input 
+      <div className='selection'>
+        <button onClick={event=>addTextElement(event)}>
+          add a text element
+        </button>
+     
+      </div>
+      {/* canvas frame to house the canvas and display possible overflows */}
+      <div className='canvas-frame'>
+        <div className='presentation-canvas' >
+            {Object.values(presentationState).map((text)=>{
+              return <SlideText setPresentationState={setPresentationState} id={text.id} text={text.text} startLeft={text.startLeft} startTop={text.startTop} />
+            })}
+        </div>
+      </div>
+      <button onClick={handleSave}>
+        save
+      </button>
+        {/* <input 
           type="textarea"
           value={text}
           onChange={update}
@@ -44,7 +92,7 @@ function PresentationCompose () {
       <div className="previous-presentation">
         <h3>Previous Presentation</h3>
         {newPresentation ? <PresentationBox presentation={newPresentation} /> : undefined}
-      </div>
+      </div> */}
     </>
   )
 }
