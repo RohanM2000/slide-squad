@@ -29,6 +29,7 @@
 .links-auth {
     display: flex;
     flex-direction: column;
+    margin-left: 10px;
    
 }
 
@@ -36,6 +37,7 @@
     color: black;
     text-decoration: none;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding-bottom: 10px;
 }
 
 
@@ -50,6 +52,7 @@
 
 .profile-dropdown {
     display: flex;
+    
 }
 
 .profile-button {
@@ -60,6 +63,7 @@
     align-items: center;
     min-width: 8em;
     border-radius: 99999px;
+    margin: 0px 10px;
   }
   
 .user-greeting {
@@ -67,13 +71,14 @@
     width: 100%;
 }
 
+
 .profile-dropdown:hover .dropdown-content {
     display: flex;
     border-radius: 8px;
     flex-direction: column;
     width: 2%;
     margin-left: 10px;
-}
+  }
   
 .dropdown-content {
     display: none;
@@ -85,5 +90,5 @@
     z-index: 1;
     width: 100%;
     color: black;
-    transform: translateX(calc(30% + 8px));
-}
+    transform: translateX(calc(70% + 8px));
+  }
