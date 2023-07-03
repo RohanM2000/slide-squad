@@ -1,6 +1,6 @@
 // import "./PresentationBox.css"
 
-function PresentationBox ({ presentaion: { text, author }}) {
+function PresentationBox ({ presentation: { text, author }}) {
   const { username } = author;
   return (
     <div className="presentation">
