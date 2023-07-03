@@ -1,9 +1,9 @@
 function MainPage() {
     return (
       <>
-        <p>SlideSquad</p>
+        <p>Slide-Squad</p>
         <footer>
-          Copyright &copy; 2023 SlideSquad
+          Copyright &copy; 2023 Slide-Squad
         </footer>
       </>
     );
