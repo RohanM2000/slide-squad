@@ -2,9 +2,11 @@ import { Link, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import './NavBar.css';
 import { logout } from '../../store/session';
+import ProfileButton from './ProfileButton';
 
 function NavBar () {
   const loggedIn = useSelector(state => !!state.session.user);
+  const currentUser = useSelector(state => state.session.user);
   const dispatch = useDispatch();
   
   const logoutUser = e => {
@@ -12,15 +14,16 @@ function NavBar () {
       dispatch(logout());
   }
 
-  const getLinks = () => {
+  let getLinks = () => {
     if (loggedIn) {
       return (
-        <div className="links-nav">
-          <NavLink to={'/tweets'} className='link-nav'>All Tweets</NavLink>
-          <NavLink to={'/profile'} className='link-nav'>Profile</NavLink>
-          <NavLink to={'/tweets/new'} className='link-nav'>Write a Tweet</NavLink>
-          <button onClick={logoutUser}>Logout</button>
-        </div>
+        <ProfileButton user={currentUser}/>
+        // <div className="links-nav">
+        //   <NavLink to={'/tweets'} className='link-nav'>All Tweets</NavLink>
+        //   <NavLink to={'/profile'} className='link-nav'>Profile</NavLink>
+        //   <NavLink to={'/tweets/new'} className='link-nav'>Write a Tweet</NavLink>
+        //   <button onClick={logoutUser}>Logout</button>
+        // </div>
       );
     } else {
       return (
