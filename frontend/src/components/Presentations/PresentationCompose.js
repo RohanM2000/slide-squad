@@ -37,7 +37,7 @@ function PresentationCompose () {
         <div className="errors">{errors?.text}</div>
         <input type="submit" value="Submit" />
       </form>
-      <div className="tweet-preview">
+      <div className="presentation-preview">
         <h3>Presentation Preview</h3>
         {text ? <PresentationBox presentation={{text, author}} /> : undefined}
       </div>
