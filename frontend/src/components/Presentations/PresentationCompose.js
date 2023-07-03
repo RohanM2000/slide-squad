@@ -5,6 +5,7 @@ import PresentationBox from './PresentationBox';
 import './PresentationCompose.css';
 import SlideText from '../SlideElements/SlideText';
 function PresentationCompose () {
+
   const [text, setText] = useState('');
   const dispatch = useDispatch();
   // const author = useSelector(state => state.session.user);
