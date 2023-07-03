@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-// import './NavBar.css';
+import './NavBar.css';
 import { logout } from '../../store/session';
 
 function NavBar () {
@@ -16,17 +16,18 @@ function NavBar () {
     if (loggedIn) {
       return (
         <div className="links-nav">
-          <Link to={'/tweets'}>All Tweets</Link>
-          <Link to={'/profile'}>Profile</Link>
-          <Link to={'/tweets/new'}>Write a Tweet</Link>
+          <NavLink to={'/tweets'} className='link-nav'>All Tweets</NavLink>
+          <NavLink to={'/profile'} className='link-nav'>Profile</NavLink>
+          <NavLink to={'/tweets/new'} className='link-nav'>Write a Tweet</NavLink>
           <button onClick={logoutUser}>Logout</button>
         </div>
       );
     } else {
       return (
         <div className="links-auth">
-          <Link to={'/signup'}>Signup</Link>
-          <Link to={'/login'}>Login</Link>
+            <NavLink to={'/signup'} className='link-auth'>Signup</NavLink>
+            <NavLink to={'/login'} className='link-auth'>Login</NavLink>
+          
         </div>
       );
     }
@@ -34,8 +35,15 @@ function NavBar () {
 
   return (
     <>
-      <h1>Chirper</h1>
-      { getLinks() }
+      <div className='nav-wrapper'>
+        <div className='nav-container'>
+          <NavLink to={'/'} className='home-link'>
+            <h1>SlideSquad</h1>
+          </NavLink>
+          { getLinks() }
+        </div>
+
+      </div>
     </>
   );
 }

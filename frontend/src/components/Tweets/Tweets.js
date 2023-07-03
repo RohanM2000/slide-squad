@@ -16,10 +16,13 @@ function Tweets () {
   
   return (
     <>
-      <h2>All Tweets</h2>
-      {tweets.map(tweet => (
-        <TweetBox key={tweet._id} tweet={tweet} />
-      ))}
+      <div className='all-tweets'>
+        <h2>All Tweets</h2>
+        {tweets.map(tweet => (
+          <TweetBox key={tweet._id} tweet={tweet} />
+        ))}
+
+      </div>
     </>
   );
 }
