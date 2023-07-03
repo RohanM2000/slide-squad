@@ -1,0 +1,19 @@
+.session-form {
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    margin-top: 20px;
+    
+}
+
+.session-form-button {
+    width: 100px;
+}
+
+.session-form label {
+    margin-bottom: 30px;
+}
+
+.session-form label span {
+    margin-right: 20px;
+}

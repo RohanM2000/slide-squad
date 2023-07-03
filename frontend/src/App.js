@@ -23,6 +23,7 @@ function App() {
 
   return loaded && (
     <>
+    <div className='app-container'>
       <NavBar />
       <Switch>
         <AuthRoute exact path="/" component={MainPage} />
@@ -33,6 +34,7 @@ function App() {
         <ProtectedRoute exact path="/profile" component={Profile} />
         <ProtectedRoute exact path="/tweets/new" component={TweetCompose} />
       </Switch>
+    </div>
     </>
   );
 }
