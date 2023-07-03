@@ -5,6 +5,7 @@ import PresentationBox from './PresentationBox';
 // import './PresentationCompose.css';
 
 function PresentationCompose () {
+
   const [text, setText] = useState('');
   const dispatch = useDispatch();
   const author = useSelector(state => state.session.user);
