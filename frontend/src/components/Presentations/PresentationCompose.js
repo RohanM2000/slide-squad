@@ -5,6 +5,7 @@ import PresentationBox from './PresentationBox';
 import './PresentationCompose.css';
 import SlideText from '../SlideElements/SlideText';
 import SlideRectangle from '../SlideElements/SlideRectangle';
+import savePresentation from './presentationSave';
 function PresentationCompose () {
 
   const [text, setText] = useState('');
@@ -55,7 +56,8 @@ function PresentationCompose () {
     Object.values(presentationState).forEach((ele)=>{
       savedObject[ele.id] = ele;
     })
-    console.log(savedObject);
+    // console.log(savedObject);
+    savePresentation(savedObject, dispatch);
   }
   // slidetext: click and drag, when placed within the presentation canvas (top > canvas top, bottom < canvas bottom, right < canvas right, left > canvas left)
   // spawn it into the center
