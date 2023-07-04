@@ -6,14 +6,15 @@ import './PresentationCompose.css';
 import SlideText from '../SlideElements/SlideText';
 import SlideRectangle from '../SlideElements/SlideRectangle';
 function PresentationCompose () {
-
+  const [onFocus,setOnFocus] = useState(null);
   const [text, setText] = useState('');
   const dispatch = useDispatch();
+  const [bold,setBold] = useState(false);
   // const author = useSelector(state => state.session.user);
   // const newPresentation = useSelector(state => state.presentations.new);
   // const errors = useSelector(state => state.errors.presentations);
   const [presentationState, setPresentationState] =useState({
-    1:{id:1, startLeft:0,startTop:0, text:'', type: "text"}
+    1:{id:1, startLeft:0,startTop:0, text:'', type: "text",bold:false}
   });
   const [slideNumber,setSlideNumber] = useState(1);
   // when the arrow is pressed, the next slide will be displayed
@@ -74,12 +75,17 @@ function PresentationCompose () {
         <button onClick={event=>addRectangleElement(event)}>
           add a rectangle element
         </button>
+        <button onClick={()=>setPresentationState(
+          {...presentationState,[onFocus]:{...presentationState[onFocus],bold: !presentationState[onFocus].bold}}
+        )}>
+          Bold
+        </button>
       </div>
       {/* canvas frame to house the canvas and display possible overflows */}
       <div className='canvas-frame'>
         <div className='presentation-canvas' >
             {Object.values(presentationState).map((obj)=>{
-              if (obj.type === "text") return <SlideText setPresentationState={setPresentationState} id={obj.id} text={obj.text} startLeft={obj.startLeft} startTop={obj.startTop} />
+              if (obj.type === "text") return <SlideText bold={obj.bold} setOnFocus={setOnFocus} setPresentationState={setPresentationState} id={obj.id} text={obj.text} startLeft={obj.startLeft} startTop={obj.startTop} />
               if (obj.type === "rectangle") return <SlideRectangle setPresentationState={setPresentationState} id={obj.id} startHeight={obj.startHeight} startWidth={obj.startWidth} startLeft={obj.startLeft} startTop={obj.startTop} />
             })}
         </div>

@@ -21,7 +21,8 @@ function App() {
     
   return loaded && (
     <>
-    <div className='app-container'>
+    <PresentationCompose />
+    {/* <div className='app-container'>
       <NavBar />
       <Switch>
         <AuthRoute exact path="/" component={MainPage} />
@@ -30,7 +31,7 @@ function App() {
 
         <ProtectedRoute exact path="/profile" component={Profile} />
       </Switch>
-    </div>
+    </div> */}
     </>
   );
 }
