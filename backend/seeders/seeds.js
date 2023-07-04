@@ -70,3 +70,4 @@ const insertSeeds = () => {
                    process.exit(1);
                  });
 }
+
