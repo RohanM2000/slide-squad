@@ -65,7 +65,8 @@ for (let i = 0; i < NUM_SEED_PRESENTATIONS; i++) {
     new Presentation({
       title: faker.hacker.phrase(),
       category: faker.hacker.phrase(),
-      author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id
+      author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+      slides: slides
     })
   )
 }
