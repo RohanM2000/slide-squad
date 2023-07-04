@@ -14,7 +14,7 @@ function PresentationCompose () {
   // const newPresentation = useSelector(state => state.presentations.new);
   // const errors = useSelector(state => state.errors.presentations);
   const [presentationState, setPresentationState] =useState({
-    1:{id:1, startLeft:0,startTop:0, text:'', type: "text",bold:false}
+    1:{id:1, startLeft:0,startTop:0, text:'', type: "text",bold:false,color:'red'}
   });
   const [slideNumber,setSlideNumber] = useState(1);
   // when the arrow is pressed, the next slide will be displayed
@@ -78,14 +78,19 @@ function PresentationCompose () {
         <button onClick={()=>setPresentationState(
           {...presentationState,[onFocus]:{...presentationState[onFocus],bold: !presentationState[onFocus].bold}}
         )}>
-          Bold
+          Bol
+        </button>
+        <button onClick={()=>setPresentationState(
+          {...presentationState,[onFocus]:{...presentationState[onFocus],color: 'red'}}
+        )}>
+          Red
         </button>
       </div>
       {/* canvas frame to house the canvas and display possible overflows */}
       <div className='canvas-frame'>
         <div className='presentation-canvas' >
             {Object.values(presentationState).map((obj)=>{
-              if (obj.type === "text") return <SlideText bold={obj.bold} setOnFocus={setOnFocus} setPresentationState={setPresentationState} id={obj.id} text={obj.text} startLeft={obj.startLeft} startTop={obj.startTop} />
+              if (obj.type === "text") return <SlideText color={obj.color} bold={obj.bold} setOnFocus={setOnFocus} setPresentationState={setPresentationState} id={obj.id} text={obj.text} startLeft={obj.startLeft} startTop={obj.startTop} />
               if (obj.type === "rectangle") return <SlideRectangle setPresentationState={setPresentationState} id={obj.id} startHeight={obj.startHeight} startWidth={obj.startWidth} startLeft={obj.startLeft} startTop={obj.startTop} />
             })}
         </div>

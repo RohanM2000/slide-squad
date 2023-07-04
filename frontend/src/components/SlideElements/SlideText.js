@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 
-export default function SlideText ({setOnFocus, bold, startLeft, id, startTop, text, setPresentationState}) {
+export default function SlideText ({color,setOnFocus, bold, startLeft, id, startTop, text, setPresentationState}) {
     const [top, setTop] = useState(0);
     const [left, setLeft] = useState(0);
     const [selected,setSelected] = useState(false);
@@ -89,7 +89,8 @@ export default function SlideText ({setOnFocus, bold, startLeft, id, startTop, t
             onMouseMove={handleMouseMove}
             onFocus={handleOnFocus}
             style={{position: "absolute", top: (startTop + top) + "px", left: (startLeft + left) + "px",
-            fontWeight: bold ? '700' : 'normal'
+            fontWeight: bold ? '700' : 'normal',
+            color: color
             }}
         >
             
