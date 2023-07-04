@@ -1,8 +1,12 @@
 function getCookie(cookieName) {
     const cookies = document.cookie.split(';');
+    console.log(cookies);
     for (let cookie of cookies) {
         const [name, value] = cookie.split('=');
-        if (name.trim() === cookieName) return value;
+        if (name.trim() === cookieName) {
+          console.log(value);
+          return value;
+        }
     }
     return null;
   }
