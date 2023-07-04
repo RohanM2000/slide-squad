@@ -32,13 +32,13 @@ const Schema = mongoose.Schema;
       required: true
     },
     slides: {
-      type: Map,
-      of: new Schema({
-        id: {
-          type: Number,
+      type: Object,
+      // of: new Schema({
+        // id: {
+          // type: Number,
           required: true
-        }
-      }, { _id: false })
+        // }
+      // }, { _id: false })
     }
   }, { timestamps: true });
   
