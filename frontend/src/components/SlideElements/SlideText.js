@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
-
-export default function SlideText ({color,setOnFocus, bold, startLeft, id, startTop, text, setPresentationState}) {
+import './SlideText.css';
+export default function SlideText ({fontsize,color,setOnFocus, bold, startLeft, id, startTop, text, setPresentationState}) {
     const [top, setTop] = useState(0);
     const [left, setLeft] = useState(0);
     const [selected,setSelected] = useState(false);
@@ -36,7 +36,7 @@ export default function SlideText ({color,setOnFocus, bold, startLeft, id, start
            return {...state,
             [id]: {
                 ...state[id],
-                text: currentText,
+                text: e.target.innerText,
                 startTop: startTop + tempTop,
                 startLeft: startLeft + tempLeft,
                 id: id,
@@ -63,7 +63,7 @@ export default function SlideText ({color,setOnFocus, bold, startLeft, id, start
            return {...state,
             [id]: {
                 ...state[id],
-                text: currentText,
+                text: e.target.innerText,
                 startTop: startTop + tempTop,
                 startLeft: startLeft + tempLeft,
                 id: id,
@@ -80,7 +80,10 @@ export default function SlideText ({color,setOnFocus, bold, startLeft, id, start
     };
 
     return (
-        <input
+        <div className='input-container'>
+        <p
+            contentEditable='true'
+            className='input-text'
             value={currentText}
             onChange={event=>setCurrentText(event.currentTarget.value)}
             onMouseDown={handleMouseDown}
@@ -90,10 +93,12 @@ export default function SlideText ({color,setOnFocus, bold, startLeft, id, start
             onFocus={handleOnFocus}
             style={{position: "absolute", top: (startTop + top) + "px", left: (startLeft + left) + "px",
             fontWeight: bold ? '700' : 'normal',
-            color: color
+            color: color,
+            fontSize: fontsize
             }}
         >
             
-        </input>
+        </p>
+        </div>
     );
 };
