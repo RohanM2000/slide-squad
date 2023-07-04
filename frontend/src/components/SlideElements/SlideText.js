@@ -89,7 +89,7 @@ export default function SlideText ({setOnFocus, bold, startLeft, id, startTop, t
             onMouseMove={handleMouseMove}
             onFocus={handleOnFocus}
             style={{position: "absolute", top: (startTop + top) + "px", left: (startLeft + left) + "px",
-            fontWeight: bold && selected ? '700' : 'normal'
+            fontWeight: bold ? '700' : 'normal'
             }}
         >
             
