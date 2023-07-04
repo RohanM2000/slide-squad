@@ -156,7 +156,36 @@ router.get('/category/:category', async (req, res, next) => {
         next(error);
     }
 });
-  
 
+router.patch('/:presentationId', async (req, res, next) => {
+    const presentationId = req.params.presentationId;
+  
+    try {
+      const presentation = await Presentation.findById(presentationId);
+      if (!presentation) {
+        const error = new Error('Presentation not found');
+        error.statusCode = 404;
+        error.errors = { message: 'No presentation found with that id' };
+        return next(error);
+      }
+  
+    
+      if (req.body.title) {
+        presentation.title = req.body.title;
+      }
+      if (req.body.category) {
+        presentation.category = req.body.category;
+      }
+      if (req.body.slides) {
+        presentation.slides = req.body.slides;
+      }
+  
+      const updatedPresentation = await presentation.save();
+      res.json(updatedPresentation);
+    } catch (err) {
+      next(err);
+    }
+  });
+  
 
 module.exports = router;

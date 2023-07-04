@@ -17,7 +17,7 @@ function ProfileButton({ user }) {
     <div className="profile-dropdown">
       <button className="profile-button">
     
-          <span className="user-greeting">Hi, {user.email}</span>
+          <span className="user-greeting">Hi, {user.username}</span>
         
       </button>
     
