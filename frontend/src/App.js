@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Switch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import { AuthRoute, ProtectedRoute } from './components/Routes/Routes';
 import NavBar from './components/NavBar/NavBar';
@@ -11,6 +11,7 @@ import SignupForm from './components/SessionForms/SignupForm';
 import Profile from './components/Profile/Profile';
 import PresentationCompose from './components/Presentations/PresentationCompose';
 import { getCurrentUser } from './store/session';
+import Presentations from './components/Presentations/Presentations';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -29,6 +30,7 @@ function App() {
         <AuthRoute exact path="/signup" component={SignupForm} />
 
         <ProtectedRoute exact path="/profile" component={Profile} />
+        <ProtectedRoute exact path="/presentations" component={Presentations} />
       </Switch>
     </div>
     </>

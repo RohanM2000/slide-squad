@@ -5,7 +5,7 @@ import PresentationBox from './PresentationBox';
 
 function Presentations () {
   const dispatch = useDispatch();
-  const presentations = useSelector(state => Object.values(state.presentations.all));
+  const presentations = useSelector(state => Object.values(state.presentations));
   
   useEffect(() => {
     dispatch(fetchPresentations());

@@ -2,8 +2,7 @@ import jwtFetch from './jwt';
 import { RECEIVE_USER_LOGOUT } from './session';
 
 const RECEIVE_PRESENTATIONS = "presentations/RECEIVE_PRESENTATIONS";
-const RECEIVE_USER_PRESENTATIONS = "presentations/RECEIVE_USER_PRESENTATIONS";
-const RECEIVE_NEW_PRESENTATION = "presentations/RECEIVE_NEW_PRESENTATION";
+const RECEIVE_PRESENTATION = "presentations/RECEIVE_PRESENTATOIN";
 const RECEIVE_PRESENTATION_ERRORS = "presentations/RECEIVE_PRESENTATION_ERRORS";
 const CLEAR_PRESENTATION_ERRORS = "presentations/CLEAR_PRESENTATION_ERRORS";
 
@@ -12,13 +11,8 @@ const receivePresentations = presentations => ({
   presentations
 });
 
-const receiveUserPresentations = presentations => ({
-  type: RECEIVE_USER_PRESENTATIONS,
-  presentations
-});
-
-const receiveNewPresentation = presentation => ({
-  type: RECEIVE_NEW_PRESENTATION,
+const receivePresentation = presentation => ({
+  type: RECEIVE_PRESENTATION,
   presentation
 });
 
@@ -34,7 +28,7 @@ export const clearPresentationErrors = errors => ({
 
 export const fetchPresentations = () => async dispatch => {
   try {
-    const res = await jwtFetch ('/api/presentations');
+    const res = await jwtFetch ('/api/presentations/');
     const presentations = await res.json();
     dispatch(receivePresentations(presentations));
   } catch (err) {
@@ -49,7 +43,7 @@ export const fetchUserPresentations = id => async dispatch => {
   try {
     const res = await jwtFetch(`/api/presentations/user/${id}`);
     const presentations = await res.json();
-    dispatch(receiveUserPresentations(presentations));
+    dispatch(receivePresentations(presentations));
   } catch(err) {
     const resBody = await err.json();
     if (resBody.statusCode === 400) {
@@ -65,7 +59,7 @@ export const composePresentation = data => async dispatch => {
       body: JSON.stringify(data)
     });
     const presentation = await res.json();
-    dispatch(receiveNewPresentation(presentation));
+    dispatch(receivePresentation(presentation));
   } catch(err) {
     const resBody = await err.json();
     if (resBody.statusCode === 400) {
@@ -80,7 +74,7 @@ export const presentationErrorsReducer = (state = nullErrors, action) => {
   switch(action.type) {
     case RECEIVE_PRESENTATION_ERRORS:
       return action.errors;
-    case RECEIVE_NEW_PRESENTATION:
+    case RECEIVE_PRESENTATION:
     case CLEAR_PRESENTATION_ERRORS:
       return nullErrors;
     default:
@@ -89,15 +83,18 @@ export const presentationErrorsReducer = (state = nullErrors, action) => {
 };
 
 const presentationsReducer = (state = {}, action) => {
+  let newState;
   switch(action.type) {
     case RECEIVE_PRESENTATIONS:
-      return { ...state, ...action.presentations};
-    case RECEIVE_USER_PRESENTATIONS:
-      return { ...action.presentations};
-    case RECEIVE_NEW_PRESENTATION:
-      return { ...state, [action.presentation.id]: action.presentation};
+      newState =  { ...state};
+      action.presentations.forEach(presentation=>{
+        newState[presentation._id] = presentation;
+      });
+      return newState;
+    case RECEIVE_PRESENTATION:
+      return { ...state, [action.presentation._id]: action.presentation};
     case RECEIVE_USER_LOGOUT:
-      return { }
+      return { };
     default:
       return state;
   }

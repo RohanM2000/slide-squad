@@ -1,11 +1,11 @@
 // import "./PresentationBox.css"
 
-function PresentationBox ({ presentation: { text, author }}) {
+function PresentationBox ({ presentation: { author, title }}) {
   const { username } = author;
   return (
     <div className="presentation">
       <h3>{username}</h3>
-      <p>{text}</p>
+      <p>{title}</p>
     </div>
   );
 }
