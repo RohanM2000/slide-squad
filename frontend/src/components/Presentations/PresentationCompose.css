@@ -1,15 +1,24 @@
 
-.presentation-canvas{
+.presentation-canvas {
     position: relative;
     overflow:hidden;
     border: 1px solid black;
+    border-radius: 4px;
     width: 62vw;
     height: 62vh
 }
 
-.selection{
+.selection {
     margin-bottom: 10px;
-    width: 100% 
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.selection button {
+    background-color: rgb(197, 235, 251);
+    border: 1px solid rgb(197, 235, 251);
+    border-radius: 1px;
 }
 
 .present-compose-container {
@@ -22,4 +31,8 @@
 .save-button {
     width: 62vw;
     margin-top: 5px;
+    background-color: rgb(255, 119, 119);
+    border: 1px solid  rgb(255, 119, 119);
+    border-radius: 1px;
+
 }
