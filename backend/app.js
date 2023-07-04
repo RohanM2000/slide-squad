@@ -8,12 +8,12 @@ const csurf = require('csurf');
 const debug = require('debug');
 
 require('./models/User');
-// require('./models/Tweet');
+require('./models/Presentation');
 require('./config/passport');
 const passport = require('passport');
 
 const usersRouter = require('./routes/api/users');
-// const tweetsRouter = require('./routes/api/tweets');
+const presentationsRouter = require('./routes/api/presentations');
 const csrfRouter = require('./routes/api/csrf');
 
 const app = express();
@@ -41,7 +41,7 @@ app.use(
 );
 
 app.use('/api/users', usersRouter);
-// app.use('/api/tweets', tweetsRouter);
+app.use('/api/presentations', presentationsRouter);
 app.use('/api/csrf', csrfRouter);
 
 app.use((req, res, next) => {
