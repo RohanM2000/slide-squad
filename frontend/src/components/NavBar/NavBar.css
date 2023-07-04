@@ -10,9 +10,8 @@
 .nav-container {
     display: flex;
     flex-direction: column;
-    margin-left: 10px;
     justify-content: center;
-    /* position: fixed; */
+
 }
 
 .links-nav {
@@ -29,7 +28,8 @@
 .links-auth {
     display: flex;
     flex-direction: column;
-    margin-left: 10px;
+    margin: 0px 10px;
+    
    
 }
 
@@ -37,17 +37,26 @@
     color: black;
     text-decoration: none;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    padding-bottom: 10px;
+    margin-bottom: 10px;
+    width: 10vw;
+    border: 1px solid rgb(101, 216, 255);
+    background-color: rgb(101, 216, 255);
+    border-radius: 2px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 7px;
 }
 
 
 .home-link {
     padding: 10px;
-    font-size: 32px;
+    font-size: 2.8vw;
     font-weight: 700;
     font-family: 'Comic Neue', cursive;
     color: black;
     text-decoration: none;
+    text-align: center;
 }
 
 .profile-dropdown {
