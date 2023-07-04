@@ -37,10 +37,6 @@ const Schema = mongoose.Schema;
         id: {
           type: Number,
           required: true
-        },
-        text: {
-          type: String,
-          required: true
         }
       }, { _id: false })
     }
