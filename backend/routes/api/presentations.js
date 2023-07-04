@@ -5,7 +5,7 @@ const User = mongoose.model('User');
 // const Tweet = mongoose.model('Tweet');
 const Presentation = mongoose.model('Presentation');
 const { requireUser } = require('../../config/passport');
-// const validateTweetInput = require('../../validations/tweet');
+const validatePresentationInput = require('../../validations/presentation');
 
 /* GET tweets listing. */
 // router.get('/', async (req, res) => {
@@ -136,7 +136,7 @@ router.post('/', requireUser, validatePresentationInput, async (req, res, next) 
             slides
         });
 
-        const presentation = await newPresentation.save();
+        let presentation = await newPresentation.save();
         presentation = await presentation.populate('author', '_id username');
         return res.json(presentation);
     }
