@@ -33,7 +33,8 @@ export default function SlideText ({startLeft, id, startTop, text, setPresentati
                 text: currentText,
                 startTop: startTop + tempTop,
                 startLeft: startLeft + tempLeft,
-                id: id
+                id: id,
+                type: "text"
             }}
         })
     };
@@ -50,7 +51,8 @@ export default function SlideText ({startLeft, id, startTop, text, setPresentati
                 text: currentText,
                 startTop: startTop + tempTop,
                 startLeft: startLeft + tempLeft,
-                id: id
+                id: id,
+                type: "text"
             }}
         })
 
