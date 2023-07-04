@@ -31,6 +31,7 @@ function App() {
 
         <ProtectedRoute exact path="/profile" component={Profile} />
         <ProtectedRoute exact path="/presentations" component={Presentations} />
+        <ProtectedRoute exact path="/presentation-compose" component={PresentationCompose} />
       </Switch>
     </div>
     </>

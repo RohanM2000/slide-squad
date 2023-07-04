@@ -3,6 +3,23 @@
     position: relative;
     overflow:hidden;
     border: 1px solid black;
-    width: 30.042vw;
-    height: 31.25vh
+    width: 62vw;
+    height: 62vh
+}
+
+.selection{
+    margin-bottom: 10px;
+    width: 100% 
+}
+
+.present-compose-container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    align-items: center;
+}
+
+.save-button {
+    width: 62vw;
+    margin-top: 5px;
 }

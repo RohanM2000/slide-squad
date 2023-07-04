@@ -68,59 +68,62 @@ function PresentationCompose () {
     <>
       {/* <form className="compose-presentation" onSubmit={handleSubmit}> */}
       {/* decide how the input will be taken */}
-      <div className='selection'>
-        <button onClick={event=>addTextElement(event)}>
-          add a text element
-        </button>
-        <button onClick={event=>addRectangleElement(event)}>
-          add a rectangle element
-        </button>
-        <button onClick={()=>setPresentationState(
-          {...presentationState,[onFocus]:{...presentationState[onFocus],bold: !presentationState[onFocus].bold}}
-        )}>
-          Bold
-        </button>
-        <button onClick={()=>setPresentationState(
-          {...presentationState,[onFocus]:{...presentationState[onFocus],color: 'red'}}
-        )}>
-          Red
-        </button>
-        <button onClick={()=>setPresentationState(
-          {...presentationState,[onFocus]:{...presentationState[onFocus],fontsize: '2.5vw'}}
-        )}>
-          48px
-        </button>
-      </div>
-      {/* canvas frame to house the canvas and display possible overflows */}
-      <div className='canvas-frame'>
-        <div className='presentation-canvas' >
-            {Object.values(presentationState).map((obj)=>{
-              if (obj.type === "text") return <SlideText fontsize={obj.fontsize} color={obj.color} bold={obj.bold} setOnFocus={setOnFocus} setPresentationState={setPresentationState} id={obj.id} text={obj.text} startLeft={obj.startLeft} startTop={obj.startTop} />
-              if (obj.type === "rectangle") return <SlideRectangle setPresentationState={setPresentationState} id={obj.id} startHeight={obj.startHeight} startWidth={obj.startWidth} startLeft={obj.startLeft} startTop={obj.startTop} />
-            })}
+      <div className='present-compose-container'>
+
+        <div className='selection'>
+          <button onClick={event=>addTextElement(event)}>
+            add a text element
+          </button>
+          <button onClick={event=>addRectangleElement(event)}>
+            add a rectangle element
+          </button>
+          <button onClick={()=>setPresentationState(
+            {...presentationState,[onFocus]:{...presentationState[onFocus],bold: !presentationState[onFocus].bold}}
+          )}>
+            Bold
+          </button>
+          <button onClick={()=>setPresentationState(
+            {...presentationState,[onFocus]:{...presentationState[onFocus],color: 'red'}}
+          )}>
+            Red
+          </button>
+          <button onClick={()=>setPresentationState(
+            {...presentationState,[onFocus]:{...presentationState[onFocus],fontsize: '2.5vw'}}
+          )}>
+            48px
+          </button>
         </div>
+        {/* canvas frame to house the canvas and display possible overflows */}
+        <div className='canvas-frame'>
+          <div className='presentation-canvas' >
+              {Object.values(presentationState).map((obj)=>{
+                if (obj.type === "text") return <SlideText fontsize={obj.fontsize} color={obj.color} bold={obj.bold} setOnFocus={setOnFocus} setPresentationState={setPresentationState} id={obj.id} text={obj.text} startLeft={obj.startLeft} startTop={obj.startTop} />
+                if (obj.type === "rectangle") return <SlideRectangle setPresentationState={setPresentationState} id={obj.id} startHeight={obj.startHeight} startWidth={obj.startWidth} startLeft={obj.startLeft} startTop={obj.startTop} />
+              })}
+          </div>
+        </div>
+        <button className='save-button'onClick={handleSave}>
+          save
+        </button>
+          {/* <input 
+            type="textarea"
+            value={text}
+            onChange={update}
+            placeholder="Write your tweet..."
+            required
+          />
+          <div className="errors">{errors?.text}</div>
+          <input type="submit" value="Submit" />
+        </form>
+        <div className="presentation-preview">
+          <h3>Presentation Preview</h3>
+          {text ? <PresentationBox presentation={{text, author}} /> : undefined}
+        </div>
+        <div className="previous-presentation">
+          <h3>Previous Presentation</h3>
+          {newPresentation ? <PresentationBox presentation={newPresentation} /> : undefined}
+        </div> */}
       </div>
-      <button onClick={handleSave}>
-        save
-      </button>
-        {/* <input 
-          type="textarea"
-          value={text}
-          onChange={update}
-          placeholder="Write your tweet..."
-          required
-        />
-        <div className="errors">{errors?.text}</div>
-        <input type="submit" value="Submit" />
-      </form>
-      <div className="presentation-preview">
-        <h3>Presentation Preview</h3>
-        {text ? <PresentationBox presentation={{text, author}} /> : undefined}
-      </div>
-      <div className="previous-presentation">
-        <h3>Previous Presentation</h3>
-        {newPresentation ? <PresentationBox presentation={newPresentation} /> : undefined}
-      </div> */}
     </>
   )
 }
