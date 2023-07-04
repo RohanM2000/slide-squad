@@ -76,8 +76,11 @@
   }
   
 .user-greeting {
-    font-size: 14px;
+    font-size: .7rem;
     width: 100%;
+    overflow-wrap: break-word;
+    
+
 }
 
 
