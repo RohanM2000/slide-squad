@@ -118,6 +118,7 @@ function PresentationCompose () {
           <button onClick={()=>setPresentationState(
             {...presentationState,[onFocus]:{...presentationState[onFocus],fontsize: '2.5vw'}}
           )}>
+            <img src='../icons/text-size.png'></img>
             48px
           </button>
           <div className='color-dropdown'>
