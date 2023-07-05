@@ -88,8 +88,7 @@
     display: flex;
     border-radius: 8px;
     flex-direction: column;
-    width: 2%;
-    margin-left: 10px;
+    width: 2vw;
   }
   
 .dropdown-content {
@@ -102,7 +101,7 @@
     z-index: 1;
     width: 100%;
     color: black;
-    transform: translateX(calc(70% + 8px));
+    transform: translateX(calc(12.8vw));
   }
 
 
