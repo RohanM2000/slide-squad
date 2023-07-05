@@ -1,4 +1,4 @@
-export default function SlideRectangle ({startLeft, id, startTop, startWidth, startHeight, setPresentationState, windowHeight, windowWidth}) {
+export default function StaticRectangle ({startLeft, id, startTop, startWidth, startHeight, setPresentationState, windowHeight, windowWidth}) {
     return (
         <div
             style={{position: "absolute", 
