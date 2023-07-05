@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+// const comment = require('comment');
 const Schema = mongoose.Schema;
 
 // const tweetSchema = new Schema({
@@ -16,6 +17,7 @@ const Schema = mongoose.Schema;
 
 // module.exports = mongoose.model("Tweet", tweetSchema);
   
+  
   const presentationSchema = new Schema({
     title: {
       type: String,
@@ -30,6 +32,18 @@ const Schema = mongoose.Schema;
       ref: 'User',
       required: true
     },
+    likes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Like'
+      }
+    ],
+    comments: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Comment'
+      }
+    ],
     slides: {
       type: Object,
       // of: new Schema({
