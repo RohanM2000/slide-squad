@@ -12,6 +12,7 @@ import Profile from './components/Profile/Profile';
 import PresentationCompose from './components/Presentations/PresentationCompose';
 import { getCurrentUser } from './store/session';
 import Presentations from './components/Presentations/Presentations';
+import StaticPresentation from './components/StaticPresentation/StaticPresentation';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -32,6 +33,7 @@ function App() {
         <ProtectedRoute exact path="/profile" component={Profile} />
         <ProtectedRoute exact path="/presentations" component={Presentations} />
         <ProtectedRoute exact path="/presentations/compose" component={PresentationCompose} />
+        <ProtectedRoute exact path="/presentations/compose-static-test" component={StaticPresentation} />
       </Switch>
     </div>
     </>
