@@ -4,6 +4,5 @@ export default function savePresentation(obj, dispatch) {
         title: "temporary-filler-title",
         category: "temporary-filler-category",
         slides: obj
-        
     }));
 };
