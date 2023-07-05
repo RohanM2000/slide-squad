@@ -52,11 +52,27 @@
     background-color: rgb(129, 217, 255);
 }
 
-.present-compose-container {
+.compose-container {
     display: flex;
     flex-direction: column;
     margin: auto;
     align-items: center;
+}
+
+.title-compose {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.presentation-title-input {
+    border: 1px solid rgba(0, 0, 0, 0.26);
+    border-radius: 3px;
+    min-height: 30px;
+    overflow-wrap: break-word;
+    min-width: 28vw;
+    margin-top: 1vw;
+    text-align: center;
+    
 }
 
 .save-button {
@@ -84,7 +100,7 @@
     padding: 12px 12px;
     z-index: 1;
     color: black;
-    margin-top: 7vh;
+    margin-top: 4.4vh;
   }
 
 .color-dropdown:hover .color-dropdown-content {

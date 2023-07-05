@@ -11,6 +11,7 @@ import Swatches from './Swatches';
 function PresentationCompose () {
   const [onFocus,setOnFocus] = useState(null);
   const [text, setText] = useState('');
+  const [title, setTitle] = useState('');
   const dispatch = useDispatch();
   const [bold,setBold] = useState(false);
   const [showSwatch,setShowSwatch] = useState({
@@ -88,7 +89,17 @@ function PresentationCompose () {
       {/* <form className="compose-presentation" onSubmit={handleSubmit}> */}
       {/* decide how the input will be taken */}
       
-      <div className='present-compose-container'>
+      <div className='compose-container'>
+        <div className="title-compose">
+          <h3> Presentation Title: </h3>
+          <input
+            type="text"
+            value={title}
+            onChange={e => setTitle(e.target.value)}
+            placeholder="Enter presentation title"
+            className="presentation-title-input"
+          />
+        </div>
 
         <div className='selection'>
           <button onClick={event=>addTextElement(event)}>
