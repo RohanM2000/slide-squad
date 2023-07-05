@@ -1,5 +1,5 @@
 import './StaticText.css';
-export default function StaticText ({fontsize,color,setOnFocus, bold, startLeft, id, startTop, text, setPresentationState, windowHeight, windowWidth}) {
+export default function StaticText ({fontsize,color, bold, startLeft, startTop, text, windowHeight, windowWidth}) {
     return (
         <div className='input-container'>
         <p

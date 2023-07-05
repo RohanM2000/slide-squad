@@ -1,4 +1,4 @@
-export default function StaticRectangle ({startLeft, id, startTop, startWidth, startHeight, setPresentationState, windowHeight, windowWidth, bg}) {
+export default function StaticRectangle ({startLeft, id, startTop, startWidth, startHeight, windowHeight, windowWidth, bg}) {
     return (
         <div
             style={{position: "absolute", 
