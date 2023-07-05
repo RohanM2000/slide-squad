@@ -11,6 +11,7 @@ import Swatches from './Swatches';
 function PresentationCompose () {
   const [onFocus,setOnFocus] = useState(null);
   const [text, setText] = useState('');
+  const [title, setTitle] = useState('');
   const dispatch = useDispatch();
   const [bold,setBold] = useState(false);
   const [showSwatch,setShowSwatch] = useState({
@@ -121,33 +122,59 @@ function PresentationCompose () {
       {/* <form className="compose-presentation" onSubmit={handleSubmit}> */}
       {/* decide how the input will be taken */}
       
-      <div className='present-compose-container'>
+      <div className='compose-container'>
+        <div className="title-compose">
+          <h3> Presentation Title: </h3>
+          <input
+            type="text"
+            value={title}
+            onChange={e => setTitle(e.target.value)}
+            placeholder="Enter presentation title"
+            className="presentation-title-input"
+          />
+        </div>
 
         <div className='selection'>
           <button onClick={event=>addTextElement(event)}>
-            add a text element
+            <img src='../icons/text-box.png'></img>
+            Text-Box
           </button>
           <button onClick={event=>addRectangleElement(event)}>
-            add a rectangle element
+            <img src='../icons/rectangle-vector.png'></img>
+            Rectangle
           </button>
           <button onClick={()=>setPresentationState(
             {...presentationState,[onFocus]:{...presentationState[onFocus],bold: !presentationState[onFocus].bold}}
           )}>
+            <i class="fa-solid fa-bold fa-xl"></i>
             Bold
           </button>
-          <button onClick={()=>setShowSwatch({reveal:true,type:'text'})}>
-            Set Text Color
-          </button>
-          {showSwatch.reveal && showSwatch.type==='text' && <Swatches type='text' onFocus={onFocus} setPresentation={setPresentationState} setShowSwatch={setShowSwatch}/>}
+          <div className='color-dropdown'>
+            <button onMouseEnter={()=>setShowSwatch({reveal:true,type:'text'})} className='color-button'>
+              <img src='../icons/color-text.png'></img>
+              Text Color
+            </button>
+            <div className='color-dropdown-content'>
+              {showSwatch.reveal && showSwatch.type==='text' && <Swatches type='text' onFocus={onFocus} setPresentation={setPresentationState} setShowSwatch={setShowSwatch}/>}
+            </div>
+
+          </div>
           <button onClick={()=>setPresentationState(
             {...presentationState,[onFocus]:{...presentationState[onFocus],fontsize: 48/windowWidth}}
           )}>
+            <img src='../icons/text-size.png'></img>
             48px
           </button>
-          <button onClick={()=>setShowSwatch({reveal:true,type:'shape'})}>
-            Set shape Color
-          </button>
-          {showSwatch.reveal && showSwatch.type==='shape' && <Swatches type='shape' onFocus={onFocus} setPresentation={setPresentationState} setShowSwatch={setShowSwatch}/>}
+          <div className='color-dropdown'>
+            <button onMouseEnter={()=>setShowSwatch({reveal:true,type:'shape'})}>
+              <img src='../icons/bucket.png'></img>
+              Shape Color
+            </button>
+            <div className='color-dropdown-content'>
+              {showSwatch.reveal && showSwatch.type==='shape' && <Swatches type='shape' onFocus={onFocus} setPresentation={setPresentationState} setShowSwatch={setShowSwatch}/>}
+            </div>
+
+          </div>
         </div>
         {/* canvas frame to house the canvas and display possible overflows */}
         <div className='canvas-frame'>
