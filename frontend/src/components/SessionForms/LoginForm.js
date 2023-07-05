@@ -27,33 +27,40 @@ function LoginForm () {
   }
 
   return (
-    <form className="session-form" onSubmit={handleSubmit}>
-      <h2>Log In</h2>
-      <div className="errors">{errors?.email}</div>
-      <label>
-        <span>Email</span>
-        <input type="text"
-          value={email}
-          onChange={update('email')}
-          placeholder="Email"
+    <>
+    <div class="bg"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
+    <div class="content">
+      <form className="session-form" onSubmit={handleSubmit}>
+        <h2>Log In</h2>
+        <div className="errors">{errors?.email}</div>
+        <label>
+          <span>Email</span>
+          <input type="text"
+            value={email}
+            onChange={update('email')}
+            placeholder="Email"
+          />
+        </label>
+        <div className="errors">{errors?.password}</div>
+        <label>
+          <span>Password</span>
+          <input type="password"
+            value={password}
+            onChange={update('password')}
+            placeholder="Password"
+          />
+        </label>
+        <input
+          className='session-form-button'
+          type="submit"
+          value="Log In"
+          disabled={!email || !password}
         />
-      </label>
-      <div className="errors">{errors?.password}</div>
-      <label>
-        <span>Password</span>
-        <input type="password"
-          value={password}
-          onChange={update('password')}
-          placeholder="Password"
-        />
-      </label>
-      <input
-        className='session-form-button'
-        type="submit"
-        value="Log In"
-        disabled={!email || !password}
-      />
-    </form>
+      </form>
+    </div>
+    </>
   );
 }
 
