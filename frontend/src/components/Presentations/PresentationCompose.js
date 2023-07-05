@@ -6,11 +6,17 @@ import './PresentationCompose.css';
 import SlideText from '../SlideElements/SlideText';
 import SlideRectangle from '../SlideElements/SlideRectangle';
 import savePresentation from './presentationSave';
+import Swatchy from './ColorSwatches';
+import Swatches from './Swatches';
 function PresentationCompose () {
   const [onFocus,setOnFocus] = useState(null);
   const [text, setText] = useState('');
   const dispatch = useDispatch();
   const [bold,setBold] = useState(false);
+  const [showSwatch,setShowSwatch] = useState({
+    reveal:false,
+  type:null});
+
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   useEffect(()=>{
@@ -47,6 +53,7 @@ function PresentationCompose () {
   //   dispatch(composePresentation({ text })); 
   //   setText('');
   // };
+  console.log(presentationState);
   const nextId = Object.values(presentationState).length+1;
   const addTextElement = (event) =>{
     event.preventDefault();
@@ -58,7 +65,7 @@ function PresentationCompose () {
   const addRectangleElement = (event) =>{
     event.preventDefault();
     setPresentationState(state=>{
-      return {...state,[nextId]: {startWidth:50/windowWidth,startHeight:50/windowHeight,startLeft:0,startTop:0,id: nextId, type: "rectangle"}}
+     return {...state,[nextId]: {startWidth:50/windowWidth,startHeight:50/windowHeight,startLeft:0,startTop:0,id: nextId, type: "rectangle", bg:'grey'}}
     })
     } 
  
@@ -76,11 +83,11 @@ function PresentationCompose () {
   // when SlideText is out of the slidetext container, render a new one
   // when dragged into canvas, append to the canvas, then onChange, we can iterate through the canvas's children to record changes to presentation state? 
   // check children right, left, top, bottom, type, width, height, (rotation??)
-
   return (
     <>
       {/* <form className="compose-presentation" onSubmit={handleSubmit}> */}
       {/* decide how the input will be taken */}
+      
       <div className='present-compose-container'>
 
         <div className='selection'>
@@ -95,16 +102,19 @@ function PresentationCompose () {
           )}>
             Bold
           </button>
-          <button onClick={()=>setPresentationState(
-            {...presentationState,[onFocus]:{...presentationState[onFocus],color: 'red'}}
-          )}>
-            Red
+          <button onClick={()=>setShowSwatch({reveal:true,type:'text'})}>
+            Set Text Color
           </button>
+          {showSwatch.reveal && showSwatch.type==='text' && <Swatches type='text' onFocus={onFocus} setPresentation={setPresentationState} setShowSwatch={setShowSwatch}/>}
           <button onClick={()=>setPresentationState(
             {...presentationState,[onFocus]:{...presentationState[onFocus],fontsize: '2.5vw'}}
           )}>
             48px
           </button>
+          <button onClick={()=>setShowSwatch({reveal:true,type:'shape'})}>
+            Set shape Color
+          </button>
+          {showSwatch.reveal && showSwatch.type==='shape' && <Swatches type='shape' onFocus={onFocus} setPresentation={setPresentationState} setShowSwatch={setShowSwatch}/>}
         </div>
         {/* canvas frame to house the canvas and display possible overflows */}
         <div className='canvas-frame'>
@@ -132,6 +142,8 @@ function PresentationCompose () {
                                                 startTop={obj.startTop} 
                                                 windowHeight={windowHeight}
                                                 windowWidth={windowWidth}
+                                                setOnFocus={setOnFocus}
+                                                bg={obj.bg}
                                                 />
               })}
           </div>
