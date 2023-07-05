@@ -23,9 +23,9 @@ function ProfileButton({ user }) {
     
         <ul className="dropdown-content">
             <div className="links-nav">
-            <NavLink to={'/tweets'} className='link-nav'>All Tweets</NavLink>
             <NavLink to={'/profile'} className='link-nav'>Profile</NavLink>
-            <NavLink to={'/tweets/new'} className='link-nav'>Write a Tweet</NavLink>
+            <NavLink to={'/presentations/likes'} className='link-nav'>Likes</NavLink>
+            <NavLink to={'/presentations/compose'} className='link-nav'>Compose a Presentation</NavLink>
             <button onClick={logoutUser}>Logout</button>
             </div>
             {/* <li className="logout-button">
