@@ -92,7 +92,8 @@ function PresentationCompose () {
 
         <div className='selection'>
           <button onClick={event=>addTextElement(event)}>
-            add a text element
+            <img src='../icons/text-box.png'></img>
+            Text-Box
           </button>
           <button onClick={event=>addRectangleElement(event)}>
             add a rectangle element
@@ -118,7 +119,7 @@ function PresentationCompose () {
           </button>
           <div className='color-dropdown'>
             <button onMouseEnter={()=>setShowSwatch({reveal:true,type:'shape'})}>
-              Set shape Color
+              Set Shape Color
             </button>
             <div className='color-dropdown-content'>
               {showSwatch.reveal && showSwatch.type==='shape' && <Swatches type='shape' onFocus={onFocus} setPresentation={setPresentationState} setShowSwatch={setShowSwatch}/>}
