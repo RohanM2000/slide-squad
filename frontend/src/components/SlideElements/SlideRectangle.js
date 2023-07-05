@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 
-export default function SlideRectangle ({setOnFocus, bg, startLeft, id, startTop, startWidth, startHeight, setPresentationState}) {
+export default function SlideRectangle ({startLeft, id, startTop, startWidth, startHeight, setPresentationState, windowHeight, windowWidth, setOnFocus, bg}) {
     const [top, setTop] = useState(0);
     const [left, setLeft] = useState(0);
     const [width, setWidth] = useState(0);
@@ -49,12 +49,12 @@ export default function SlideRectangle ({setOnFocus, bg, startLeft, id, startTop
             setWidth(0);
            return {...state,
             [id]: {
+                startTop: startTop + tempTop/windowHeight,
+                startLeft: startLeft + tempLeft/windowWidth,
                 bg: bg,
-                startTop: startTop + tempTop,
-                startLeft: startLeft + tempLeft,
                 id: id,
-                startHeight: startHeight + tempHeight,
-                startWidth: startWidth + tempWidth,
+                startHeight: startHeight + tempHeight/windowHeight,
+                startWidth: startWidth + tempWidth/windowWidth,
                 type: "rectangle"
             }}
         })
@@ -74,12 +74,12 @@ export default function SlideRectangle ({setOnFocus, bg, startLeft, id, startTop
             setWidth(0);
            return {...state,
             [id]: {
+                startTop: startTop + tempTop/windowHeight,
+                startLeft: startLeft + tempLeft/windowWidth,
                 bg: bg,
-                startTop: startTop + tempTop,
-                startLeft: startLeft + tempLeft,
                 id: id,
-                startHeight: startHeight + tempHeight,
-                startWidth: startWidth + tempWidth,
+                startHeight: startHeight + tempHeight/windowHeight,
+                startWidth: startWidth + tempWidth/windowWidth,
                 type: "rectangle"
             }}
         })
@@ -107,11 +107,11 @@ export default function SlideRectangle ({setOnFocus, bg, startLeft, id, startTop
                     display: "flex",
                     "justify-content": "flex-end",
                     "align-items": "flex-end",
-                    backgroundColor: bg,
-                    top: (startTop + top) + "px", 
-                    left: (startLeft + left) + "px", 
-                    width: (startWidth + width) + "px",
-                    height: (startHeight + height) + "px"}}
+                    backgroundColor : bg,
+                    top: (startTop*windowHeight + top) + "px", 
+                    left: (startLeft*windowWidth + left) + "px", 
+                    width: (startWidth*windowWidth + width) + "px",
+                    height: (startHeight*windowHeight + height) + "px"}}
         >
             <div className="resize-area" style={{
                 "background-color": "black",

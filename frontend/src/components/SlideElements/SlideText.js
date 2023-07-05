@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import './SlideText.css';
-export default function SlideText ({fontsize,color,setOnFocus, bold, startLeft, id, startTop, text, setPresentationState}) {
+export default function SlideText ({fontsize,color,setOnFocus, bold, startLeft, id, startTop, text, setPresentationState, windowHeight, windowWidth}) {
     const [top, setTop] = useState(0);
     const [left, setLeft] = useState(0);
     const [selected,setSelected] = useState(false);
@@ -37,8 +37,8 @@ export default function SlideText ({fontsize,color,setOnFocus, bold, startLeft, 
             [id]: {
                 ...state[id],
                 text: e.target.innerText,
-                startTop: startTop + tempTop,
-                startLeft: startLeft + tempLeft,
+                startTop: startTop + tempTop/windowHeight,
+                startLeft: startLeft + tempLeft/windowWidth,
                 id: id,
                 type: "text"
             }}
@@ -64,8 +64,8 @@ export default function SlideText ({fontsize,color,setOnFocus, bold, startLeft, 
             [id]: {
                 ...state[id],
                 text: e.target.innerText,
-                startTop: startTop + tempTop,
-                startLeft: startLeft + tempLeft,
+                startTop: startTop + tempTop/windowHeight,
+                startLeft: startLeft + tempLeft/windowWidth,
                 id: id,
                 type: "text"
             }}
@@ -91,13 +91,13 @@ export default function SlideText ({fontsize,color,setOnFocus, bold, startLeft, 
             onMouseLeave={handleMouseLeave}
             onMouseMove={handleMouseMove}
             onFocus={handleOnFocus}
-            style={{position: "absolute", top: (startTop + top) + "px", left: (startLeft + left) + "px",
+            style={{position: "absolute", top: (startTop*windowHeight + top) + "px", left: (startLeft*windowWidth + left) + "px",
             fontWeight: bold ? '700' : 'normal',
             color: color,
-            fontSize: fontsize
+            fontSize: (fontsize*windowWidth) + "px"
             }}
         >
-            
+            {text}
         </p>
         </div>
     );

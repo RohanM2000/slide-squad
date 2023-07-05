@@ -16,12 +16,23 @@ function PresentationCompose () {
   const [showSwatch,setShowSwatch] = useState({
     reveal:false,
   type:null});
-  
+
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  useEffect(()=>{
+    const handleResize = () => {
+      setWindowHeight(window.innerHeight);
+      setWindowWidth(window.innerWidth);
+    }
+    window.addEventListener("resize", handleResize);
+
+    return ()=> window.removeEventListener("resize",handleResize);
+  },[]);
   // const author = useSelector(state => state.session.user);
   // const newPresentation = useSelector(state => state.presentations.new);
   // const errors = useSelector(state => state.errors.presentations);
   const [presentationState, setPresentationState] =useState({
-    1:{id:1, startLeft:0,startTop:0, text:'', type: "text",bold:false,color:'black',fontsize:'16px'}
+    1:{id:1, startLeft:0/windowWidth,startTop:0/windowHeight, text:'TYPE HERE', type: "text",bold:false,color:'black',fontsize: 16/windowWidth}
   });
   const [slideNumber,setSlideNumber] = useState(1);
   // when the arrow is pressed, the next slide will be displayed
@@ -45,16 +56,16 @@ function PresentationCompose () {
   console.log(presentationState);
   const nextId = Object.values(presentationState).length+1;
   const addTextElement = (event) =>{
-  event.preventDefault();
-  setPresentationState(state=>{
-    return {...state,[nextId]: {text: 'added text',startLeft:0,startTop:0,id: nextId, type: "text"}}
-  })
+    event.preventDefault();
+    setPresentationState(state=>{
+      return {...state,[nextId]: {text: 'TYPE HERE',startLeft:0/windowWidth,startTop:0/windowHeight,id: nextId, type: "text", bold:false,color:'black',fontsize: 16/windowWidth}}
+    })
   } 
 
   const addRectangleElement = (event) =>{
     event.preventDefault();
     setPresentationState(state=>{
-      return {...state,[nextId]: { bg:'grey',startWidth:50,startHeight:50,startLeft:0,startTop:0,id: nextId, type: "rectangle"}}
+     return {...state,[nextId]: {startWidth:50/windowWidth,startHeight:50/windowHeight,startLeft:0,startTop:0,id: nextId, type: "rectangle", bg:'grey'}}
     })
     } 
  
@@ -109,8 +120,31 @@ function PresentationCompose () {
         <div className='canvas-frame'>
           <div className='presentation-canvas' >
               {Object.values(presentationState).map((obj)=>{
-                if (obj.type === "text") return <SlideText fontsize={obj.fontsize} color={obj.color} bold={obj.bold} setOnFocus={setOnFocus} setPresentationState={setPresentationState} id={obj.id} text={obj.text} startLeft={obj.startLeft} startTop={obj.startTop} />
-                if (obj.type === "rectangle") return <SlideRectangle setOnFocus={setOnFocus} bg={obj.bg} setPresentationState={setPresentationState} id={obj.id} startHeight={obj.startHeight} startWidth={obj.startWidth} startLeft={obj.startLeft} startTop={obj.startTop} />
+                if (obj.type === "text") return <SlideText 
+                                                fontsize={obj.fontsize} 
+                                                color={obj.color} 
+                                                bold={obj.bold} 
+                                                setOnFocus={setOnFocus} 
+                                                setPresentationState={setPresentationState} 
+                                                id={obj.id} 
+                                                text={obj.text} 
+                                                startLeft={obj.startLeft} 
+                                                startTop={obj.startTop} 
+                                                windowHeight={windowHeight}
+                                                windowWidth={windowWidth}
+                                                />
+                if (obj.type === "rectangle") return <SlideRectangle 
+                                                setPresentationState={setPresentationState} 
+                                                id={obj.id} 
+                                                startHeight={obj.startHeight} 
+                                                startWidth={obj.startWidth} 
+                                                startLeft={obj.startLeft} 
+                                                startTop={obj.startTop} 
+                                                windowHeight={windowHeight}
+                                                windowWidth={windowWidth}
+                                                setOnFocus={setOnFocus}
+                                                bg={obj.bg}
+                                                />
               })}
           </div>
         </div>

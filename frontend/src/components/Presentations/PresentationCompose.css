@@ -4,8 +4,8 @@
     overflow:hidden;
     border: 1px solid black;
     border-radius: 4px;
-    width: 62vw;
-    height: 62vh
+    width: 54vw;
+    height: 52vh
 }
 
 .selection {
@@ -29,10 +29,12 @@
 }
 
 .save-button {
-    width: 62vw;
+    width: 30vw;
+    height: 5vh;
     margin-top: 5px;
-    background-color: rgb(255, 119, 119);
-    border: 1px solid  rgb(255, 119, 119);
-    border-radius: 1px;
-
+    background-color: rgb(202, 12, 12);
+    border: 1px solid  rgb(202, 12, 12);
+    border-radius: 3px;
+    font-size: 2vw;
+    font-weight: 700;
 }
