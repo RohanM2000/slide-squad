@@ -4,8 +4,10 @@ import session from './session';
 import errors from './errors';
 import presentations from './presentations';
 import comments from './comments'
+import likes from './likes'
 
 const rootReducer = combineReducers({
+  likes,
   comments,
   presentations,
   session,

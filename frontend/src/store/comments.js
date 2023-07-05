@@ -33,7 +33,7 @@ export const clearCommentErrors = errors => ({
 
 export const fetchComments = () => async dispatch => {
   try {
-    const res = await jwtFetch ('/api/comments/');
+    const res = await jwtFetch('/api/comments/');
     const comments = await res.json();
     dispatch(receiveComments(comments));
   } catch (err) {

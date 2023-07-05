@@ -33,7 +33,7 @@ export const clearLIKEErrors = errors => ({
 
 export const fetchLikes = () => async dispatch => {
   try {
-    const res = await jwtFetch ('/api/likes/');
+    const res = await jwtFetch('/api/likes/');
     const likes = await res.json();
     dispatch(receiveLikes(likes));
   } catch (err) {
@@ -72,8 +72,6 @@ export const createlike = data => async dispatch => {
     }
   }
 };
-
-
 
 export const deletelike= (likeId) => async(dispatch) => {
     try {
