@@ -1,41 +1,41 @@
 import jwtFetch from './jwt';
 
-const RECEIVE_COMMENTS = "comments/RECEIVE_COMMENTS";
-const RECEIVE_COMMENT = "comments/RECEIVE_PRESENTATOIN";
-const REMOVE_COMMENT = "comments/REMOVE_COMMENT"
-const RECEIVE_COMMENT_ERRORS = "comments/RECEIVE_COMMENT_ERRORS";
-const CLEAR_COMMENT_ERRORS = "comments/CLEAR_COMMENT_ERRORS";
+const RECEIVE_LIKES = "likes/RECEIVE_LIKES";
+const RECEIVE_LIKE = "likes/RECEIVE_PRESENTATOIN";
+const REMOVE_LIKE = "likes/REMOVE_LIKE"
+const RECEIVE_LIKE_ERRORS = "likes/RECEIVE_LIKE_ERRORS";
+const CLEAR_LIKE_ERRORS = "likes/CLEAR_LIKE_ERRORS";
 
-const receiveComments = comments => ({
-  type: RECEIVE_COMMENTS,
-  comments
+const receiveLikes = likes => ({
+  type: RECEIVE_LIKES,
+  likes
 });
 
-const receiveComment = comment => ({
-  type: RECEIVE_COMMENT,
-  comment
+const receiveLike = like => ({
+  type: RECEIVE_LIKE,
+  like
 });
 
-export const removeComment = (commentId) => ({
-    type: REMOVE_COMMENT, 
-    commentId
+export const removeLike = (likeId) => ({
+    type: REMOVE_LIKE, 
+    likeId
 })
 
 const receiveErrors = errors => ({
-  type: RECEIVE_COMMENT_ERRORS,
+  type: RECEIVE_LIKE_ERRORS,
   errors
 });
 
-export const clearCommentErrors = errors => ({
-    type: CLEAR_COMMENT_ERRORS,
+export const clearLIKEErrors = errors => ({
+    type: CLEAR_LIKE_ERRORS,
     errors
 });
 
-export const fetchComments = () => async dispatch => {
+export const fetchLikes = () => async dispatch => {
   try {
-    const res = await jwtFetch ('/api/comments/');
-    const comments = await res.json();
-    dispatch(receiveComments(comments));
+    const res = await jwtFetch ('/api/likes/');
+    const likes = await res.json();
+    dispatch(receiveLikes(likes));
   } catch (err) {
     const resBody = await err.json();
     if (resBody.statusCode === 400) {
@@ -44,11 +44,11 @@ export const fetchComments = () => async dispatch => {
   }
 };
 
-export const fetchUserComments = id => async dispatch => {
+export const fetchUserLikes = id => async dispatch => {
   try {
-    const res = await jwtFetch(`/api/comments/user/${id}`);
-    const comments = await res.json();
-    dispatch(receiveComments(comments));
+    const res = await jwtFetch(`/api/likes/user/${id}`);
+    const likes = await res.json();
+    dispatch(receiveLikes(likes));
   } catch(err) {
     const resBody = await err.json();
     if (resBody.statusCode === 400) {
@@ -57,30 +57,14 @@ export const fetchUserComments = id => async dispatch => {
   }
 };
 
-export const createComment = data => async dispatch => {
+export const createlike = data => async dispatch => {
   try {
-    const res = await jwtFetch('/api/comments/', {
+    const res = await jwtFetch('/api/likes/', {
       method: 'POST',
       body: JSON.stringify(data)
     });
-    const comment = await res.json();
-    dispatch(receiveComment(comment));
-  } catch(err) {
-    const resBody = await err.json();
-    if (resBody.statusCode === 400) {
-      return dispatch(receiveErrors(resBody.errors));
-    }
-  }
-};
-
-export const updateComment = data => async dispatch => {
-  try {
-    const res = await jwtFetch(`/api/comments/${data.id}`, {
-      method: 'POST',
-      body: JSON.stringify(data)
-    });
-    const comment = await res.json();
-    dispatch(receiveComment(comment));
+    const like = await res.json();
+    dispatch(receiveLike(like));
   } catch(err) {
     const resBody = await err.json();
     if (resBody.statusCode === 400) {
@@ -91,12 +75,12 @@ export const updateComment = data => async dispatch => {
 
 
 
-export const deleteComment= (commentId) => async(dispatch) => {
+export const deletelike= (likeId) => async(dispatch) => {
     try {
-        const res = await jwtFetch(`/api/comments/${commentId}`, {
+        const res = await jwtFetch(`/api/likes/${likeId}`, {
           method: 'DELETE',
         });
-        dispatch(receiveComment(commentId));
+        dispatch(receiveLike(likeId));
     } catch(err) {
         const resBody = await err.json();
         if (resBody.statusCode === 400) {
@@ -107,35 +91,35 @@ export const deleteComment= (commentId) => async(dispatch) => {
 
 const nullErrors = null;
 
-export const commentErrorsReducer = (state = nullErrors, action) => {
+export const likeErrorsReducer = (state = nullErrors, action) => {
   switch(action.type) {
-    case RECEIVE_COMMENT_ERRORS:
+    case RECEIVE_LIKE_ERRORS:
       return action.errors;
-    case RECEIVE_COMMENT:
-    case CLEAR_COMMENT_ERRORS:
+    case RECEIVE_LIKE:
+    case CLEAR_LIKE_ERRORS:
       return nullErrors;
     default:
       return state;
   }
 };
 
-const commentsReducer = (state = {}, action) => {
+const likesReducer = (state = {}, action) => {
   let newState;
   switch(action.type) {
-    case RECEIVE_COMMENTS:
+    case RECEIVE_LIKES:
       newState =  { ...state};
-      action.comments.forEach(comment=>{
-        newState[comment._id] = comment;
+      action.likes.forEach(like=>{
+        newState[like._id] = like;
       });
       return newState;
-    case RECEIVE_COMMENT:
-      return { ...state, [action.comment._id]: action.comment};
-    case REMOVE_COMMENT:
-        delete newState[action.commentId]
+    case RECEIVE_LIKE:
+      return { ...state, [action.like._id]: action.like};
+    case REMOVE_LIKE:
+        delete newState[action.likeId]
         return newState
     default:
       return state;
   }
 };
 
-export default commentsReducer;
+export default likesReducer;
