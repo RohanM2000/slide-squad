@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 
-export default function SlideRectangle ({startLeft, id, startTop, startWidth, startHeight, setPresentationState}) {
+export default function SlideRectangle ({setOnFocus, bg, startLeft, id, startTop, startWidth, startHeight, setPresentationState}) {
     const [top, setTop] = useState(0);
     const [left, setLeft] = useState(0);
     const [width, setWidth] = useState(0);
@@ -12,7 +12,6 @@ export default function SlideRectangle ({startLeft, id, startTop, startWidth, st
     const isClicked = useRef(false);
     const isResizeClicked = useRef(false);
     // const assignedLocation = useRef(false);
-
     const handleMouseDown = (e) => {
         e.preventDefault();
         // e.stopPropogation();
@@ -29,6 +28,13 @@ export default function SlideRectangle ({startLeft, id, startTop, startWidth, st
         prevPos.current.left = e.clientX;
     };
 
+    const handleClick = () => {
+        //we'll update a prop passed down 
+        // to let the presentationcompose know this
+        // is the text to change??
+        setOnFocus(id);
+        console.log('focused',id)
+    }
     const handleMouseUp = (e) => {
         isClicked.current = false;
         isResizeClicked.current = false;
@@ -43,6 +49,7 @@ export default function SlideRectangle ({startLeft, id, startTop, startWidth, st
             setWidth(0);
            return {...state,
             [id]: {
+                bg: bg,
                 startTop: startTop + tempTop,
                 startLeft: startLeft + tempLeft,
                 id: id,
@@ -67,6 +74,7 @@ export default function SlideRectangle ({startLeft, id, startTop, startWidth, st
             setWidth(0);
            return {...state,
             [id]: {
+                bg: bg,
                 startTop: startTop + tempTop,
                 startLeft: startLeft + tempLeft,
                 id: id,
@@ -94,11 +102,12 @@ export default function SlideRectangle ({startLeft, id, startTop, startWidth, st
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseLeave}
             onMouseMove={handleMouseMove}
+            onClick={handleClick}
             style={{position: "absolute", 
                     display: "flex",
                     "justify-content": "flex-end",
                     "align-items": "flex-end",
-                    "background-color": "gray",
+                    backgroundColor: bg,
                     top: (startTop + top) + "px", 
                     left: (startLeft + left) + "px", 
                     width: (startWidth + width) + "px",
