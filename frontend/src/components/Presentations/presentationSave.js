@@ -3,8 +3,7 @@ export default function savePresentation(obj, dispatch) {
     dispatch(composePresentation({
         title: "temporary-filler-title",
         category: "temporary-filler-category",
-        slides: {
-            1: obj
-        }
+        slides: obj
+        
     }));
 };

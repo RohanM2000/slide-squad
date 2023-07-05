@@ -1,6 +1,6 @@
 export default function Swatches ({type,onFocus,setPresentation,setShowSwatch}) {
     const handleClick = (event) =>{
-        event.preventDefault();
+        // event.preventDefault();
         // need to set cahnge the pagrapg state for the id to zero
         //when whev we have mulitpl pages //need to add one more index
         const newColor=event.target.dataset.swatchyColor;

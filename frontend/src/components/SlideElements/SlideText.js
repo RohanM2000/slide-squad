@@ -1,20 +1,17 @@
-import { useState, useRef } from "react";
+import { useState, useRef,useEffect } from "react";
+import myDebounce from "../Presentations/MyDebounce";
 import './SlideText.css';
-export default function SlideText ({fontsize,color,setOnFocus, bold, startLeft, id, startTop, text, setPresentationState, windowHeight, windowWidth}) {
+export default function SlideText ({slideNumber,fontsize,color,setOnFocus, bold, startLeft, id, startTop, text, setPresentationState, windowHeight, windowWidth}) {
     const [top, setTop] = useState(0);
     const [left, setLeft] = useState(0);
     const [selected,setSelected] = useState(false);
-    const [currentText,setCurrentText] = useState(text);
-    const [textStyles,setTextStyles] = useState({
-        bold: '700'
-    });
+    const preText = useRef(text);
     const prevPos = useRef({
         top: 0,
         left: 0
     });
     const isClicked = useRef(false);
     // const assignedLocation = useRef(false);
-
     const handleMouseDown = (e) => {
         // e.preventDefault();
         isClicked.current = true;
@@ -25,24 +22,39 @@ export default function SlideText ({fontsize,color,setOnFocus, bold, startLeft, 
         // }
         // assignedLocation.current = true;
     };
-
+    useEffect(()=>{
+        setPresentationState(state=>{
+            return {...state,
+                [slideNumber]:{
+                    ...state[slideNumber],
+                    [id]: {
+                        ...state[slideNumber][id],
+                        text: preText.current,
+                    }}
+                }
+            }) 
+    },[preText,slideNumber,id])
     const handleMouseUp = (e) => {
         isClicked.current = false;
-        setPresentationState(state=>{
-            const tempLeft = left;
-            const tempTop = top;
-            setTop(0);
-            setLeft(0);
-           return {...state,
-            [id]: {
-                ...state[id],
-                text: e.target.innerText,
-                startTop: startTop + tempTop/windowHeight,
-                startLeft: startLeft + tempLeft/windowWidth,
-                id: id,
-                type: "text"
-            }}
-        })
+            setPresentationState(state=>{
+                const tempLeft = left;
+                const tempTop = top;
+                setTop(0);
+                setLeft(0);
+                return {...state,
+                    [slideNumber]:{
+                        ...state[slideNumber],
+                        [id]: {
+                            ...state[slideNumber][id],
+                            text: e.target.innerText,
+                            startTop: startTop + tempTop/windowHeight,
+                            startLeft: startLeft + tempLeft/windowWidth,
+                            id: id,
+                            type: "text"
+                        }}
+                    }
+                })
+            
     };
 
     const handleOnFocus = () => {
@@ -50,26 +62,52 @@ export default function SlideText ({fontsize,color,setOnFocus, bold, startLeft, 
         // to let the presentationcompose know this
         // is the text to change??
         setOnFocus(id);
-        console.log('focused',id)
     }
-   
-    const handleMouseLeave = (e) => {
-        isClicked.current = false;
+    const handleInput = (e)=>{
         setPresentationState(state=>{
             const tempLeft = left;
             const tempTop = top;
             setTop(0);
             setLeft(0);
-           return {...state,
-            [id]: {
-                ...state[id],
-                text: e.target.innerText,
-                startTop: startTop + tempTop/windowHeight,
-                startLeft: startLeft + tempLeft/windowWidth,
-                id: id,
-                type: "text"
-            }}
+            let obj = JSON.parse(JSON.stringify(state));
+            let ele = obj[slideNumber][id];
+            return {...state,
+                [slideNumber]:{
+                    ...state[slideNumber],
+                    [id]: {
+                        ...state[slideNumber][id],
+                        text: e.target.innerText,
+                        startTop: startTop + tempTop/windowHeight,
+                        startLeft: startLeft + tempLeft/windowWidth,
+                        id: id,
+                        type: "text"
+                    }}
+            }
         })
+    }
+    const handleDebounceInput = myDebounce(handleInput,1000);
+    const handleMouseLeave = (e) => {
+        isClicked.current = false;
+        
+        setPresentationState(state=>{
+            const tempLeft = left;
+            const tempTop = top;
+            setTop(0);
+            setLeft(0);
+            return {...state,
+                [slideNumber]:{
+                    ...state[slideNumber],
+                    [id]: {
+                        ...state[slideNumber][id],
+                        text: e.target.innerText,
+                        startTop: startTop + tempTop/windowHeight,
+                        startLeft: startLeft + tempLeft/windowWidth,
+                        id: id,
+                        type: "text"
+                    }}
+                }
+            })
+        
 
     };
 
@@ -78,14 +116,15 @@ export default function SlideText ({fontsize,color,setOnFocus, bold, startLeft, 
         setTop(e.clientY - prevPos.current.top);
         setLeft(e.clientX - prevPos.current.left);
     };
-
     return (
         <div className='input-container'>
         <p
+
             contentEditable='true'
             className='input-text'
-            value={currentText}
-            onChange={event=>setCurrentText(event.currentTarget.value)}
+            value={text}
+            // onInput={handleDebounceInput}
+            onChange={(e)=>preText.current=e.target.innerHTML}      
             onMouseDown={handleMouseDown}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseLeave}
@@ -97,7 +136,7 @@ export default function SlideText ({fontsize,color,setOnFocus, bold, startLeft, 
             fontSize: (fontsize*windowWidth) + "px"
             }}
         >
-            {text}
+        {preText.current}
         </p>
         </div>
     );
