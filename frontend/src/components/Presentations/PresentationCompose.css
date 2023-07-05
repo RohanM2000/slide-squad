@@ -13,12 +13,19 @@
     width: 100%;
     display: flex;
     justify-content: space-around;
+    background-color: rgb(197, 235, 251);
+    padding: 5px 0px;
+    border-radius: 3px;
 }
 
 .selection button {
     background-color: rgb(197, 235, 251);
     border: 1px solid rgb(197, 235, 251);
-    border-radius: 1px;
+    border-radius: 3px;
+}
+
+.selection button:hover {
+    background-color: rgb(129, 217, 255);
 }
 
 .present-compose-container {
@@ -31,10 +38,12 @@
 .save-button {
     width: 30vw;
     height: 5vh;
-    margin-top: 5px;
+    margin-top: 30px;
     background-color: rgb(202, 12, 12);
     border: 1px solid  rgb(202, 12, 12);
     border-radius: 3px;
     font-size: 2vw;
     font-weight: 700;
+   
+    
 }
