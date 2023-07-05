@@ -32,20 +32,18 @@ const Schema = mongoose.Schema;
       ref: 'User',
       required: true
     },
-    likes: {
-      type: {
-        type: Map,
-        of: likeSchema
-      }, // Object of likes (using the likeSchema)
-      default: {}
-    },
-    comments: {
-      type: {
-        type: Map,
-        of: commentSchema
-      },
-      default: {}
-    },
+    likes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Like'
+      }
+    ],
+    comments: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Comment'
+      }
+    ],
     slides: {
       type: Object,
       // of: new Schema({
