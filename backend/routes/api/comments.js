@@ -11,10 +11,9 @@ const validateCommentInput = require('../../validations/comment');
 
 
 // Create a new comment
-router.post('/:presentationId/comments', requireUser, validateCommentInput, async (req, res, next) => {
+router.post('/', requireUser, validateCommentInput, async (req, res, next) => {
   try {
-    const presentationId = req.params.presentationId;
-    const { content, parent_id } = req.body;
+    const { content, parent_id, presentationId } = req.body;
 
     const presentation = await Presentation.findById(presentationId);
     if (!presentation) {
@@ -23,7 +22,6 @@ router.post('/:presentationId/comments', requireUser, validateCommentInput, asyn
       error.errors = { message: 'No presentation found with that id' };
       return next(error);
     }
-
     const newComment = new Comment({
       user: req.user._id,
       content,
@@ -33,12 +31,13 @@ router.post('/:presentationId/comments', requireUser, validateCommentInput, asyn
     const comment = await newComment.save();
 
     // Add the comment to the presentation's comments array
-    presentation.comments.push(comment._id);
-    await presentation.save();
+    // presentation.comments.push(comment._id);
+    // await presentation.save();
 
     return res.json(comment);
   } catch (err) {
     next(err);
+    // return res.json("erroring out here");
   }
 });
 
