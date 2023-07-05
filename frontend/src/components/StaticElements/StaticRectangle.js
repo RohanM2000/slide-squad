@@ -1,4 +1,4 @@
-export default function SlideRectangle ({startLeft, id, startTop, startWidth, startHeight, setPresentationState}) {
+export default function SlideRectangle ({startLeft, id, startTop, startWidth, startHeight, setPresentationState, windowHeight, windowWidth}) {
     return (
         <div
             style={{position: "absolute", 
@@ -6,10 +6,10 @@ export default function SlideRectangle ({startLeft, id, startTop, startWidth, st
                     "justify-content": "flex-end",
                     "align-items": "flex-end",
                     "background-color": "gray",
-                    top: (startTop) + "px", 
-                    left: (startLeft) + "px", 
-                    width: (startWidth) + "px",
-                    height: (startHeight) + "px"}}
+                    top: (startTop*windowHeight) + "px", 
+                    left: (startLeft*windowWidth) + "px", 
+                    width: (startWidth*windowWidth) + "px",
+                    height: (startHeight*windowHeight) + "px"}}
         >
         </div>
     );
