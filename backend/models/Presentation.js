@@ -15,6 +15,48 @@ const Schema = mongoose.Schema;
 // });
 
 // module.exports = mongoose.model("Tweet", tweetSchema);
+
+  // Define the like schema
+  const likeSchema = new Schema(
+    {
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User', // Reference to the User model
+        required: true
+      }
+    },
+    { timestamps: true } // Enable timestamps for like documents
+  );
+
+  // Define the comment schema
+  const commentSchema = new Schema(
+    {
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User', // Reference to the User model
+        required: true
+      },
+      content: {
+        type: String,
+        required: true
+      },
+      likes: {
+        type: [likeSchema], // Array of likes (using the likeSchema)
+        default: []
+      },
+      // replies: {
+      //   type: Map,
+      //   of: commentSchema,
+      //   default: {}
+      // }
+      parent_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Comment',
+        default: null
+      }
+    },
+    { timestamps: true } // Enable timestamps for comment documents
+  );
   
   const presentationSchema = new Schema({
     title: {
@@ -29,6 +71,20 @@ const Schema = mongoose.Schema;
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: true
+    },
+    likes: {
+      type: {
+        type: Map,
+        of: likeSchema
+      }, // Object of likes (using the likeSchema)
+      default: {}
+    },
+    comments: {
+      type: {
+        type: Map,
+        of: commentSchema
+      },
+      default: {}
     },
     slides: {
       type: Object,
