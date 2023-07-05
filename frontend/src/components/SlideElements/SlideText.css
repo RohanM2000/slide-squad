@@ -4,3 +4,7 @@
     /* width:fit-content;
     block-size: fit-content; */
 }
+.input-text:empty:before{
+    content:'input text here';
+    color: grey;
+}
