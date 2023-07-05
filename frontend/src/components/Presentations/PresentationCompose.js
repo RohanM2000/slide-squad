@@ -96,16 +96,19 @@ function PresentationCompose () {
             Text-Box
           </button>
           <button onClick={event=>addRectangleElement(event)}>
-            add a rectangle element
+            <img src='../icons/rectangle-vector.png'></img>
+            Rectangle
           </button>
           <button onClick={()=>setPresentationState(
             {...presentationState,[onFocus]:{...presentationState[onFocus],bold: !presentationState[onFocus].bold}}
           )}>
+            <i class="fa-solid fa-bold fa-xl"></i>
             Bold
           </button>
           <div className='color-dropdown'>
             <button onMouseEnter={()=>setShowSwatch({reveal:true,type:'text'})} className='color-button'>
-              Set Text Color
+              <img src='../icons/color-text.png'></img>
+              Text Color
             </button>
             <div className='color-dropdown-content'>
               {showSwatch.reveal && showSwatch.type==='text' && <Swatches type='text' onFocus={onFocus} setPresentation={setPresentationState} setShowSwatch={setShowSwatch}/>}
@@ -119,7 +122,8 @@ function PresentationCompose () {
           </button>
           <div className='color-dropdown'>
             <button onMouseEnter={()=>setShowSwatch({reveal:true,type:'shape'})}>
-              Set Shape Color
+              <img src='../icons/bucket.png'></img>
+              Shape Color
             </button>
             <div className='color-dropdown-content'>
               {showSwatch.reveal && showSwatch.type==='shape' && <Swatches type='shape' onFocus={onFocus} setPresentation={setPresentationState} setShowSwatch={setShowSwatch}/>}
