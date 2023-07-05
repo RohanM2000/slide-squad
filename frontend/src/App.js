@@ -33,7 +33,7 @@ function App() {
         <ProtectedRoute exact path="/profile" component={Profile} />
         <ProtectedRoute exact path="/presentations" component={Presentations} />
         <ProtectedRoute exact path="/presentations/compose" component={PresentationCompose} />
-        <ProtectedRoute exact path="/presentations/compose-static-test" component={StaticPresentation} />
+        <ProtectedRoute exact path="/presentations/:presentationId" component={StaticPresentation} />
       </Switch>
     </div>
     </>

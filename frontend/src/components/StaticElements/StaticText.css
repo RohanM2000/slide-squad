@@ -1,0 +1,6 @@
+.input-text-static{
+    border: none;
+    white-space: pre-wrap;
+    /* width:fit-content;
+    block-size: fit-content; */
+}
