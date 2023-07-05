@@ -76,7 +76,7 @@ export const createComment = data => async dispatch => {
 export const updateComment = data => async dispatch => {
   try {
     const res = await jwtFetch(`/api/comments/${data.id}`, {
-      method: 'POST',
+      method: 'PATCH',
       body: JSON.stringify(data)
     });
     const comment = await res.json();
