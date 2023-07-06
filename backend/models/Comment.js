@@ -8,6 +8,11 @@ const commentSchema = new Schema(
       ref: 'User',
       required: true
     },
+    presentation: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Presentation',
+      required: true
+    },
     content: {
       type: String,
       required: true
