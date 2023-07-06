@@ -2,12 +2,13 @@ import { useState } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min"
 import CommentsIndex from "../Comments/CommentIndex";
 
-const PresentationFooter =()=>{
+const PresentationFooter =({presentationId})=>{
     const {presentationId} = useParams();
     const [showComments,setShowComments] = useState(false);
 
     const handleToggle=()=>{
         setShowComments(!showComments);
+        // fetch comments for the post with presentationId
     }
     return (
         <div className='footer-container'>
