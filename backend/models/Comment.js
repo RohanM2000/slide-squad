@@ -12,13 +12,6 @@ const commentSchema = new Schema(
       type: String,
       required: true
     },
-    likes: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Like'
-      }
-    ],
-    // likes: [likeSchema],
     parent_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Comment',
