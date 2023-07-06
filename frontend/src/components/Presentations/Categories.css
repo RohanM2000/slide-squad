@@ -1,10 +1,17 @@
 .category-input:empty:before{
     content: 'enter Category';
     color: grey
-}.category-container{
+}
+.category-input{
+    outline: 0px solid transparent;
+    padding: 5px;
+    width:auto;
+}
+.category-container{
     display: flex;
     align-items: center;
 }
+
 .category{
     display: flex;
 }
@@ -14,6 +21,7 @@
     width:25px;
     height: 25px;
     border-radius: 50%;
+    margin-right: 5px;
 }
 .category-remove i{
     color: transparent;
@@ -30,3 +38,11 @@
     width:200px;
     height: 50px;
 }
+
+.category-text-container{
+    min-width:150px;
+    width:100%;
+    background-color: rgba(0,0,0,.1);
+    border-radius: 3px;
+}
+
