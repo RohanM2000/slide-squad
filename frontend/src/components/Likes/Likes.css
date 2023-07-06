@@ -1,0 +1,15 @@
+.likes-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px auto;
+}
+
+.likes-container h2 {
+    padding: .3vw;
+    font-size: 1.7vw;
+    font-weight: 700;
+    margin-top: 1vw;
+    color: rgb(202, 12, 12);
+
+}

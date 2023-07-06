@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const LikesIndex = () => {
+  const currentUser = useSelector(state => state.session.user)
     const { userId } = useParams();
     const dispatch = useDispatch();
     const [newLikes, setNewLikes] = useState([])
@@ -22,14 +23,12 @@ const LikesIndex = () => {
       dispatch(fetchUserLikes(userId));
     }, [dispatch, userId])
 
-    // console.log("likes", likes);
-  
   
     console.log("RERENDERING RIGHT NOW")
     return (
       <div>
-        <h2>Presentations Liked by User</h2>
         <div className='likes-container'>
+          <h2>{currentUser.username}'s Liked Presentations</h2>
             {newLikes.map(like => (
                 <>
                   <LikesIndexItem key={like._id} like={like} />
