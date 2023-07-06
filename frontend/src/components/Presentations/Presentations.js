@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearPresentationErrors, fetchPresentations } from '../../store/presentations';
-import PresentationBox from './PresentationBox';
+import './PresentationBox.css';
+import StaticPresentation from '../StaticPresentation/StaticPresentation';
 
 function Presentations () {
   const dispatch = useDispatch();
@@ -16,10 +17,17 @@ function Presentations () {
   
   return (
     <>
+    <div className='all-presentations-container'>
       <h2>All Presentations</h2>
       {presentations.map(presentation => (
-        <PresentationBox key={presentation._id} presentation={presentation} />
+        <>
+          {/* <PresentationBox key={presentation._id} presentation={presentation} /> */}
+          <div className='presentation-container'>
+            <StaticPresentation presentation={presentation} />
+          </div>
+        </>
       ))}
+    </div>
     </>
   );
 }
