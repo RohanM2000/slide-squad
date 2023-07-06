@@ -32,18 +32,6 @@ const Schema = mongoose.Schema;
       ref: 'User',
       required: true
     },
-    likes: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Like'
-      }
-    ],
-    comments: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Comment'
-      }
-    ],
     slides: {
       type: Object,
       // of: new Schema({
