@@ -5,6 +5,7 @@
     border-radius: 5px;
     border: solid 1px transparent;
     background-color: rgba(0,0,0,.1);
+    margin-bottom: 5px;
 }
 .category-container{
     display: flex;
@@ -13,6 +14,8 @@
 
 .category{
     display: flex;
+    flex-wrap: wrap;
+    width: 54vw;
 }
 .category-remove{
     border: none;
