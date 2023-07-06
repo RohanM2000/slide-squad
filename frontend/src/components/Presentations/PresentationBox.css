@@ -1,13 +1,13 @@
 .all-presentations-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+
     align-items: center;
-    margin: auto;
+    margin: 0px auto;
 }
 
 .all-presentations-container h2 {
-    padding: 1vw;
+    padding: .3vw;
     font-size: 1.7vw;
     font-weight: 700;
 }

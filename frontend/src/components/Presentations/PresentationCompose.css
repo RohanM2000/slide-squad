@@ -72,7 +72,7 @@
 .compose-container {
     display: flex;
     flex-direction: column;
-    margin: auto;
+    margin: 0px auto;
     align-items: center;
 }
 
