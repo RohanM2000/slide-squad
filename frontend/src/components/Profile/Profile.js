@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './profile.css';
 import { fetchUserPresentations, clearPresentationErrors } from '../../store/presentations';
+import StaticPresentation from '../StaticPresentation/StaticPresentation';
 // import { fetchUserTweets, clearTweetErrors } from '../../store/tweets';
 // import TweetBox from '../Tweets/TweetBox';
 
@@ -28,15 +29,19 @@ function Profile () {
   } else {
     return (
       <>
+      <div className='all-presentations-container'>
         <h2>All of {currentUser.username}'s Presentations</h2>
         {userPresentations.map(presentation => (
           <div key={presentation._id} >
             {/* <PresentationShowPage
             
             /> */}
-            <p key={presentation._id}>{presentation.title}</p>
+              <div key={presentation._id} className='presentation-container'>
+                <StaticPresentation presentation={presentation} />
+              </div>
           </div>
         ))}
+      </div>
         
       </>
     );

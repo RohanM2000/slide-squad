@@ -56,7 +56,6 @@ router.post('/presentation/:presentationId/like', requireUser, async (req, res, 
     // Create a new Like object
     const newLike = new Like({
       liker: req.user._id, 
-      presentation: presentation._id,
       likedType: 'Presentation', 
       likeId: presentation._id
     });

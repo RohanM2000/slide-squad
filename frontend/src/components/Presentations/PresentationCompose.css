@@ -72,7 +72,8 @@
 .compose-container {
     display: flex;
     flex-direction: column;
-    margin: auto;
+    margin: 0px auto;
+    padding-top: 3vw;
     align-items: center;
 }
 
@@ -80,6 +81,7 @@
     margin-bottom: 30px;
     text-align: center;
 }
+
 
 .presentation-title-input {
     border: 1px solid rgba(0, 0, 0, 0.26);
@@ -125,4 +127,47 @@
     border-radius: 8px;
     flex-direction: column;
     position: absolute;
+}
+
+.all-presentations-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px auto;
+}
+
+.all-presentations-container h2 {
+    padding: .3vw;
+    font-size: 1.7vw;
+    font-weight: 700;
+    margin-top: 1vw;
+
+}
+
+.presentation-container {
+    padding: 5px;
+    margin: 10px 0px;
+}
+
+.presentation-show-container{
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    width: 80vw;
+}
+
+.presentation-show-container h3 {
+    font-size: 1.4vw;
+    margin-bottom: 10px;
+    font-weight: 700;
+    width: 68%;
+    text-align: center;
+    
+}
+
+.presentation-show-container b {
+    font-weight: 700;
+    margin-bottom: .8vw;
+    
 }
