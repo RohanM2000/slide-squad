@@ -28,10 +28,10 @@ router.get('/user/:userId', async (req, res, next) => {
       return next(error);
   }
   try {
-      const presentations = await Like.find({ liker: user._id })
+      const likes = await Like.find({ liker: user._id })
                                   .sort({ createdAt: -1 })
                                   .populate("liker", "_id username");
-      return res.json(presentations);
+      return res.json(likes);
   }
   catch(err) {
       return res.json([]);
@@ -150,7 +150,7 @@ router.delete('/like/:likeId', requireUser, async (req, res, next) => {
       await presentation.save();
     }
 
-    return res.json({ message: "Like deleted successfully" });
+    return res.json(req.params.likeId);
   } catch (err) {
     return next(err);
   }
