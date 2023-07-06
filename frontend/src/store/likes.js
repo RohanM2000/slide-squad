@@ -73,13 +73,16 @@ export const createLike = data => async dispatch => {
   }
 };
 
-export const deleteLike= (likeId) => async(dispatch) => {
+export const deleteLike= (likeId) => async (dispatch) => {
     try {
         const res = await jwtFetch(`/api/likes/like/${likeId}`, {
           method: 'DELETE',
         });
-        dispatch(receiveLike(likeId));
+        const like = await res.json();
+        // console.log("RESULT", like)
+        dispatch(removeLike(like));
     } catch(err) {
+        // console.log("DELETED THE THING", err);
         const resBody = await err.json();
         if (resBody.statusCode === 400) {
           return dispatch(receiveErrors(resBody.errors));
@@ -107,13 +110,16 @@ const likesReducer = (state = {}, action) => {
   switch(action.type) {
     case RECEIVE_LIKES:
       newState =  { ...state};
+      // console.log("action likes", action.likes);
       action.likes.forEach(like=>{
         newState[like._id] = like;
       });
+      // console.log("new state", newState);
       return newState;
     case RECEIVE_LIKE:
       return { ...state, [action.like._id]: action.like};
     case REMOVE_LIKE:
+        newState = state;
         delete newState[action.likeId]
         return newState
     default:
