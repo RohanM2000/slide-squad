@@ -57,9 +57,9 @@ export const fetchUserLikes = id => async dispatch => {
   }
 };
 
-export const createlike = data => async dispatch => {
+export const createLike = data => async dispatch => {
   try {
-    const res = await jwtFetch('/api/likes/', {
+    const res = await jwtFetch(`/api/likes/${data.likeId}`, {
       method: 'POST',
       body: JSON.stringify(data)
     });
@@ -73,7 +73,7 @@ export const createlike = data => async dispatch => {
   }
 };
 
-export const deletelike= (likeId) => async(dispatch) => {
+export const deleteLike= (likeId) => async(dispatch) => {
     try {
         const res = await jwtFetch(`/api/likes/${likeId}`, {
           method: 'DELETE',
