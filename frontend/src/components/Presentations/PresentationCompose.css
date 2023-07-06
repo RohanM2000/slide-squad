@@ -72,7 +72,7 @@
 .compose-container {
     display: flex;
     flex-direction: column;
-    margin: 0px auto;
+    margin: 3vw auto;
     align-items: center;
 }
 
@@ -80,6 +80,7 @@
     margin-bottom: 30px;
     text-align: center;
 }
+
 
 .presentation-title-input {
     border: 1px solid rgba(0, 0, 0, 0.26);
