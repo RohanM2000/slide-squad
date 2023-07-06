@@ -1,6 +1,6 @@
 import { useState } from "react";
 import './Categories.css';
-export default function Categories () {
+export default function Categories ({setStateCategories}) {
    const [categories,setCategories] = useState(['']);
     const handleKeyDown = (event)=>{
         
@@ -21,6 +21,7 @@ export default function Categories () {
         const updatedState=[...categories];
         updatedState[event.target.dataset.type]=event.target.value
             setCategories(updatedState);
+            setStateCategories(updatedState);
             // setStateCategories(state=>{
             //     return categories.join('#');
             // })

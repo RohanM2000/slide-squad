@@ -15,6 +15,7 @@ function PresentationCompose () {
   const [title, setTitle] = useState('');
   const dispatch = useDispatch();
   const [bold,setBold] = useState(false);
+  const [stateCategories,setStateCategories] = useState(['']);
   const [showSwatch,setShowSwatch] = useState({
     reveal:false,
   type:null});
@@ -162,7 +163,7 @@ function PresentationCompose () {
             className="presentation-title-input"
           />
         </div>
-        <Categories />
+        <Categories setStateCategories={setStateCategories}/>
 
         <div className='selection'>
           <button onClick={event=>addTextElement(event)}>
