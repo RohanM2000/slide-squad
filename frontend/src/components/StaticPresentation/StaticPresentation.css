@@ -1,0 +1,22 @@
+.presentation-show-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+}
+
+.presentation-show-container h3 {
+    font-size: 1.4vw;
+    margin-bottom: 10px;
+    font-weight: 700;
+    width: 68%;
+    text-align: center;
+    
+}
+
+.presentation-show-container b {
+    font-weight: 700;
+    margin-bottom: .8vw;
+    
+}

@@ -1,0 +1,18 @@
+.all-presentations-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin: auto;
+}
+
+.all-presentations-container h2 {
+    padding: 1vw;
+    font-size: 1.7vw;
+    font-weight: 700;
+}
+
+.presentation-container {
+    padding: 5px;
+    margin: 10px 0px;
+}

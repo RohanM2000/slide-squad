@@ -7,9 +7,11 @@ import '../Presentations/PresentationCompose.css';
 import StaticText from '../StaticElements/StaticText';
 import StaticRectangle from '../StaticElements/StaticRectangle';
 import PresentationFooter from './StaticPresentationFooter';
-function PresentationCompose () {
+import './StaticPresentation.css'
+
+function StaticPresentation ({presentation}) {
   const dispatch = useDispatch();
-  const {presentationId} = useParams();
+  const presentationId = presentation._id
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   useEffect(()=>{
@@ -80,6 +82,8 @@ function PresentationCompose () {
       {/* <form className="compose-presentation" onSubmit={handleSubmit}> */}
       {/* decide how the input will be taken */}
       <div className='presentation-show-container'>
+        <b>Title:</b>
+        <h3> {presentation.title}</h3>
         <div className='compose-container'>
           {/* canvas frame to house the canvas and display possible overflows */}
           <div className='canvas-frame'>
@@ -138,4 +142,4 @@ function PresentationCompose () {
   ) : null;
 }
 
-export default PresentationCompose;
+export default StaticPresentation;
