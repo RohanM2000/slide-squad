@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import './Likes.css';
+import { deleteLike } from '../../store/likes';
 import { fetchPresentation } from '../../store/presentations';
 
 const LikesIndexItem = ({ like } ) => {
@@ -20,6 +21,7 @@ const LikesIndexItem = ({ like } ) => {
         <>
         <div className='like-container'>
             <h3>{presentation.title}</h3>
+            <button onClick={() => dispatch(deleteLike(like._id))}>Delete</button>
         </div>
         </>
     )

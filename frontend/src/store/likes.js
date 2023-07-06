@@ -75,7 +75,7 @@ export const createLike = data => async dispatch => {
 
 export const deleteLike= (likeId) => async(dispatch) => {
     try {
-        const res = await jwtFetch(`/api/likes/${likeId}`, {
+        const res = await jwtFetch(`/api/likes/like/${likeId}`, {
           method: 'DELETE',
         });
         dispatch(receiveLike(likeId));
