@@ -93,7 +93,35 @@ function PresentationCompose () {
      return {...state,[slideNumber]: {...state[slideNumber],[nextId]: {startWidth:50/windowWidth,startHeight:50/windowHeight,startLeft:0,startTop:0,id: nextId, type: "rectangle", bg:'grey'}}}
     })
     } 
- 
+    const handleFontChange = (type) =>{
+      
+      switch (type) {
+          case 'minus':
+              if(onFocus){
+                setPresentationState(state=>{
+                  return{
+                    ...state,
+                    [slideNumber]:{...state[slideNumber],
+                    [onFocus]:{...state[slideNumber][onFocus],
+                      fontsize: (presentationState[slideNumber][onFocus].fontsize*windowWidth-1)/windowWidth}} }
+                })
+              } 
+              break;
+          case 'plus':
+            if(onFocus){
+            setPresentationState(state=>{
+              return{
+                ...state,
+                [slideNumber]:{...state[slideNumber],
+                [onFocus]:{...state[slideNumber][onFocus],
+                  fontsize: (presentationState[slideNumber][onFocus].fontsize*windowWidth+1)/windowWidth}}}  
+            })
+          }
+            break;
+          default:
+              break;
+      }
+  }
   const handleSave = ()=>{
     console.log('saved');
     let savedObject=JSON.parse(JSON.stringify(presentationState));
@@ -159,7 +187,6 @@ function PresentationCompose () {
             <div className='color-dropdown-content'>
               {showSwatch.reveal && showSwatch.type==='text' && <Swatches slideNumber={slideNumber} type='text' onFocus={onFocus} setPresentation={setPresentationState} setShowSwatch={setShowSwatch}/>}
             </div>
-
           </div>
           <button onClick={()=>setPresentationState(
             {...presentationState,[onFocus]:{...presentationState[onFocus],fontsize: 48/windowWidth}}
@@ -167,6 +194,19 @@ function PresentationCompose () {
             <img src='../icons/text-size.png'></img>
             48px
           </button>
+          <div className='fontsize-container'>
+              <button onClick={()=>handleFontChange('plus')} className='font-buttons' o>
+                  <i className="fa-solid fa-plus"></i>
+              </button>
+              <div>
+                {presentationState[slideNumber][onFocus] && 
+                presentationState[slideNumber][onFocus].type==='text'&& 
+                <span>{Math.round(presentationState[slideNumber][onFocus].fontsize*windowWidth)}</span>}
+              </div>
+              <button onClick={()=>handleFontChange('minus')} className='font-buttons'>
+                <i className="fa-solid fa-minus"></i>
+              </button>
+            </div>
           <div className='color-dropdown'>
             <button onMouseEnter={()=>setShowSwatch({reveal:true,type:'shape'})}>
               <img src='../icons/bucket.png'></img>
