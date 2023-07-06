@@ -3,6 +3,7 @@ import './Categories.css';
 export default function Categories () {
    const [categories,setCategories] = useState(['']);
     const handleInput = (event)=>{
+        console.log(event.key)
         if (event.key==='Enter'){
             event.preventDefault();
             setCategories(state=>{
@@ -13,7 +14,7 @@ export default function Categories () {
     const handleChange  = (event)=>{
         console.log(event.key)
         // each input will have a data-type identifier to update the state
-            setCategories[event.target.dataset.dataType] = event.target.value;
+            setCategories[event.target.dataset.type] = event.target.value;
             // setStateCategories(state=>{
             //     return categories.join('#');
             // })
@@ -25,11 +26,10 @@ export default function Categories () {
     }
 
     const handleRemove = (event) =>{
-        console.log(event.target.dataset.dataType);
-        let target = event.target.dataset.dataType 
-        let firstHalf = categories.slice(0,target);
-        let secondHalf=categories.slice(target);
-        setCategories(firstHalf.concat(secondHalf));
+        console.log(event.target.dataset.type);
+        let target = parseInt(event.target.dataset.type);
+        let newState=categories.filter((c,index)=>index!==target);
+        setCategories(newState);
     }
    return (
     <>
@@ -37,12 +37,14 @@ export default function Categories () {
     {categories.map((category,index)=>{
         return(
             <>
-            <div datatype={index} className='category-container'>
-            <button onClick={event=>handleRemove(event)} datatype={index} className='category-remove'>
-            <i datatype={index}  className="fa-solid fa-x"></i>
+            <div key={index} data-type={index} className='category-container'>
+            <button key={index} onClick={event=>handleRemove(event)} data-type={index} className='category-remove'>
+            <i key={index} data-type={index}  className="fa-solid fa-x"></i>
             </button>
-            <div className-='category-text-container'>
+            <div key={index} className-='category-text-container'>
                 <span
+                    onInput={(event)=>handleInput(event)}
+                    key={index}
                     contentEditable='true'
                     className='category-input' 
                     value={category}
