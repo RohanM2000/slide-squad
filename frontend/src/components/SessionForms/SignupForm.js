@@ -51,6 +51,8 @@ function SignupForm () {
     dispatch(signup(user)); 
   }
 
+  
+
   return (
     <form className="session-form" onSubmit={handleSubmit}>
       <h2>Sign Up</h2>

@@ -15,6 +15,8 @@ function Profile () {
     return () => dispatch(clearPresentationErrors());
   }, [currentUser, dispatch]);
 
+
+
   // return (
   //   <>
   //   <h1>{currentUser.username}</h1>
