@@ -155,7 +155,7 @@ function PresentationCompose () {
               Text Color
             </button>
             <div className='color-dropdown-content'>
-              {showSwatch.reveal && showSwatch.type==='text' && <Swatches type='text' onFocus={onFocus} setPresentation={setPresentationState} setShowSwatch={setShowSwatch}/>}
+              {showSwatch.reveal && showSwatch.type==='text' && <Swatches slideNumber={slideNumber} type='text' onFocus={onFocus} setPresentation={setPresentationState} setShowSwatch={setShowSwatch}/>}
             </div>
 
           </div>
@@ -171,7 +171,7 @@ function PresentationCompose () {
               Shape Color
             </button>
             <div className='color-dropdown-content'>
-              {showSwatch.reveal && showSwatch.type==='shape' && <Swatches type='shape' onFocus={onFocus} setPresentation={setPresentationState} setShowSwatch={setShowSwatch}/>}
+              {showSwatch.reveal && showSwatch.type==='shape' && <Swatches slideNumber={slideNumber} type='shape' onFocus={onFocus} setPresentation={setPresentationState} setShowSwatch={setShowSwatch}/>}
             </div>
 
           </div>

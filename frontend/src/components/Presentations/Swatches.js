@@ -1,4 +1,4 @@
-export default function Swatches ({type,onFocus,setPresentation,setShowSwatch}) {
+export default function Swatches ({type,onFocus,setPresentation,setShowSwatch,slideNumber}) {
     const handleClick = (event) =>{
         // event.preventDefault();
         // need to set cahnge the pagrapg state for the id to zero
@@ -7,13 +7,13 @@ export default function Swatches ({type,onFocus,setPresentation,setShowSwatch}) 
         switch (type) {
             case 'text':
                 setPresentation(state=>{
-                    return{...state,[onFocus]:{...state[onFocus],color: newColor}}
+                    return{...state,[slideNumber]: {...state[slideNumber],[onFocus]:{...state[slideNumber][onFocus],color: newColor}}}
                 });
                 break;
             case 'shape':
                 console.log(onFocus);
                 setPresentation(state=>{
-                    return{...state,[onFocus]:{...state[onFocus],bg: newColor}}
+                    return{...state,[slideNumber]: {...state[slideNumber],[onFocus]:{...state[slideNumber][onFocus],bg: newColor}}}
                 });
                 break;
             default:
