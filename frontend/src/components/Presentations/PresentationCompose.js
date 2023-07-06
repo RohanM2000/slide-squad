@@ -151,7 +151,7 @@ function PresentationCompose () {
     //   savedObject[ele.id] = ele;
     // })
     // console.log(savedObject);
-    savePresentation(savedObject, dispatch);
+    savePresentation(savedObject, dispatch, title);
   }
   const nextPage = Object.values(presentationState).length+1;
   const handlePageAdd = ()=>{
