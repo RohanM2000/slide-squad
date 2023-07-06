@@ -6,6 +6,39 @@ const Presentation = mongoose.model('Presentation');
 const Like = mongoose.model('Like');
 const { requireUser } = require('../../config/passport');
 
+
+router.get('/', async (req, res) => {
+  try {
+    const users = await User.find().populate('likes');
+    res.json(users);
+  } catch (err) {
+    return res.json([]);
+  }
+});
+
+router.get('/user/:userId', async (req, res, next) => {
+  let user;
+  try {
+      user = await User.findById(req.params.userId);
+  }
+  catch(err) {
+      const error = new Error('User not found');
+      error.statusCode = 404;
+      error.errors = { message: "No user found with that id" };
+      return next(error);
+  }
+  try {
+      const presentations = await Like.find({ liker: user._id })
+                                  .sort({ createdAt: -1 })
+                                  .populate("liker", "_id username");
+      return res.json(presentations);
+  }
+  catch(err) {
+      return res.json([]);
+  }
+});
+
+
 // Like a presentation
 router.post('/:presentationId/likes', async (req, res, next) => {
   try {
