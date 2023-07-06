@@ -41,14 +41,14 @@ export default function Categories () {
     console.log(categories);
    return (
     <>
-    <h3>Categories</h3>
+    <h3 className="heading-categories">Categories</h3>
     <div className='category'>
     {categories.map((category,index)=>{
         return(
             <>
             <div key={index} data-type={index} className='category-container'>
                 <button key={index} onClick={event=>handleRemove(event)} data-type={index} className='category-remove'>
-                    <i key={index} data-type={index}  className="fa-solid fa-x"></i>
+                    <i key={index} data-type={index}  className="fa-solid fa-x fa-xs"></i>
                 </button>
                 <div>
                 <input
