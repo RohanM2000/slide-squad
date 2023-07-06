@@ -194,7 +194,7 @@ function PresentationCompose () {
             Rectangle
           </button>
           <button className='photo-upload-container' onClick={()=>document.getElementById('photo-input').click()} >
-            <i className="fa-solid fa-image"></i>
+            <i className="fa-solid fa-image fa-xl"></i>
             <span className='photo-text'>Photo (max 1) </span>
             <input style={{display: 'none'}} type='file' id='photo-input' onChange={event=>handleFile(event)}></input>
           </button>

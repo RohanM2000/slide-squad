@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearPresentationErrors, fetchPresentations } from '../../store/presentations';
-import './PresentationBox.css';
 import StaticPresentation from '../StaticPresentation/StaticPresentation';
 
 function Presentations () {
