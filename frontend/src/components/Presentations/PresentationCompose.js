@@ -188,12 +188,6 @@ function PresentationCompose () {
               {showSwatch.reveal && showSwatch.type==='text' && <Swatches slideNumber={slideNumber} type='text' onFocus={onFocus} setPresentation={setPresentationState} setShowSwatch={setShowSwatch}/>}
             </div>
           </div>
-          <button onClick={()=>setPresentationState(
-            {...presentationState,[onFocus]:{...presentationState[onFocus],fontsize: 48/windowWidth}}
-          )}>
-            <img src='../icons/text-size.png'></img>
-            48px
-          </button>
           <div className='fontsize-container'>
               <button onClick={()=>handleFontChange('plus')} className='font-buttons' o>
                   <i className="fa-solid fa-plus"></i>
