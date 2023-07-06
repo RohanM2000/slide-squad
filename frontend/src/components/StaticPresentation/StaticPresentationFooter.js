@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min"
 import CommentsIndex from "../Comments/CommentIndex";
 
-const PresentationFooter =()=>{
+const PresentationFooter =({})=>{
     const {presentationId} = useParams();
     const [showComments,setShowComments] = useState(false);
 
