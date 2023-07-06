@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const Presentation = mongoose.model('Presentation');
+const Like = mongoose.model('Like');
 const { requireUser } = require('../../config/passport');
 
 // Like a presentation
@@ -20,7 +21,9 @@ router.post('/:presentationId/likes', async (req, res, next) => {
     }
 
     // Check if the user has already liked the presentation
-    const alreadyLiked = presentation.likes.includes(userId);
+    const alreadyLiked = presentation.likes.some(like =>
+      like.user.toString() === userId.toString()
+    );
     if (alreadyLiked) {
       const error = new Error('You have already liked this presentation');
       error.statusCode = 400;
@@ -28,8 +31,12 @@ router.post('/:presentationId/likes', async (req, res, next) => {
       return next(error);
     }
 
-    // Add the user's like to the presentation
-    presentation.likes.push(userId);
+    // Create a new like
+    const newLike = new Like({ user: userId });
+    await newLike.save();
+
+    // Add the like to the presentation
+    presentation.likes.push(newLike);
     await presentation.save();
 
     return res.json(presentation);
@@ -43,7 +50,7 @@ router.post('/:presentationId/comments/:commentId/likes', async (req, res, next)
   try {
     const presentationId = req.params.presentationId;
     const commentId = req.params.commentId;
-    const { user } = req.body;
+    const userId = req.user._id;
 
     const presentation = await Presentation.findById(presentationId);
     if (!presentation) {
@@ -62,7 +69,9 @@ router.post('/:presentationId/comments/:commentId/likes', async (req, res, next)
     }
 
     // Check if the user has already liked the comment
-    const hasLiked = comment.likes.some(like => like.user.toString() === user.toString());
+    const hasLiked = comment.likes.some(like =>
+      like.user.toString() === userId.toString()
+    );
     if (hasLiked) {
       const error = new Error('User has already liked the comment');
       error.statusCode = 400;
@@ -70,14 +79,44 @@ router.post('/:presentationId/comments/:commentId/likes', async (req, res, next)
       return next(error);
     }
 
-    // Add the like to the comment
-    comment.likes.push({ user });
+    // Create a new like
+    const newLike = new Like({ user: userId });
+    await newLike.save();
 
-    // Save the updated presentation
+    // Add the like to the comment
+    comment.likes.push(newLike);
     await presentation.save();
+
     res.json(presentation);
   } catch (err) {
     next(err);
   }
 });
 
+// Delete all likes by a user
+// router.delete('/likes', async (req, res, next) => {
+//   try {
+//     const userId = req.user._id;
+
+//     // Remove likes from presentations
+//     await Presentation.updateMany(
+//       { 'likes.user': userId },
+//       { $pull: { likes: { user: userId } } }
+//     );
+
+//     // Remove likes from comments
+//     await Presentation.updateMany(
+//       { 'comments.likes.user': userId },
+//       { $pull: { 'comments.$[].likes': { user: userId } } }
+//     );
+
+//     // Delete the likes from the Like model
+//     await Like.deleteMany({ user: userId });
+
+//     res.json({ message: 'Likes deleted successfully' });
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
+module.exports = router;

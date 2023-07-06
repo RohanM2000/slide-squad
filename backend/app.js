@@ -9,11 +9,21 @@ const debug = require('debug');
 
 require('./models/User');
 require('./models/Presentation');
+
+//comments and likes routes Wed
+require('./models/Like');
+require('./models/Comment');
+
 require('./config/passport');
 const passport = require('passport');
 
 const usersRouter = require('./routes/api/users');
 const presentationsRouter = require('./routes/api/presentations');
+
+//comments and likes routes Wed
+const likesRouter = require('./routes/api/likes');
+const commentsRouter = require('./routes/api/comments');
+
 const csrfRouter = require('./routes/api/csrf');
 
 const app = express();
@@ -42,12 +52,18 @@ app.use(
 
 app.use('/api/users', usersRouter);
 app.use('/api/presentations', presentationsRouter);
+
+//comments and likes routes Wed
+app.use('/api/likes', likesRouter);
+app.use('/api/comments', commentsRouter);
+
+
 app.use('/api/csrf', csrfRouter);
 
 app.use((req, res, next) => {
     const err = new Error('Not Found');
     err.statusCode = 404;
-    next(err);;
+    next(err);
 });
 
 const serverErrorLogger = debug('backend:error');
