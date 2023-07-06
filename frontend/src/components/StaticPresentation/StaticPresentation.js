@@ -1,11 +1,12 @@
 import { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPresentations } from '../../store/presentations';
+import { fetchPresentation } from '../../store/presentations';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 // import { clearPresentationErrors, composePresentation } from '../../store/presentations';
 import '../Presentations/PresentationCompose.css';
 import StaticText from '../StaticElements/StaticText';
 import StaticRectangle from '../StaticElements/StaticRectangle';
+import PresentationFooter from './StaticPresentationFooter';
 function PresentationCompose () {
   const dispatch = useDispatch();
   const {presentationId} = useParams();
@@ -17,7 +18,7 @@ function PresentationCompose () {
       setWindowWidth(window.innerWidth);
     }
     window.addEventListener("resize", handleResize);
-    dispatch(fetchPresentations());
+    dispatch(fetchPresentation(presentationId));
     return ()=> window.removeEventListener("resize",handleResize);
   },[]);
 
@@ -73,62 +74,65 @@ function PresentationCompose () {
   // check children right, left, top, bottom, type, width, height, (rotation??)
   // console.log(presentationState[slideNumber]);
   // let intObjects = Object.values(presentationState[slideNumber]);
+  // console.log(presentationState);
   return presentationState ? (
     <>
       {/* <form className="compose-presentation" onSubmit={handleSubmit}> */}
       {/* decide how the input will be taken */}
-      
-      <div className='compose-container'>
-        {/* canvas frame to house the canvas and display possible overflows */}
-        <div className='canvas-frame'>
-          <div className='presentation-canvas' >
-              {Object.values(presentationState[slideNumber]).map((obj)=>{
-                if (obj.type === "text") return <StaticText 
-                                                key={`${slideNumber}-${obj.id}`}
-                                                slideNumber={slideNumber}
-                                                fontsize={obj.fontsize} 
-                                                color={obj.color} 
-                                                bold={obj.bold} 
-                                                id={obj.id} 
-                                                text={obj.text} 
-                                                startLeft={obj.startLeft} 
-                                                startTop={obj.startTop} 
-                                                windowHeight={windowHeight}
-                                                windowWidth={windowWidth}
-                                                />
-                if (obj.type === "rectangle") return <StaticRectangle 
-                                                key={`${slideNumber}-${obj.id}`}
-                                                slideNumber={slideNumber}
-                                                id={obj.id} 
-                                                startHeight={obj.startHeight} 
-                                                startWidth={obj.startWidth} 
-                                                startLeft={obj.startLeft} 
-                                                startTop={obj.startTop} 
-                                                windowHeight={windowHeight}
-                                                windowWidth={windowWidth}
-                                                bg={obj.bg}
-                                                />
-              })}
+      <div className='presentation-show-container'>
+        <div className='compose-container'>
+          {/* canvas frame to house the canvas and display possible overflows */}
+          <div className='canvas-frame'>
+            <div className='presentation-canvas' >
+                {presentationState[slideNumber]&& Object.values(presentationState[slideNumber]).map((obj)=>{
+                  if (obj.type === "text") return <StaticText 
+                                                  key={`${slideNumber}-${obj.id}`}
+                                                  slideNumber={slideNumber}
+                                                  fontsize={obj.fontsize} 
+                                                  color={obj.color} 
+                                                  bold={obj.bold} 
+                                                  id={obj.id} 
+                                                  text={obj.text} 
+                                                  startLeft={obj.startLeft} 
+                                                  startTop={obj.startTop} 
+                                                  windowHeight={windowHeight}
+                                                  windowWidth={windowWidth}
+                                                  />
+                  if (obj.type === "rectangle") return <StaticRectangle 
+                                                  key={`${slideNumber}-${obj.id}`}
+                                                  slideNumber={slideNumber}
+                                                  id={obj.id} 
+                                                  startHeight={obj.startHeight} 
+                                                  startWidth={obj.startWidth} 
+                                                  startLeft={obj.startLeft} 
+                                                  startTop={obj.startTop} 
+                                                  windowHeight={windowHeight}
+                                                  windowWidth={windowWidth}
+                                                  bg={obj.bg}
+                                                  />
+                })}
+            </div>
           </div>
+            {/* <input 
+              type="textarea"
+              value={text}
+              onChange={update}
+              placeholder="Write your tweet..."
+              required
+            />
+            <div className="errors">{errors?.text}</div>
+            <input type="submit" value="Submit" />
+          </form>
+          <div className="presentation-preview">
+            <h3>Presentation Preview</h3>
+            {text ? <PresentationBox presentation={{text, author}} /> : undefined}
+          </div>
+          <div className="previous-presentation">
+            <h3>Previous Presentation</h3>
+            {newPresentation ? <PresentationBox presentation={newPresentation} /> : undefined}
+          </div> */}
         </div>
-          {/* <input 
-            type="textarea"
-            value={text}
-            onChange={update}
-            placeholder="Write your tweet..."
-            required
-          />
-          <div className="errors">{errors?.text}</div>
-          <input type="submit" value="Submit" />
-        </form>
-        <div className="presentation-preview">
-          <h3>Presentation Preview</h3>
-          {text ? <PresentationBox presentation={{text, author}} /> : undefined}
-        </div>
-        <div className="previous-presentation">
-          <h3>Previous Presentation</h3>
-          {newPresentation ? <PresentationBox presentation={newPresentation} /> : undefined}
-        </div> */}
+          <PresentationFooter />
       </div>
     </>
   ) : null;

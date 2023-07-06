@@ -8,6 +8,7 @@ import SlideRectangle from '../SlideElements/SlideRectangle';
 import savePresentation from './presentationSave';
 import Swatchy from './ColorSwatches';
 import Swatches from './Swatches';
+import Categories from './Categories';
 function PresentationCompose () {
   const [onFocus,setOnFocus] = useState(null);
   const [text, setText] = useState('');
@@ -161,6 +162,7 @@ function PresentationCompose () {
             className="presentation-title-input"
           />
         </div>
+        <Categories />
 
         <div className='selection'>
           <button onClick={event=>addTextElement(event)}>
@@ -188,12 +190,6 @@ function PresentationCompose () {
               {showSwatch.reveal && showSwatch.type==='text' && <Swatches slideNumber={slideNumber} type='text' onFocus={onFocus} setPresentation={setPresentationState} setShowSwatch={setShowSwatch}/>}
             </div>
           </div>
-          <button onClick={()=>setPresentationState(
-            {...presentationState,[onFocus]:{...presentationState[onFocus],fontsize: 48/windowWidth}}
-          )}>
-            <img src='../icons/text-size.png'></img>
-            48px
-          </button>
           <div className='fontsize-container'>
               <button onClick={()=>handleFontChange('plus')} className='font-buttons' o>
                   <i className="fa-solid fa-plus"></i>
@@ -254,8 +250,8 @@ function PresentationCompose () {
               })}
           </div>
         </div>
-        <button onClick={handlePageAdd}>
-          add page
+        <button onClick={handlePageAdd} className='button-add-page'>
+          Add Page
         </button>
         <button className='save-button'onClick={handleSave}>
           save
