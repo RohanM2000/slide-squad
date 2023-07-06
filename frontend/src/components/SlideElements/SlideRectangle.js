@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 
-export default function SlideRectangle ({startLeft, id, startTop, startWidth, startHeight, setPresentationState, windowHeight, windowWidth, setOnFocus, bg}) {
+export default function SlideRectangle ({slideNumber, startLeft, id, startTop, startWidth, startHeight, setPresentationState, windowHeight, windowWidth, setOnFocus, bg}) {
     const [top, setTop] = useState(0);
     const [left, setLeft] = useState(0);
     const [width, setWidth] = useState(0);
@@ -47,16 +47,20 @@ export default function SlideRectangle ({startLeft, id, startTop, startWidth, st
             setLeft(0);
             setHeight(0);
             setWidth(0);
-           return {...state,
-            [id]: {
-                startTop: startTop + tempTop/windowHeight,
-                startLeft: startLeft + tempLeft/windowWidth,
-                bg: bg,
-                id: id,
-                startHeight: startHeight + tempHeight/windowHeight,
-                startWidth: startWidth + tempWidth/windowWidth,
-                type: "rectangle"
-            }}
+            return {...state,
+                [slideNumber]:
+                {
+                ...state[slideNumber],
+                [id]:{
+                    startTop: startTop + tempTop/windowHeight,
+                    startLeft: startLeft + tempLeft/windowWidth,
+                    bg: bg,
+                    id: id,
+                    startHeight: startHeight + tempHeight/windowHeight,
+                    startWidth: startWidth + tempWidth/windowWidth,
+                    type: "rectangle"
+                }
+                }}
         })
     };
 
@@ -72,16 +76,20 @@ export default function SlideRectangle ({startLeft, id, startTop, startWidth, st
             setLeft(0);
             setHeight(0);
             setWidth(0);
-           return {...state,
-            [id]: {
-                startTop: startTop + tempTop/windowHeight,
-                startLeft: startLeft + tempLeft/windowWidth,
-                bg: bg,
-                id: id,
-                startHeight: startHeight + tempHeight/windowHeight,
-                startWidth: startWidth + tempWidth/windowWidth,
-                type: "rectangle"
-            }}
+            return {...state,
+                [slideNumber]:
+                {
+                ...state[slideNumber],
+                [id]:{
+                    startTop: startTop + tempTop/windowHeight,
+                    startLeft: startLeft + tempLeft/windowWidth,
+                    bg: bg,
+                    id: id,
+                    startHeight: startHeight + tempHeight/windowHeight,
+                    startWidth: startWidth + tempWidth/windowWidth,
+                    type: "rectangle"
+                }
+                }}
         })
     };
 
