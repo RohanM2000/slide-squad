@@ -55,13 +55,19 @@ const presentations = [];
 
 for (let i = 0; i < NUM_SEED_PRESENTATIONS; i++) {
   const slides = {
-    slide1: {
+    1: {
+      1:{
       id: 1,
-      text: faker.lorem.sentence()
+      text: faker.lorem.sentence(),
+      type: 'text'
+      }
     },
-    slide2: {
-      id: 2,
-      text: faker.lorem.sentence()
+    2: {
+      1:{
+      id: 1,
+      text: faker.lorem.sentence(),
+      type: 'text'
+      }
     },
   };
 
