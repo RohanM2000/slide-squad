@@ -6,23 +6,23 @@ const Like = mongoose.model('Like');
 const Presentation = mongoose.model('Presentation');
 const Comment = mongoose.model('Comment');
 const { requireUser } = require('../../config/passport');
-// const validatePresentationInput = require('../../validations/presentation');
 const validateCommentInput = require('../../validations/comment');
 
 
 // Create a new comment
-router.post('/:presentationId/comments', requireUser, validateCommentInput, async (req, res, next) => {
+router.post('/', requireUser, validateCommentInput, async (req, res, next) => {
   try {
-    const presentationId = req.params.presentationId;
-    const { content, parent_id } = req.body;
+    // const presentationId = req.params.presentationId;
+    const { content, parent_id, presentationId } = req.body;
 
     const presentation = await Presentation.findById(presentationId);
-    if (!presentation) {
-      const error = new Error('Presentation not found');
-      error.statusCode = 404;
-      error.errors = { message: 'No presentation found with that id' };
-      return next(error);
-    }
+    // if (!presentation) {
+    //   const error = new Error('Presentation not found');
+    //   error.statusCode = 404;
+    //   error.errors = { message: 'No presentation found with that id' };
+    //   return next(error);
+    // }
+    // console.log(presentation)
 
     const newComment = new Comment({
       user: req.user._id,

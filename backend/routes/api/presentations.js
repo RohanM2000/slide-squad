@@ -70,7 +70,7 @@ router.get('/user/:userId', async (req, res, next) => {
     try {
         const presentations = await Presentation.find({ author: user._id })
                                     .sort({ createdAt: -1 })
-                                    .populate("author", "_id username");
+                                    .populate("author", "_id username", "comments", "likes");
         return res.json(presentations);
     }
     catch(err) {
@@ -96,7 +96,7 @@ router.get('/user/:userId', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
     try {
         const presentation = await Presentation.findById(req.params.id)
-                                    .populate("author", "_id username");
+                                    .populate("author", "_id username", "comments", "likes");
         return res.json(presentation);
     }
     catch(err) {
@@ -123,6 +123,8 @@ router.get('/:id', async (req, res, next) => {
 //     }
 // });
 
+
+
 router.post('/', requireUser, validatePresentationInput, async (req, res, next) => {
 // router.post('/', requireUser, async (req, res, next) => {
     try {
@@ -133,11 +135,13 @@ router.post('/', requireUser, validatePresentationInput, async (req, res, next) 
             title,
             category,
             author: req.user._id,
-            slides
+            slides,
+            comments,
+            likes
         });
 
         let presentation = await newPresentation.save();
-        presentation = await presentation.populate('author', '_id username');
+        presentation = await presentation.populate('author', '_id username', "comments", "likes");
         return res.json(presentation);
     }
     catch(err) {
@@ -157,6 +161,8 @@ router.get('/category/:category', async (req, res, next) => {
     }
 });
 
+
+// edit a route
 router.patch('/:presentationId', async (req, res, next) => {
     const presentationId = req.params.presentationId;
   
