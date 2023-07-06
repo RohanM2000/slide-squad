@@ -1,13 +1,20 @@
-import { useState, useRef } from "react";
+import { useState, useRef,useEffect } from "react";
 
-export default function SlidePhoto ({preview, file, slideNumber, startLeft, id, startTop, startWidth, startHeight, setPresentationState, windowHeight, windowWidth, setOnFocus}) {
+export default function SlidePhoto ({file, slideNumber, startLeft, id, startTop, startWidth, startHeight, setPresentationState, windowHeight, windowWidth, setOnFocus}) {
     const [top, setTop] = useState(0);
     const [left, setLeft] = useState(0);
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
-    
+    const [preview,setPreview] = useState(null);
 
-   console.log(preview);
+    useEffect(()=>{
+        
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
+        fileReader.onload = () => setPreview(fileReader.result);
+        
+        return () => setPreview(null);
+    },[file])
     const prevPos = useRef({
         top: 0,
         left: 0
@@ -84,6 +91,7 @@ export default function SlidePhoto ({preview, file, slideNumber, startLeft, id, 
                 {
                 ...state[slideNumber],
                 [id]:{
+                    file: file,
                     startTop: startTop + tempTop/windowHeight,
                     startLeft: startLeft + tempLeft/windowWidth,
                     id: id,

@@ -139,8 +139,7 @@ function PresentationCompose () {
             startLeft:0,startTop:0,
             id: nextId, 
             type: "photo",
-            file: file,
-            preview: preview}}}
+            file: file}}}
       }
     )
   }
@@ -286,7 +285,6 @@ function PresentationCompose () {
                                                 windowWidth={windowWidth}
                                                 setOnFocus={setOnFocus}
                                                 file= {obj.file}
-                                                preview = {preview}
                                                 />
               })}
           </div>
