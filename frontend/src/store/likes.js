@@ -26,7 +26,7 @@ const receiveErrors = errors => ({
   errors
 });
 
-export const clearLIKEErrors = errors => ({
+export const clearLikeErrors = errors => ({
     type: CLEAR_LIKE_ERRORS,
     errors
 });
@@ -86,6 +86,7 @@ export const deletelike= (likeId) => async(dispatch) => {
         }
     }
 }
+
 
 const nullErrors = null;
 

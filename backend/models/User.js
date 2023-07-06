@@ -13,7 +13,13 @@ const userSchema = new Schema({
     hashedPassword: {
         type: String,
         required: true
-    }
+    },
+    likes: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Like'
+        }
+    ]
 }, {
     timestamps: true
 });
