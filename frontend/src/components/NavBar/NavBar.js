@@ -30,6 +30,7 @@ function NavBar () {
         <div className="links-auth">
             <NavLink to={'/signup'} className='link-auth'>Signup</NavLink>
             <NavLink to={'/login'} className='link-auth'>Login</NavLink>
+            <NavLink to={'/about-us'} className='link-auth'>Learn More</NavLink>
           
         </div>
       );
