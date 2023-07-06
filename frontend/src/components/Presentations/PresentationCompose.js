@@ -289,8 +289,8 @@ function PresentationCompose () {
               })}
           </div>
         </div>
-        <button onClick={handlePageAdd}>
-          add page
+        <button onClick={handlePageAdd} className='button-add-page'>
+          Add Page
         </button>
         <button className='save-button'onClick={handleSave}>
           save

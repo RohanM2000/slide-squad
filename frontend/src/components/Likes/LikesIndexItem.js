@@ -1,11 +1,14 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './Likes.css';
+import { deleteLike } from '../../store/likes';
 import { fetchPresentation } from '../../store/presentations';
+import StaticPresentation from '../StaticPresentation/StaticPresentation';
 
 const LikesIndexItem = ({ like } ) => {
-    const presentation = useSelector(state => state.presentations[like.likeId] )
+    const presentation = useSelector(state => state.presentations[like.likeId] );
     const dispatch = useDispatch();
+    const [show, setShow] = useState(true);
     useEffect(() => {
         dispatch(fetchPresentation(like.likeId))
     }, [dispatch, like.likeId])
@@ -13,13 +16,16 @@ const LikesIndexItem = ({ like } ) => {
     if (presentation === undefined) {
         return null 
     }
+    // console.log("like", like);
 
-    console.log(like);
-
-    return (
+    return show && (
         <>
-        <div className='like-container'>
-            <h3>{presentation.title}</h3>
+        <div className='presentation-container'>
+            <StaticPresentation presentation={presentation} />
+            <button onClick={() => {
+                                    dispatch(deleteLike(like._id));
+                                    setShow(false);
+                                   }}>Delete</button>
         </div>
         </>
     )

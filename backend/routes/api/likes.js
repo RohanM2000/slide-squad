@@ -28,10 +28,10 @@ router.get('/user/:userId', async (req, res, next) => {
       return next(error);
   }
   try {
-      const presentations = await Like.find({ liker: user._id })
+      const likes = await Like.find({ liker: user._id })
                                   .sort({ createdAt: -1 })
                                   .populate("liker", "_id username");
-      return res.json(presentations);
+      return res.json(likes);
   }
   catch(err) {
       return res.json([]);
@@ -39,42 +39,37 @@ router.get('/user/:userId', async (req, res, next) => {
 });
 
 
-// Like a presentation
-router.post('/:presentationId/likes', async (req, res, next) => {
-  try {
-    const presentationId = req.params.presentationId;
-    const userId = req.user._id;
+// // Like a presentation
 
-    const presentation = await Presentation.findById(presentationId);
+router.post('/presentation/:presentationId/like', requireUser, async (req, res, next) => {
+  try {
+    const presentation = await Presentation.findById(req.params.presentationId);
+    
+    // Check if the presentation exists
     if (!presentation) {
       const error = new Error('Presentation not found');
       error.statusCode = 404;
-      error.errors = { message: 'No presentation found with that id' };
+      error.errors = { message: "No presentation found with that id" };
       return next(error);
     }
-
-    // Check if the user has already liked the presentation
-    const alreadyLiked = presentation.likes.some(like =>
-      like.user.toString() === userId.toString()
-    );
-    if (alreadyLiked) {
-      const error = new Error('You have already liked this presentation');
-      error.statusCode = 400;
-      error.errors = { message: 'You have already liked this presentation' };
-      return next(error);
-    }
-
-    // Create a new like
-    const newLike = new Like({ user: userId });
-    await newLike.save();
-
-    // Add the like to the presentation
-    presentation.likes.push(newLike);
+    
+    // Create a new Like object
+    const newLike = new Like({
+      liker: req.user._id, 
+      likedType: 'Presentation', 
+      likeId: presentation._id
+    });
+    
+    // Save the new Like object
+    const savedLike = await newLike.save();
+    
+    // Update the presentation's like count
+    presentation.likeCount += 1;
     await presentation.save();
-
-    return res.json(presentation);
+    
+    return res.json(savedLike);
   } catch (err) {
-    next(err);
+    return next(err);
   }
 });
 
@@ -101,7 +96,7 @@ router.post('/:presentationId/comments/:commentId/likes', async (req, res, next)
       return next(error);
     }
 
-    // Check if the user has already liked the comment
+
     const hasLiked = comment.likes.some(like =>
       like.user.toString() === userId.toString()
     );
@@ -112,17 +107,52 @@ router.post('/:presentationId/comments/:commentId/likes', async (req, res, next)
       return next(error);
     }
 
-    // Create a new like
     const newLike = new Like({ user: userId });
     await newLike.save();
 
-    // Add the like to the comment
+
     comment.likes.push(newLike);
     await presentation.save();
 
     res.json(presentation);
   } catch (err) {
     next(err);
+  }
+});
+
+router.delete('/like/:likeId', requireUser, async (req, res, next) => {
+  try {
+    const like = await Like.findById(req.params.likeId);
+
+
+    if (!like) {
+      const error = new Error('Like not found');
+      error.statusCode = 404;
+      error.errors = { message: "No like found with that id" };
+      return next(error);
+    }
+
+    
+    if (!like.liker.equals(req.user._id)) {
+      const error = new Error('Unauthorized');
+      error.statusCode = 401;
+      error.errors = { message: "You are not authorized to delete this like" };
+      return next(error);
+    }
+
+
+    await Like.deleteOne({ _id: req.params.likeId });
+
+    
+    const presentation = await Presentation.findById(like.likeId);
+    if (presentation) {
+      presentation.likeCount -= 1;
+      await presentation.save();
+    }
+
+    return res.json(req.params.likeId);
+  } catch (err) {
+    return next(err);
   }
 });
 

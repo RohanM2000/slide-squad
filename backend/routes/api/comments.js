@@ -11,10 +11,9 @@ const validateCommentInput = require('../../validations/comment');
 
 
 // Create a new comment
-router.post('/:presentationId/comments', requireUser, validateCommentInput, async (req, res, next) => {
+router.post('/', requireUser, validateCommentInput, async (req, res, next) => {
   try {
-    const presentationId = req.params.presentationId;
-    const { content, parent_id } = req.body;
+    const { content, parent_id, presentationId } = req.body;
 
     const presentation = await Presentation.findById(presentationId);
     if (!presentation) {
@@ -23,18 +22,15 @@ router.post('/:presentationId/comments', requireUser, validateCommentInput, asyn
       error.errors = { message: 'No presentation found with that id' };
       return next(error);
     }
-
     const newComment = new Comment({
       user: req.user._id,
       content,
-      parent_id
+      parent_id,
+      presentation: presentationId
     });
 
     const comment = await newComment.save();
 
-    // Add the comment to the presentation's comments array
-    presentation.comments.push(comment._id);
-    await presentation.save();
 
     return res.json(comment);
   } catch (err) {
@@ -42,61 +38,11 @@ router.post('/:presentationId/comments', requireUser, validateCommentInput, asyn
   }
 });
 
-// Reply to a comment
-router.post('/:presentationId/comments/:commentId/reply', requireUser, async (req, res, next) => {
-  try {
-    const presentationId = req.params.presentationId;
-    const commentId = req.params.commentId;
-    const { content } = req.body;
-
-    const presentation = await Presentation.findById(presentationId);
-    if (!presentation) {
-      const error = new Error('Presentation not found');
-      error.statusCode = 404;
-      error.errors = { message: 'No presentation found with that id' };
-      return next(error);
-    }
-
-    const parentComment = await Comment.findById(commentId);
-    if (!parentComment) {
-      const error = new Error('Comment not found');
-      error.statusCode = 404;
-      error.errors = { message: 'No comment found with that id' };
-      return next(error);
-    }
-
-    const newReply = new Comment({
-      user: req.user._id,
-      content,
-      parent_id: commentId
-    });
-
-    const reply = await newReply.save();
-
-    // Add the reply to the parent comment's replies array
-    parentComment.replies.push(reply._id);
-    await parentComment.save();
-
-    return res.json(reply);
-  } catch (err) {
-    next(err);
-  }
-});
-
 // Edit a comment
-router.patch('/:presentationId/comments/:commentId', requireUser, async (req, res, next) => {
+router.patch('/:commentId', requireUser, async (req, res, next) => {
   try {
-    const presentationId = req.params.presentationId;
     const commentId = req.params.commentId;
     const { content } = req.body;
-
-    const presentation = await Presentation.findById(presentationId);
-    if (!presentation) {
-      const error = new Error('Presentation not found');
-      error.statusCode = 404;
-      error.errors = { message: 'No presentation found with that id' };
-      return next(error);
-    }
 
     const comment = await Comment.findById(commentId);
     if (!comment) {
@@ -107,7 +53,7 @@ router.patch('/:presentationId/comments/:commentId', requireUser, async (req, re
     }
 
     // Check if the user is the owner of the comment or has sufficient privileges
-    if (comment.user.toString() !== req.user._id.toString()) {
+    if (comment.user._id.toString() !== req.user._id.toString()) {
       const error = new Error('Unauthorized');
       error.statusCode = 401;
       error.errors = { message: 'You are not authorized to edit this comment' };
@@ -124,18 +70,11 @@ router.patch('/:presentationId/comments/:commentId', requireUser, async (req, re
 });
 
 // Delete a comment
-router.delete('/:presentationId/comments/:commentId', requireUser, async (req, res, next) => {
+router.delete('/:commentId', requireUser, async (req, res, next) => {
   try {
-    const presentationId = req.params.presentationId;
     const commentId = req.params.commentId;
 
     const presentation = await Presentation.findById(presentationId);
-    if (!presentation) {
-      const error = new Error('Presentation not found');
-      error.statusCode = 404;
-      error.errors = { message: 'No presentation found with that id' };
-      return next(error);
-    }
 
     const comment = await Comment.findById(commentId);
     if (!comment) {
@@ -146,23 +85,11 @@ router.delete('/:presentationId/comments/:commentId', requireUser, async (req, r
     }
 
     // Check if the user is the owner of the comment or has sufficient privileges
-    if (comment.user.toString() !== req.user._id.toString()) {
+    if (comment.user._id.toString() !== req.user._id.toString()) {
       const error = new Error('Unauthorized');
       error.statusCode = 401;
       error.errors = { message: 'You are not authorized to delete this comment' };
       return next(error);
-    }
-
-    // Remove the comment from the parent's comments array
-    if (comment.parent_id) {
-      const parentComment = await Comment.findById(comment.parent_id);
-      if (parentComment) {
-        parentComment.replies.pull(comment._id);
-        await parentComment.save();
-      } else {
-        presentation.comments.pull(comment._id);
-        await presentation.save();
-      }
     }
 
     // Delete the comment
