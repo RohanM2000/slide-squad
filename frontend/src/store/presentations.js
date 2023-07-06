@@ -83,6 +83,22 @@ export const composePresentation = data => async dispatch => {
   }
 };
 
+export const updatePresentation = (data, presentationId) => async dispatch => {
+  try {
+    const res = await jwtFetch(`/api/presentations/${presentationId}`, {
+      method: 'PATCH',
+      body: JSON.stringify(data)
+    });
+    const presentation = await res.json();
+    dispatch(receivePresentation(presentation));
+  } catch(err) {
+    const resBody = await err.json();
+    if (resBody.statusCode === 400) {
+      return dispatch(receiveErrors(resBody.errors));
+    }
+  }
+};
+
 const nullErrors = null;
 
 export const presentationErrorsReducer = (state = nullErrors, action) => {
