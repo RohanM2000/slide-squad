@@ -6,10 +6,12 @@ const Like = mongoose.model('Like');
 const Presentation = mongoose.model('Presentation');
 const Comment = mongoose.model('Comment');
 const { requireUser } = require('../../config/passport');
+// const validatePresentationInput = require('../../validations/presentation');
+const validateCommentInput = require('../../validations/comment');
 
 
 // Create a new comment
-router.post('/:presentationId/comments', requireUser, async (req, res, next) => {
+router.post('/:presentationId/comments', requireUser, validateCommentInput, async (req, res, next) => {
   try {
     const presentationId = req.params.presentationId;
     const { content, parent_id } = req.body;
