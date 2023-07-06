@@ -59,7 +59,7 @@ export const fetchUserLikes = id => async dispatch => {
 
 export const createLike = data => async dispatch => {
   try {
-    const res = await jwtFetch(`/api/likes/${data.likeId}`, {
+    const res = await jwtFetch(`/api/likes/presentation/${data.likeId}/like`, {
       method: 'POST',
       body: JSON.stringify(data)
     });

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { createLike } from "../../store/likes";
 
-function PresentationBox ({ presentation}) {
+function PresentationBox ({presentation}) {
   const { username } = presentation.author;
   const currentUser = useSelector(state => state.session.user)
   const dispatch = useDispatch();
