@@ -24,7 +24,7 @@ function ProfileButton({ user }) {
         <ul className="dropdown-content">
             <div className="links-nav">
             <NavLink to={'/profile'} className='link-nav'>Profile</NavLink>
-            <NavLink to={'/presentations/likes'} className='link-nav'>Likes</NavLink>
+            <NavLink to={`/likes/user/${user._id}`} className='link-nav'>Likes</NavLink>
             <NavLink to={'/presentations/compose'} className='link-nav'>Compose a Presentation</NavLink>
             <button onClick={logoutUser}>Logout</button>
             </div>
