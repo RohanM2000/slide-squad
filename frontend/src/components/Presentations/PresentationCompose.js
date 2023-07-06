@@ -144,7 +144,9 @@ function PresentationCompose () {
             Rectangle
           </button>
           <button onClick={()=>setPresentationState(
-            {...presentationState,[onFocus]:{...presentationState[onFocus],bold: !presentationState[onFocus].bold}}
+            state=>{
+              return {...state,[slideNumber]:{...state[slideNumber],[onFocus]:{...state[slideNumber][onFocus],bold: !presentationState[slideNumber][onFocus].bold}}}
+            }
           )}>
             <i class="fa-solid fa-bold fa-xl"></i>
             Bold
