@@ -8,6 +8,7 @@ import SlideRectangle from '../SlideElements/SlideRectangle';
 import savePresentation from './presentationSave';
 import Swatchy from './ColorSwatches';
 import Swatches from './Swatches';
+import Categories from './Categories';
 function PresentationCompose () {
   const [onFocus,setOnFocus] = useState(null);
   const [text, setText] = useState('');
@@ -161,6 +162,7 @@ function PresentationCompose () {
             className="presentation-title-input"
           />
         </div>
+        <Categories />
 
         <div className='selection'>
           <button onClick={event=>addTextElement(event)}>

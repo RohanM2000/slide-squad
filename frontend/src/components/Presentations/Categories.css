@@ -1,0 +1,43 @@
+
+.category-input{
+    outline: 0px solid transparent;
+    padding: 5px;
+    border-radius: 5px;
+    border: solid 1px transparent;
+    background-color: rgba(0,0,0,.1);
+    margin-bottom: 5px;
+}
+.category-container{
+    display: flex;
+    align-items: center;
+}
+
+.category{
+    display: flex;
+    flex-wrap: wrap;
+    width: 54vw;
+}
+.category-remove{
+    border: none;
+    background-color: transparent;
+    width:25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+.category-remove i{
+    color: transparent;
+}
+
+.category-remove:hover{
+    background-color: grey;
+}
+.category-remove:hover i{
+    color: black;
+}
+
+.add-category{
+    width:200px;
+    height: 50px;
+}
+
