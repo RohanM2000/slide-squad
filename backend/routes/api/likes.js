@@ -39,42 +39,38 @@ router.get('/user/:userId', async (req, res, next) => {
 });
 
 
-// Like a presentation
-router.post('/:presentationId/likes', async (req, res, next) => {
-  try {
-    const presentationId = req.params.presentationId;
-    const userId = req.user._id;
+// // Like a presentation
 
-    const presentation = await Presentation.findById(presentationId);
+router.post('/presentation/:presentationId/like', requireUser, async (req, res, next) => {
+  try {
+    const presentation = await Presentation.findById(req.params.presentationId);
+    
+    // Check if the presentation exists
     if (!presentation) {
       const error = new Error('Presentation not found');
       error.statusCode = 404;
-      error.errors = { message: 'No presentation found with that id' };
+      error.errors = { message: "No presentation found with that id" };
       return next(error);
     }
-
-    // Check if the user has already liked the presentation
-    const alreadyLiked = presentation.likes.some(like =>
-      like.user.toString() === userId.toString()
-    );
-    if (alreadyLiked) {
-      const error = new Error('You have already liked this presentation');
-      error.statusCode = 400;
-      error.errors = { message: 'You have already liked this presentation' };
-      return next(error);
-    }
-
-    // Create a new like
-    const newLike = new Like({ user: userId });
-    await newLike.save();
-
-    // Add the like to the presentation
-    presentation.likes.push(newLike);
+    
+    // Create a new Like object
+    const newLike = new Like({
+      liker: req.user._id, 
+      presentation: presentation._id,
+      likedType: 'Presentation', 
+      likeId: presentation._id
+    });
+    
+    // Save the new Like object
+    const savedLike = await newLike.save();
+    
+    // Update the presentation's like count
+    presentation.likeCount += 1;
     await presentation.save();
-
-    return res.json(presentation);
+    
+    return res.json(savedLike);
   } catch (err) {
-    next(err);
+    return next(err);
   }
 });
 
