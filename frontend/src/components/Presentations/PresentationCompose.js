@@ -124,6 +124,20 @@ function PresentationCompose () {
               break;
       }
   }
+  const handleFile =(event) =>{
+    const file = event.currentTarget.files[0];
+    setPresentationState(state=>{
+        return {...state,
+          [slideNumber]: {...state[slideNumber],
+            [nextId]: {startWidth:50/windowWidth,
+            startHeight:50/windowHeight,
+            startLeft:0,startTop:0,
+            id: nextId, 
+            type: "photo",
+            photo: file}}}
+      }
+    )
+  }
   const handleSave = ()=>{
     console.log('saved');
     let savedObject=JSON.parse(JSON.stringify(presentationState));
