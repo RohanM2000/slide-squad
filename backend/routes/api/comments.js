@@ -174,4 +174,45 @@ router.delete('/:presentationId/comments/:commentId', requireUser, async (req, r
   }
 });
 
+
+// fetching comments by presentation id
+// router.get('/:presentationId/comments', requireUser, aync (req, res, next) => {
+//   let presentation;
+
+// })
+
+router.get('/:presentationId/comments', async (req, res, next) => {
+  try {
+    const presentationId = req.params.presentationId;
+
+    const presentation = await Presentation.findById(presentationId);
+    if (!presentation) {
+      const error = new Error('Presentation not found');
+      error.statusCode = 404;
+      throw error;
+    }
+
+    const comments = await Comment.find({ _id: { $in: presentation.comments } }); // need to be changed to presentationId after update 
+
+    res.json(comments);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+// fetching comments by user id
+router.get('/:userId/comments', async (req, res, next) => {
+  try {
+    const userId = req.params.userId;
+
+    const comments = await Comment.find({ user: userId });
+
+    res.json(comments);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
 module.exports = router;
