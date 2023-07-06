@@ -1,4 +1,4 @@
-import "./PresentationBox.css"
+// import "./PresentationBox.css"
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { createLike } from "../../store/likes";

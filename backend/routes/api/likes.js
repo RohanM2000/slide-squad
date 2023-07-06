@@ -97,7 +97,7 @@ router.post('/:presentationId/comments/:commentId/likes', async (req, res, next)
       return next(error);
     }
 
-    // Check if the user has already liked the comment
+
     const hasLiked = comment.likes.some(like =>
       like.user.toString() === userId.toString()
     );
@@ -108,17 +108,52 @@ router.post('/:presentationId/comments/:commentId/likes', async (req, res, next)
       return next(error);
     }
 
-    // Create a new like
     const newLike = new Like({ user: userId });
     await newLike.save();
 
-    // Add the like to the comment
+
     comment.likes.push(newLike);
     await presentation.save();
 
     res.json(presentation);
   } catch (err) {
     next(err);
+  }
+});
+
+router.delete('/like/:likeId', requireUser, async (req, res, next) => {
+  try {
+    const like = await Like.findById(req.params.likeId);
+
+
+    if (!like) {
+      const error = new Error('Like not found');
+      error.statusCode = 404;
+      error.errors = { message: "No like found with that id" };
+      return next(error);
+    }
+
+    
+    if (!like.liker.equals(req.user._id)) {
+      const error = new Error('Unauthorized');
+      error.statusCode = 401;
+      error.errors = { message: "You are not authorized to delete this like" };
+      return next(error);
+    }
+
+
+    await Like.deleteOne({ _id: req.params.likeId });
+
+    
+    const presentation = await Presentation.findById(like.likeId);
+    if (presentation) {
+      presentation.likeCount -= 1;
+      await presentation.save();
+    }
+
+    return res.json({ message: "Like deleted successfully" });
+  } catch (err) {
+    return next(err);
   }
 });
 
