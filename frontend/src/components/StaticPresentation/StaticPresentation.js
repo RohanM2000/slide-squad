@@ -7,7 +7,7 @@ import '../Presentations/PresentationCompose.css';
 import StaticText from '../StaticElements/StaticText';
 import StaticRectangle from '../StaticElements/StaticRectangle';
 import PresentationFooter from './StaticPresentationFooter';
-import './StaticPresentation.css'
+import './Static.css'
 
 function StaticPresentation ({presentation}) {
   const dispatch = useDispatch();
