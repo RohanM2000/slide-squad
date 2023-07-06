@@ -1,16 +1,13 @@
 import { useState, useRef } from "react";
 
-export default function SlidePhoto ({file, slideNumber, startLeft, id, startTop, startWidth, startHeight, setPresentationState, windowHeight, windowWidth, setOnFocus, bg}) {
+export default function SlidePhoto ({preview, file, slideNumber, startLeft, id, startTop, startWidth, startHeight, setPresentationState, windowHeight, windowWidth, setOnFocus}) {
     const [top, setTop] = useState(0);
     const [left, setLeft] = useState(0);
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
-    const [preview,setPreview] = useState(null);
     
 
-    useEffect(()=>{
-        
-    })
+   console.log(preview);
     const prevPos = useRef({
         top: 0,
         left: 0
@@ -58,13 +55,13 @@ export default function SlidePhoto ({file, slideNumber, startLeft, id, startTop,
                 {
                 ...state[slideNumber],
                 [id]:{
+                    file: file,
                     startTop: startTop + tempTop/windowHeight,
                     startLeft: startLeft + tempLeft/windowWidth,
-                    bg: bg,
                     id: id,
                     startHeight: startHeight + tempHeight/windowHeight,
                     startWidth: startWidth + tempWidth/windowWidth,
-                    type: "rectangle"
+                    type: "photo"
                 }
                 }}
         })
@@ -89,11 +86,10 @@ export default function SlidePhoto ({file, slideNumber, startLeft, id, startTop,
                 [id]:{
                     startTop: startTop + tempTop/windowHeight,
                     startLeft: startLeft + tempLeft/windowWidth,
-                    bg: bg,
                     id: id,
                     startHeight: startHeight + tempHeight/windowHeight,
                     startWidth: startWidth + tempWidth/windowWidth,
-                    type: "rectangle"
+                    type: "photo"
                 }
                 }}
         })
@@ -111,31 +107,42 @@ export default function SlidePhoto ({file, slideNumber, startLeft, id, startTop,
     };
 
     return (
-        <div
+        <>
+        <div className='imageContainer'
             onMouseDown={handleMouseDown}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseLeave}
             onMouseMove={handleMouseMove}
             onClick={handleClick}
             style={{position: "absolute", 
-                    display: "flex",
-                    "justify-content": "flex-end",
-                    "align-items": "flex-end",
-                    backgroundColor : bg,
-                    top: (startTop*windowHeight + top) + "px", 
-                    left: (startLeft*windowWidth + left) + "px", 
-                    width: (startWidth*windowWidth + width) + "px",
-                    height: (startHeight*windowHeight + height) + "px"}}
+                        display: "flex",
+                        "justify-content": "flex-end",
+                        "align-items": "flex-end",
+                        top: (startTop*windowHeight + top) + "px", 
+                        left: (startLeft*windowWidth + left) + "px", 
+                        width: (startWidth*windowWidth + width) + "px",
+                        height: (startHeight*windowHeight + height) + "px"}}
         >
-            <div className="resize-area" style={{
-                "background-color": "black",
-                display: "block",
-                height: "10px",
-                width: "10px"
-                }}
-                onMouseDown={handleResizeMouseDown}
+            <img
+                src={preview} 
+                alt=''
+                style={{
+                        width: (startWidth*windowWidth + width) + "px",
+                        height: (startHeight*windowHeight + height) + "px"}}       
             >
-            </div>
+            </img>
+                <div className="resize-area" style={{
+                    "background-color": "black",
+                    position: 'absolute',
+                    display: "block",
+                    height: "10px",
+                    width: "10px",
+                    zIndex: '2'
+                    }}
+                    onMouseDown={handleResizeMouseDown}
+                >
+                </div>
         </div>
+            </>
     );
 };

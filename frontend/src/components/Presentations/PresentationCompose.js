@@ -5,6 +5,7 @@ import PresentationBox from './PresentationBox';
 import './PresentationCompose.css';
 import SlideText from '../SlideElements/SlideText';
 import SlideRectangle from '../SlideElements/SlideRectangle';
+import SlidePhoto from '../SlideElements/SlidePhotos';
 import savePresentation from './presentationSave';
 import Swatchy from './ColorSwatches';
 import Swatches from './Swatches';
@@ -16,6 +17,7 @@ function PresentationCompose () {
   const dispatch = useDispatch();
   const [bold,setBold] = useState(false);
   const [stateCategories,setStateCategories] = useState(['']);
+  const [preview,setPreview] = useState(null);
   const [showSwatch,setShowSwatch] = useState({
     reveal:false,
   type:null});
@@ -126,6 +128,9 @@ function PresentationCompose () {
   }
   const handleFile =(event) =>{
     const file = event.currentTarget.files[0];
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onload = () => setPreview(fileReader.result);
     setPresentationState(state=>{
         return {...state,
           [slideNumber]: {...state[slideNumber],
@@ -134,7 +139,8 @@ function PresentationCompose () {
             startLeft:0,startTop:0,
             id: nextId, 
             type: "photo",
-            photo: file}}}
+            file: file,
+            preview: preview}}}
       }
     )
   }
@@ -187,6 +193,11 @@ function PresentationCompose () {
           <button onClick={event=>addRectangleElement(event)}>
             <img src='../icons/rectangle-vector.png'></img>
             Rectangle
+          </button>
+          <button className='photo-upload-container' onClick={()=>document.getElementById('photo-input').click()} >
+            <i className="fa-solid fa-image"></i>
+            <span className='photo-text'>Photo (max 1) </span>
+            <input style={{display: 'none'}} type='file' id='photo-input' onChange={event=>handleFile(event)}></input>
           </button>
           <button onClick={()=>setPresentationState(
             state=>{
@@ -252,6 +263,20 @@ function PresentationCompose () {
                                                 key={`${slideNumber}-${obj.id}`}
                                                 slideNumber={slideNumber}
                                                 setPresentationState={setPresentationState} 
+                                                startHeight={obj.startHeight} 
+                                                id={obj.id} 
+                                                startWidth={obj.startWidth} 
+                                                startLeft={obj.startLeft} 
+                                                startTop={obj.startTop} 
+                                                windowHeight={windowHeight}
+                                                windowWidth={windowWidth}
+                                                setOnFocus={setOnFocus}
+                                                bg={obj.bg}
+                                                />
+                if (obj.type === "photo") return <SlidePhoto
+                                                key={`${slideNumber}-${obj.id}`}
+                                                slideNumber={slideNumber}
+                                                setPresentationState={setPresentationState} 
                                                 id={obj.id} 
                                                 startHeight={obj.startHeight} 
                                                 startWidth={obj.startWidth} 
@@ -260,7 +285,8 @@ function PresentationCompose () {
                                                 windowHeight={windowHeight}
                                                 windowWidth={windowWidth}
                                                 setOnFocus={setOnFocus}
-                                                bg={obj.bg}
+                                                file= {obj.file}
+                                                preview = {preview}
                                                 />
               })}
           </div>
