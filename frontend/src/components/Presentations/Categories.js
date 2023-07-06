@@ -50,6 +50,7 @@ export default function Categories () {
                 <button key={index} onClick={event=>handleRemove(event)} data-type={index} className='category-remove'>
                     <i key={index} data-type={index}  className="fa-solid fa-x"></i>
                 </button>
+                <div>
                 <input
                     className='category-input'
                     placeholder={`category ${index+1}`}
@@ -59,6 +60,7 @@ export default function Categories () {
                     onKeyDown={event=>handleKeyDown(event)}
                 >
                 </input>
+                </div>
             </div>
             </>
         )
