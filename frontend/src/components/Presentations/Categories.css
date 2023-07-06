@@ -1,0 +1,32 @@
+.category-input:empty:before{
+    content: 'enter Category';
+    color: grey
+}.category-container{
+    display: flex;
+    align-items: center;
+}
+.category{
+    display: flex;
+}
+.category-remove{
+    border: none;
+    background-color: transparent;
+    width:25px;
+    height: 25px;
+    border-radius: 50%;
+}
+.category-remove i{
+    color: transparent;
+}
+
+.category-remove:hover{
+    background-color: grey;
+}
+.category-remove:hover i{
+    color: black;
+}
+
+.add-category{
+    width:200px;
+    height: 50px;
+}
