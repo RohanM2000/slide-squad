@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import './Likes.css';
 import { deleteLike } from '../../store/likes';
 import { fetchPresentation } from '../../store/presentations';
+import StaticPresentation from '../StaticPresentation/StaticPresentation';
 
 const LikesIndexItem = ({ like } ) => {
     const presentation = useSelector(state => state.presentations[like.likeId] )
@@ -15,12 +16,10 @@ const LikesIndexItem = ({ like } ) => {
         return null 
     }
 
-    console.log(like);
-
     return (
         <>
-        <div className='like-container'>
-            <h3>{presentation.title}</h3>
+        <div className='presentation-container'>
+            <StaticPresentation presentation={presentation} />
             <button onClick={() => dispatch(deleteLike(like._id))}>Delete</button>
         </div>
         </>
