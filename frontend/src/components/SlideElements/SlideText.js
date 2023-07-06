@@ -22,7 +22,7 @@ export default function SlideText ({slideNumber,fontsize,color,setOnFocus, bold,
         // }
         // assignedLocation.current = true;
     };
-    useEffect(()=>{
+    const reassignState = function () {
         setPresentationState(state=>{
             return {...state,
                 [slideNumber]:{
@@ -33,7 +33,7 @@ export default function SlideText ({slideNumber,fontsize,color,setOnFocus, bold,
                     }}
                 }
             }) 
-    },[preText,slideNumber,id])
+    }
     const handleMouseUp = (e) => {
         isClicked.current = false;
             setPresentationState(state=>{
@@ -85,7 +85,6 @@ export default function SlideText ({slideNumber,fontsize,color,setOnFocus, bold,
             }
         })
     }
-    const handleDebounceInput = myDebounce(handleInput,1000);
     const handleMouseLeave = (e) => {
         isClicked.current = false;
         
@@ -116,6 +115,17 @@ export default function SlideText ({slideNumber,fontsize,color,setOnFocus, bold,
         setTop(e.clientY - prevPos.current.top);
         setLeft(e.clientX - prevPos.current.left);
     };
+    let stack = 0;
+
+    const handleRefInput = function() {
+        stack +=1
+        setTimeout(()=>{
+            stack -=1;
+            if (stack === 0) {
+                reassignState();
+            }
+        }, 700);
+    }
     return (
         <div className='input-container'>
         <p
@@ -124,7 +134,15 @@ export default function SlideText ({slideNumber,fontsize,color,setOnFocus, bold,
             className='input-text'
             value={text}
             // onInput={handleDebounceInput}
-            onChange={(e)=>preText.current=e.target.innerHTML}      
+            onInput={(e)=> {
+                preText.current=e.target.innerHTML;
+                handleRefInput();
+            }
+            }
+            // onChange={(e)=>{
+            //     preText.current=e.target.innerHTML;
+            //     console.log("Change received");
+            // }}      
             onMouseDown={handleMouseDown}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseLeave}
