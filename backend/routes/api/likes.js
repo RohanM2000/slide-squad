@@ -6,7 +6,7 @@ const Presentation = mongoose.model('Presentation');
 const Like = mongoose.model('Like');
 const { requireUser } = require('../../config/passport');
 
-
+// get all likes
 router.get('/', async (req, res) => {
   try {
     const users = await User.find().populate('likes');
@@ -16,6 +16,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+// get all likes for a user
 router.get('/user/:userId', async (req, res, next) => {
   let user;
   try {
@@ -39,9 +40,9 @@ router.get('/user/:userId', async (req, res, next) => {
 });
 
 
-// // Like a presentation
-
-router.post('/presentation/:presentationId/like', requireUser, async (req, res, next) => {
+// Like a presentation
+// router.post('/presentation/:presentationId/like', requireUser, async (req, res, next) => {
+router.post('/:presentationId', requireUser, async (req, res, next) => {
   try {
     const presentation = await Presentation.findById(req.params.presentationId);
     
@@ -76,6 +77,7 @@ router.post('/presentation/:presentationId/like', requireUser, async (req, res, 
 
 // Like a comment
 router.post('/:presentationId/comments/:commentId/likes', async (req, res, next) => {
+// router.post('/:commentId', async (req, res, next) => {
   try {
     const presentationId = req.params.presentationId;
     const commentId = req.params.commentId;

@@ -70,7 +70,7 @@ router.get('/user/:userId', async (req, res, next) => {
     try {
         const presentations = await Presentation.find({ author: user._id })
                                     .sort({ createdAt: -1 })
-                                    .populate("author", "_id username", "comments", "likes");
+                                    .populate("author", "_id username");
         return res.json(presentations);
     }
     catch(err) {
@@ -96,7 +96,7 @@ router.get('/user/:userId', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
     try {
         const presentation = await Presentation.findById(req.params.id)
-                                    .populate("author", "_id username", "comments", "likes");
+                                    .populate("author", "_id username");
         return res.json(presentation);
     }
     catch(err) {
@@ -141,7 +141,7 @@ router.post('/', requireUser, validatePresentationInput, async (req, res, next) 
         });
 
         let presentation = await newPresentation.save();
-        presentation = await presentation.populate('author', '_id username', "comments", "likes");
+        presentation = await presentation.populate('author', '_id username');
         return res.json(presentation);
     }
     catch(err) {
@@ -162,7 +162,7 @@ router.get('/category/:category', async (req, res, next) => {
 });
 
 
-// edit a route
+// edit a presentation
 router.patch('/:presentationId', async (req, res, next) => {
     const presentationId = req.params.presentationId;
   
