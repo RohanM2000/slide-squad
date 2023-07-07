@@ -136,7 +136,7 @@ function StaticPresentation ({presentation}) {
             {newPresentation ? <PresentationBox presentation={newPresentation} /> : undefined}
           </div> */}
         </div>
-          <PresentationFooter />
+          <PresentationFooter presentationId={presentationId} />
       </div>
     </>
   ) : null;
