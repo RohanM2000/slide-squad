@@ -330,7 +330,7 @@ function PresentationCompose () {
         <button onClick={handlePageAdd} className='button-add-page'>
           Add Page
         </button>
-        <button className='button-remove-page' onClick={handlePageRemove}>
+        <button disabled={Object.keys(presentationState).length===1}  className='button-remove-page' onClick={handlePageRemove}>
           Remove Page
         </button>
         <span>
