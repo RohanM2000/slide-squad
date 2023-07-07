@@ -43,7 +43,7 @@ const PresentationFooter =({presentation})=>{
                 </button>
                 </div>
                 { !showComments && <div onClick={handleToggle} className='footer-toggle'>
-                    <i class="fa-regular fa-comment fa-lg"></i>
+                    <i class="fa-regular fa-comment fa-lg" id='comment-icon'></i>
                 </div>}
             </div>
             { showComments && <div onClick={handleToggle} className='footer-toggle up-arrow'>

@@ -25,7 +25,7 @@ const LikesIndexItem = ({ like } ) => {
             <button onClick={() => {
                                     dispatch(deleteLike(like._id));
                                     setShow(false);
-                                   }}>Delete</button>
+                                   }}>Unlike</button>
         </div>
         </>
     )
