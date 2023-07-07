@@ -135,13 +135,11 @@ router.post('/', requireUser, validatePresentationInput, async (req, res, next) 
             title,
             category,
             author: req.user._id,
-            slides,
-            comments,
-            likes
+            slides
         });
 
         let presentation = await newPresentation.save();
-        presentation = await presentation.populate('author', '_id username', "comments", "likes");
+        presentation = await presentation.populate('author', '_id username');
         return res.json(presentation);
     }
     catch(err) {
