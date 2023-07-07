@@ -17,7 +17,6 @@ function PresentationCompose () {
   const dispatch = useDispatch();
   const [bold,setBold] = useState(false);
   const [stateCategories,setStateCategories] = useState(['']);
-  const [preview,setPreview] = useState(null);
   const [showSwatch,setShowSwatch] = useState({
     reveal:false,
   type:null});
@@ -128,9 +127,6 @@ function PresentationCompose () {
   }
   const handleFile =(event) =>{
     const file = event.currentTarget.files[0];
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(file);
-    fileReader.onload = () => setPreview(fileReader.result);
     setPresentationState(state=>{
         return {...state,
           [slideNumber]: {...state[slideNumber],
@@ -139,7 +135,7 @@ function PresentationCompose () {
             startLeft:0,startTop:0,
             id: nextId, 
             type: "photo",
-            file: file}}}
+            photo: file}}}
       }
     )
   }
@@ -284,7 +280,7 @@ function PresentationCompose () {
                                                 windowHeight={windowHeight}
                                                 windowWidth={windowWidth}
                                                 setOnFocus={setOnFocus}
-                                                file= {obj.file}
+                                                photo= {obj.photo}
                                                 />
               })}
           </div>
