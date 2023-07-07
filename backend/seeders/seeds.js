@@ -10,7 +10,7 @@ const { faker } = require('@faker-js/faker');
 const NUM_SEED_USERS = 10;
 const NUM_SEED_PRESENTATIONS = 10;
 const NUM_SEED_LIKES = 10;
-const NUM_SEED_COMMENTS = 3;
+const NUM_SEED_COMMENTS = 30;
 
 
 // Create users
