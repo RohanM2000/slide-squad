@@ -46,7 +46,9 @@ function Profile () {
             
             /> */}
               <div key={presentation._id} className='presentation-container'>
-                <Link to={`/presentations/${presentation._id}/edit`}>Edit</Link>
+                <button>
+                  <Link to={`/presentations/${presentation._id}/edit`}>Edit</Link>
+                </button>
                 <StaticPresentation presentation={presentation} />
               </div>
           </div>
