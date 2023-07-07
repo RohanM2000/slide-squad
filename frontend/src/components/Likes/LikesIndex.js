@@ -25,11 +25,20 @@ const LikesIndex = () => {
 
   
     // console.log("RERENDERING RIGHT NOW")
+    let filteredLikes = [];
+    if (newLikes) {
+      newLikes.forEach((like)=> {
+        // console.log("like", like)
+        if (like.liker._id === userId) {
+          filteredLikes.push(like);
+        }
+      })
+    }
     return (
       <div>
         <div className='likes-container'>
           <h2>{currentUser.username}'s Liked Presentations</h2>
-            {newLikes.map(like => (
+            {filteredLikes.map(like => (
                 <>
                   <LikesIndexItem key={like._id} like={like} />
                 </>

@@ -31,9 +31,9 @@ const CommentsIndex = ({presentationId}) => {
             }
         })
     }
-    return filteredComments.length > 0 && (
+    return (
         <div className='comments-container'>
-            <div className='comments-body'>
+            {filteredComments.length > 0 && <div className='comments-body'>
                 {filteredComments.map((comment,index)=>{
                     return (
                         <>
@@ -41,7 +41,7 @@ const CommentsIndex = ({presentationId}) => {
                         </>
                     )
                 })}
-            </div>
+            </div>}
             <CommentInput presentationId={presentationId} />
         </div>
     )
@@ -90,6 +90,7 @@ export const CommentShow = (comment) => {
                             </div>
                         </>
                         }
+
                     </div>
                 </div>
             </div>
@@ -123,6 +124,7 @@ const CommentInput =({presentationId})=>{
         const body = {presentationId: presentationId, content: content}
 
         dispatch(createComment(body));
+        setContent("");
 
     }
 
@@ -143,7 +145,7 @@ const CommentInput =({presentationId})=>{
                 </div>
                 <div className='left-side'>
                     <button className='create-comment' onClick={event=>handleSubmit(event)}>
-                        Enter
+                        Comment
                     </button>
 
                 </div>
