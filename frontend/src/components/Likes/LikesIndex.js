@@ -40,7 +40,7 @@ const LikesIndex = () => {
           <h2>{currentUser.username}'s Liked Presentations</h2>
             {filteredLikes.map(like => (
                 <>
-                  <LikesIndexItem key={like._id} like={like} />
+                  <LikesIndexItem key={like._id} like={like} swap={true}/>
                 </>
             ))}
         </div>
