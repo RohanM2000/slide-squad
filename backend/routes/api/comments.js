@@ -29,9 +29,9 @@ router.post('/', requireUser, validateCommentInput, async (req, res, next) => {
     });
 
     const comment = await newComment.save();
+    const sendBackComment = await comment.populate("user", "_id username");
 
-
-    return res.json(comment);
+    return res.json(sendBackComment);
   } catch (err) {
     next(err);
   }
