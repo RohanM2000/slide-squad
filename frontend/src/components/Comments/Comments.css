@@ -18,7 +18,10 @@
 
 .commenter {
     margin-right: 2vw;
+    min-height: 2vw;
     width: 5vw;
+    font-size: .8vw;
+    overflow-wrap: break-word;
 }
 
 .comment-buttons {
