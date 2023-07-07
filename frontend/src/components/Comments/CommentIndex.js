@@ -1,9 +1,17 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { fetchComments, fetchPresentationComments } from "../../store/comments";
 
-const CommentsIndex = () => {
-    const {presentationId} = useParams();
+const CommentsIndex = ({presentationId}) => {
     const presentationComments = useSelector(state=> Object.values(state.comments));
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchPresentationComments(presentationId))
+    }, [dispatch])
+
     if (!presentationComments) return(
         <div className='loading'>
             <div className='loading-animation'>
