@@ -9,6 +9,7 @@ const CommentsIndex = ({presentationId}) => {
     const presentationComments = useSelector(state=> Object.values(state.comments));
     const dispatch = useDispatch();
 
+
     useEffect(() => {
         dispatch(fetchPresentationComments(presentationId))
     }, [dispatch])
@@ -53,13 +54,14 @@ export const CommentShow = (comment) => {
                     <div className='comment-body'>
                         <p className='comment-text'>
                             {comment.comment.content}
+                            {comment.comment.content}
                         </p>
                     </div>
                 </div>
             </div>
 
             <div className='comment-buttons'>
-                <button>
+                <button onClick={() => dispatch(deleteComment(comment.comment._id))}>
                     <i className="fa-solid fa-trash"></i>
                 </button>
                 <button>

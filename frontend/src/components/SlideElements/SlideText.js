@@ -127,7 +127,7 @@ export default function SlideText ({slideNumber,fontsize,color,setOnFocus, bold,
     return (
         <div className='input-container'>
         <p
-
+            suppressContentEditableWarning='true'
             contentEditable='true'
             className='input-text'
             value={text}

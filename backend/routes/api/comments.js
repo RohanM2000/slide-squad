@@ -73,7 +73,7 @@ router.delete('/:commentId', requireUser, async (req, res, next) => {
   try {
     const commentId = req.params.commentId;
 
-    const presentation = await Presentation.findById(presentationId);
+    // const presentation = await Presentation.findById(presentationId);
 
     const comment = await Comment.findById(commentId);
     if (!comment) {
