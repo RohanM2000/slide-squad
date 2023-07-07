@@ -98,6 +98,7 @@
     border: none;
     background-color: transparent;
     margin-top: .7vw;
+   
 }
 
 .add-like-button fa-solid fa-heart {
@@ -180,4 +181,14 @@
     font-weight: 700;
     margin-bottom: .8vw;
     
+}
+
+.like-comment-buttons {
+    display: flex;
+ 
+}
+
+.footer-toggle {
+    margin-top: .7vw;
+   
 }
