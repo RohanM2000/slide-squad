@@ -1,10 +1,9 @@
-import { UseSelector } from "react-redux/es/hooks/useSelector";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 const CommentsIndex = () => {
     const {presentationId} = useParams();
-    // const presentationComments = useSelector(state=>state.comments);
-    const presentationComments = ['comment1','comment2'];
+    const presentationComments = useSelector(state=> Object.values(state.comments));
     if (!presentationComments) return(
         <div className='loading'>
             <div className='loading-animation'>
