@@ -12,17 +12,29 @@
 
 .comment-container {
     display: flex;
-    margin-right: 3vw;
     text-align: left;
     font-size: 1vw;
 }
 
 .commenter {
     margin-right: 2vw;
+    width: 5vw;
+}
+
+.comment-buttons {
+    margin-left: 1vw;
 }
 
 .comment-buttons button{
     background-color: transparent;
     border: none;
     font-size: 1vw;
+}
+
+.comment-content {
+    width: 30vw;
+}
+
+.comment-text {
+    width: 30vw;
 }
