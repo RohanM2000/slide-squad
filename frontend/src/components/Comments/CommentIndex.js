@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
-import { fetchComments, fetchPresentationComments, deleteComment } from "../../store/comments";
+import { fetchPresentationComments } from "../../store/comments";
+import './Comments.css'
 
 const CommentsIndex = ({presentationId}) => {
     const presentationComments = useSelector(state=> Object.values(state.comments));
@@ -42,18 +43,17 @@ export default CommentsIndex;
 export const CommentShow = (comment) => {
     const dispatch = useDispatch();
    
-    //dislay profile pic and comment 
-    // const {profilepic,content,username} = comment;
     // need to add a button to delete
     return (
         <div key={comment.id} className='comment-row'>
             <div className='comment-container'>
-                <div className='commenter-profilepic'>
-                    {comment.comment.user.username}
+                <div className='commenter'>
+                    <div>{comment.comment.user.username} </div>
                 </div>
                 <div className='comment-content'>
                     <div className='comment-body'>
                         <p className='comment-text'>
+                            {comment.comment.content}
                             {comment.comment.content}
                         </p>
                     </div>

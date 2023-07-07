@@ -20,8 +20,7 @@ const PresentationFooter =({presentationId})=>{
     return (
         <div className='footer-container'>
             { !showComments && <div onClick={handleToggle} className='footer-toggle'>
-                <h4>Comments</h4>
-                <i className="fa-solid fa-arrow-down"></i>
+                <i class="fa-regular fa-comment fa-lg"></i>
             </div>}
             { showComments && <div onClick={handleToggle} className='footer-toggle'>
                 <i className="fa-solid fa-arrow-up"></i>
