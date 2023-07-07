@@ -8,7 +8,8 @@ function MainPage() {
       <div className='mainpage-wrapper'>
         <div className='mainpage-header'>
           <div className='mainpage-heading'>
-            <h1>Create. Share. Discover.</h1>
+          
+            <h1><i class="fa-solid fa-person-chalkboard"></i>  Create. Share. Discover.</h1>
             <p>Present with Impact: Unleash Your Storytelling Power with Our Presentation Platform</p>
           </div>
           <div className='featured-container'>
