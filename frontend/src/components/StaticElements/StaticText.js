@@ -1,7 +1,7 @@
 import './StaticText.css';
 export default function StaticText ({fontsize,color='black', bold, startLeft=0, startTop=0, text, windowHeight, windowWidth}) {
     fontsize ||= 16/windowWidth;
-    console.log(text);
+   
     return (
         <div className='input-container'>
         <p

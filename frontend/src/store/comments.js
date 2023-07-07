@@ -44,6 +44,22 @@ export const fetchComments = () => async dispatch => {
   }
 };
 
+
+
+export const fetchPresentationComments = id => async dispatch => {
+  try {
+    const res = await jwtFetch(`/api/comments/presentation/${id}`);
+    const comments = await res.json();
+    dispatch(receiveComments(comments));
+  } catch(err) {
+    const resBody = await err.json();
+    if (resBody.statusCode === 400) {
+      return dispatch(receiveErrors(resBody.errors));
+    }
+  }
+};
+
+
 export const fetchUserComments = id => async dispatch => {
   try {
     const res = await jwtFetch(`/api/comments/user/${id}`);
