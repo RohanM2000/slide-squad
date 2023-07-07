@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
@@ -22,11 +22,18 @@ const CommentsIndex = ({presentationId}) => {
             </div>
         </div>
     );
-
-    return (
+    let filteredComments = [];
+    if (presentationComments) {
+        presentationComments.forEach(comment=> {
+            if (comment.presentation === presentationId) {
+                filteredComments.push(comment);
+            }
+        })
+    }
+    return filteredComments.length > 0 && (
         <div className='comments-container'>
             <div className='comments-body'>
-                {presentationComments.map((comment,index)=>{
+                {filteredComments.map((comment,index)=>{
                     return (
                         <>
                             <CommentShow comment={comment} />
@@ -43,9 +50,9 @@ export default CommentsIndex;
 
 export const CommentShow = (comment) => {
     const dispatch = useDispatch();
-   
+    const [show, setShow] = useState(true);
     // need to add a button to delete
-    return (
+    return show && (
         <div key={comment.id} className='comment-row'>
             <div className='comment-container'>
                 <div className='commenter'>
@@ -62,7 +69,10 @@ export const CommentShow = (comment) => {
             </div>
 
             <div className='comment-buttons'>
-                <button onClick={() => dispatch(deleteComment(comment.comment._id))}>
+                <button onClick={() => {
+                    dispatch(deleteComment(comment.comment._id));
+                    setShow(false);
+                    }}>
                     <i className="fa-solid fa-trash"></i>
                 </button>
                 <button>
