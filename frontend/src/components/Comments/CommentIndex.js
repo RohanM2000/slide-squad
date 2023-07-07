@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { fetchPresentationComments } from "../../store/comments";
-import { deleteComment,createComment } from "../../store/comments";
+import { deleteComment,createComment,updateComment } from "../../store/comments";
 import './Comments.css'
 
 
@@ -54,6 +54,14 @@ export default CommentsIndex;
 export const CommentShow = (comment) => {
     const dispatch = useDispatch();
     const [show, setShow] = useState(true);
+    const [edit,setEdit] = useState(false);
+    const [updateComment,setUpdateComment] = useState(comment.comment.content);
+
+    const handleUpdate =(event) =>{
+        event.preventDefault();
+        const body = {id: comment.comment.id, content: updateComment};
+
+    }
     // need to add a button to delete
     return show && (
         <>
@@ -79,7 +87,7 @@ export const CommentShow = (comment) => {
                     }}>
                     <i className="fa-solid fa-trash"></i>
                 </button>
-                <button>
+                <button onClick={()=>setEdit(true)}>
                     <i className="fa-solid fa-pen-to-square"></i>
                 </button>
             </div>
