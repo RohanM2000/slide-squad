@@ -22,7 +22,9 @@ const LikesIndexItem = ({ like } ) => {
         <>
         <div className='presentation-container'>
             <StaticPresentation presentation={presentation} />
-            <button onClick={() => {
+            <button 
+                    className='delete-like-button'
+                                   onClick={() => {
                                     dispatch(deleteLike(like._id));
                                     setShow(false);
                                    }}>Delete</button>
