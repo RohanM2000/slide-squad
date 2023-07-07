@@ -13,3 +13,11 @@
     color: rgb(202, 12, 12);
 
 }
+
+.delete-like-button {
+    background-color: rgb(196, 196, 242);
+    border-radius: 0.5vw;
+    text-decoration: none;
+    font-size: 1.2vw;
+    color: black;
+}
