@@ -24,36 +24,40 @@ export default function SlideText ({slideNumber,fontsize,color,setOnFocus, bold,
     };
     const reassignState = function () {
         setPresentationState(state=>{
+            const tempLeft = left;
+            const tempTop = top;
+            setTop(0);
+            setLeft(0);
             return {...state,
                 [slideNumber]:{
                     ...state[slideNumber],
                     [id]: {
                         ...state[slideNumber][id],
                         text: preText.current,
+                        startTop: startTop + tempTop/windowHeight,
+                        startLeft: startLeft + tempLeft/windowWidth
                     }}
                 }
             }) 
     }
     const handleMouseUp = (e) => {
         isClicked.current = false;
-            setPresentationState(state=>{
-                const tempLeft = left;
-                const tempTop = top;
-                setTop(0);
-                setLeft(0);
-                return {...state,
-                    [slideNumber]:{
-                        ...state[slideNumber],
-                        [id]: {
-                            ...state[slideNumber][id],
-                            text: e.target.innerText,
-                            startTop: startTop + tempTop/windowHeight,
-                            startLeft: startLeft + tempLeft/windowWidth,
-                            id: id,
-                            type: "text"
-                        }}
-                    }
-                })
+        handleRefInput();
+            // setPresentationState(state=>{
+            //     const tempLeft = left;
+            //     const tempTop = top;
+            //     setTop(0);
+            //     setLeft(0);
+            //     return {...state,
+            //         [slideNumber]:{
+            //             ...state[slideNumber],
+            //             [id]: {
+            //                 ...state[slideNumber][id],
+            //                 startTop: startTop + tempTop/windowHeight,
+            //                 startLeft: startLeft + tempLeft/windowWidth,
+            //             }}
+            //         }
+            //     })
             
     };
 
@@ -76,36 +80,30 @@ export default function SlideText ({slideNumber,fontsize,color,setOnFocus, bold,
                     ...state[slideNumber],
                     [id]: {
                         ...state[slideNumber][id],
-                        text: e.target.innerText,
                         startTop: startTop + tempTop/windowHeight,
                         startLeft: startLeft + tempLeft/windowWidth,
-                        id: id,
-                        type: "text"
                     }}
             }
         })
     }
     const handleMouseLeave = (e) => {
         isClicked.current = false;
-        
-        setPresentationState(state=>{
-            const tempLeft = left;
-            const tempTop = top;
-            setTop(0);
-            setLeft(0);
-            return {...state,
-                [slideNumber]:{
-                    ...state[slideNumber],
-                    [id]: {
-                        ...state[slideNumber][id],
-                        text: e.target.innerText,
-                        startTop: startTop + tempTop/windowHeight,
-                        startLeft: startLeft + tempLeft/windowWidth,
-                        id: id,
-                        type: "text"
-                    }}
-                }
-            })
+        handleRefInput();
+        // setPresentationState(state=>{
+        //     const tempLeft = left;
+        //     const tempTop = top;
+        //     setTop(0);
+        //     setLeft(0);
+        //     return {...state,
+        //         [slideNumber]:{
+        //             ...state[slideNumber],
+        //             [id]: {
+        //                 ...state[slideNumber][id],
+        //                 startTop: startTop + tempTop/windowHeight,
+        //                 startLeft: startLeft + tempLeft/windowWidth
+        //             }}
+        //         }
+        //     })
         
 
     };
@@ -135,7 +133,7 @@ export default function SlideText ({slideNumber,fontsize,color,setOnFocus, bold,
             value={text}
             // onInput={handleDebounceInput}
             onInput={(e)=> {
-                preText.current=e.target.innerHTML;
+                preText.current=e.target.innerText;
                 handleRefInput();
             }
             }
