@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { fetchPresentationComments } from "../../store/comments";
+import { deleteComment } from "../../store/comments";
 import './Comments.css'
 
 const CommentsIndex = ({presentationId}) => {
