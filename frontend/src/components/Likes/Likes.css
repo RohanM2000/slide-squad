@@ -11,7 +11,18 @@
     font-weight: 700;
     margin-top: 1vw;
     color: rgb(202, 12, 12);
+}
 
+.presentation-container button { 
+    margin-top: 1vw;
+    background-color: transparent;
+    border: none;
+
+}
+
+
+#comment-icon {
+    margin-top: .3vw;
 }
 
 .delete-like-button {
@@ -21,3 +32,4 @@
     font-size: 1.2vw;
     color: black;
 }
+
