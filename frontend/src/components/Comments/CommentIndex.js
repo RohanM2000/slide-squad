@@ -97,7 +97,7 @@ const CommentInput =({presentationId})=>{
     const handleSubmit = (event) =>{
         event.preventDefault();
 
-        const body = {user: currentUser.id,presentation: presentationId, content: content}
+        const body = {presentationId: presentationId, content: content}
 
         dispatch(createComment(body));
 
