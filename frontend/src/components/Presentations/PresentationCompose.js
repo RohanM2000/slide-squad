@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 // import { clearPresentationErrors, composePresentation } from '../../store/presentations';
 import PresentationBox from './PresentationBox';
 import './PresentationCompose.css';
@@ -20,6 +21,7 @@ function PresentationCompose () {
   const [showSwatch,setShowSwatch] = useState({
     reveal:false,
   type:null});
+  const history = useHistory();
 
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -146,7 +148,7 @@ function PresentationCompose () {
       }
     )
   }
-  const handleSave = ()=>{
+  const handleSave = async ()=>{
     console.log('saved');
     let savedObject=JSON.parse(JSON.stringify(presentationState));
     // [1:{},2:{}]
@@ -154,7 +156,13 @@ function PresentationCompose () {
     //   savedObject[ele.id] = ele;
     // })
     // console.log(savedObject);
-    savePresentation(savedObject, dispatch, title);
+    const res = await savePresentation(savedObject, dispatch, title);
+    if (res.ok) {
+      history.push('/presentations');
+      console.log("successful creation");
+    } else {
+      console.log("did not work here")
+    }
   }
   const handleEleRemove = () =>{
     const newState = {

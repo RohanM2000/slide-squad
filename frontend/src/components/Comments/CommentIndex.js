@@ -32,9 +32,9 @@ const CommentsIndex = ({presentationId}) => {
             }
         })
     }
-    return filteredComments.length > 0 && (
+    return (
         <div className='comments-container'>
-            <div className='comments-body'>
+            {filteredComments.length > 0 && <div className='comments-body'>
                 {filteredComments.map((comment,index)=>{
                     return (
                         <>
@@ -42,7 +42,7 @@ const CommentsIndex = ({presentationId}) => {
                         </>
                     )
                 })}
-            </div>
+            </div>}
             <CommentInput presentationId={presentationId} />
         </div>
     )
