@@ -5,6 +5,7 @@
     align-items: center;
     margin-left: auto;
     margin-right: auto;
+    
 }
 
 .mainpage-wrapper h3 {
@@ -42,4 +43,74 @@
     border-bottom: 1px solid black;
    display: flex;
     width: 3vw;
+}
+
+.caro-wrapper {
+    margin-top: 2vh;
+    width: 74vw;
+    height: 30vh;
+    background-color:transparent;
+    padding: 1vw;
+    margin: 0px auto;
+    padding-right: 1.5vw;
+  
+    
+}
+
+.caro-presentation-slide {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-right: 2vw;
+    width: 30vw;
+    font-size: 2vw;
+    min-height: 44vh;
+    
+}
+
+.caro-canvas {
+    width: 20vw;
+    height: 20vh;
+    background-color: white;
+    position: relative;
+    overflow:hidden;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
+.caro-presentation {
+    display: flex;
+    flex-direction: column;
+}
+
+.caro-container {
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    background-color: rgb(255, 248, 112);
+    align-items: center;
+    width: 30vw;
+    padding: 2vw 0px;
+}
+
+.caro-title {
+    padding: 1vw;
+    font-size: 1.5vw;
+}
+
+.caro-msg {
+    font-size: .8vw;
+    padding: 0px 1vw;
+}
+
+.mainpage-wrapper img {
+    width: 15vw;
+    margin-top: 20vh;
+    margin-right: 10vw;
+}
+
+.caro-icon-container {
+    display: flex;
+    justify-content: space-around;
+    width: 40vw;
+    margin-left: 10vw;
 }

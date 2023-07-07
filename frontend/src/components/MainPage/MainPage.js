@@ -1,4 +1,5 @@
 import './MainPage.css'
+import MainCarousel from './Carousel.js';
 
 
 function MainPage() {
@@ -7,7 +8,8 @@ function MainPage() {
       <div className='mainpage-wrapper'>
         <div className='mainpage-header'>
           <div className='mainpage-heading'>
-            <h1>Create. Share. Discover.</h1>
+          
+            <h1><i class="fa-solid fa-person-chalkboard"></i>  Create. Share. Discover.</h1>
             <p>Present with Impact: Unleash Your Storytelling Power with Our Presentation Platform</p>
           </div>
           <div className='featured-container'>
@@ -15,6 +17,13 @@ function MainPage() {
             <h3>Featured Presentations</h3>
        
           </div>
+        </div>
+        <MainCarousel />
+        <div className='caro-icon-container'>
+          <img src='../icons/presentation.gif'/>
+          <img src='../icons/diagram.gif'/>
+          <img src='../icons/presentation2.gif'/>
+
         </div>
         {/* <footer>
           Copyright &copy; 2023 SlideSquad
