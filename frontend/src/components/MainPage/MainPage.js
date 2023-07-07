@@ -1,4 +1,5 @@
 import './MainPage.css'
+import MainCarousel from './Carousel';
 
 
 function MainPage() {
@@ -16,6 +17,7 @@ function MainPage() {
        
           </div>
         </div>
+        <MainCarousel />
         {/* <footer>
           Copyright &copy; 2023 SlideSquad
         </footer> */}
