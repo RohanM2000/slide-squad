@@ -107,7 +107,7 @@ router.delete('/:commentId', requireUser, async (req, res, next) => {
 
 // })
 
-router.get('/:presentationId/comments', async (req, res, next) => {
+router.get('/presentation/:presentationId', async (req, res, next) => {
   try {
     const presentationId = req.params.presentationId;
 
@@ -128,7 +128,7 @@ router.get('/:presentationId/comments', async (req, res, next) => {
 
 
 // fetching comments by user id
-router.get('/:userId/comments', async (req, res, next) => {
+router.get('/user/:userId', async (req, res, next) => {
   try {
     const userId = req.params.userId;
 

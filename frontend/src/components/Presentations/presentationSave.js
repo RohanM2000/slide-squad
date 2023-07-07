@@ -1,7 +1,7 @@
 import { composePresentation } from "../../store/presentations";
-export default function savePresentation(obj, dispatch) {
+export default function savePresentation(obj, dispatch, title) {
     dispatch(composePresentation({
-        title: "temporary-filler-title",
+        title: title,
         category: "temporary-filler-category",
         slides: obj
     }));

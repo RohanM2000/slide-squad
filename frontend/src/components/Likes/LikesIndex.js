@@ -5,7 +5,7 @@ import { fetchPresentations } from '../../store/presentations';
 import { fetchUserLikes, fetchLikes } from '../../store/likes';
 import LikesIndexItem from './LikesIndexItem';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+// import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const LikesIndex = () => {
   const currentUser = useSelector(state => state.session.user)
@@ -24,7 +24,7 @@ const LikesIndex = () => {
     }, [dispatch, userId])
 
   
-    console.log("RERENDERING RIGHT NOW")
+    // console.log("RERENDERING RIGHT NOW")
     return (
       <div>
         <div className='likes-container'>
