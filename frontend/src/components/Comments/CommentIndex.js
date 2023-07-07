@@ -3,13 +3,15 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { fetchPresentationComments } from "../../store/comments";
-import { deleteComment } from "../../store/comments";
+import { deleteComment,createComment } from "../../store/comments";
 import './Comments.css'
+
+
 
 const CommentsIndex = ({presentationId}) => {
     const presentationComments = useSelector(state=> Object.values(state.comments));
     const dispatch = useDispatch();
-
+    const currentUser = useSelector(state=>state.session.user);
 
     useEffect(() => {
         dispatch(fetchPresentationComments(presentationId))
@@ -41,6 +43,7 @@ const CommentsIndex = ({presentationId}) => {
                     )
                 })}
             </div>
+            <CommentInput presentationId={presentationId} />
         </div>
     )
     // button to click to display comments
@@ -53,6 +56,7 @@ export const CommentShow = (comment) => {
     const [show, setShow] = useState(true);
     // need to add a button to delete
     return show && (
+        <>
         <div key={comment.id} className='comment-row'>
             <div className='comment-container'>
                 <div className='commenter'>
@@ -78,8 +82,51 @@ export const CommentShow = (comment) => {
                 <button>
                     <i className="fa-solid fa-pen-to-square"></i>
                 </button>
-
             </div>
         </div>
+        
+        </>
+
     )
 }
+
+const CommentInput =({presentationId})=>{
+    const dispatch = useDispatch();
+    const currentUser = useSelector((state)=>state.session.user);
+    const [content,setContent] = useState('');
+    const handleSubmit = (event) =>{
+        event.preventDefault();
+
+        const body = {user: currentUser.id,presentation: presentationId, content: content}
+
+        dispatch(createComment(body));
+
+    }
+
+    return (
+        <>
+            <div className='inputcomment-container'>
+                <div className='right-side'>
+                    <div className='user-info'>
+                        <span>
+                            {currentUser.username}
+                        </span>
+                    </div>
+                    <input
+                    value={content}
+                    onChange={(event)=>setContent(event.target.value)
+                    }>
+                    </input>
+                </div>
+                <div className='left-side'>
+                    <button className='create-comment' onClick={event=>handleSubmit(event)}>
+                        Enter
+                    </button>
+
+                </div>
+            </div>
+        </>
+    )
+}
+
+
