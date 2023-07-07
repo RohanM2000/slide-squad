@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom/cjs/react-router-dom.min"
 import CommentsIndex from "../Comments/CommentIndex";
 import { useDispatch } from "react-redux";
 import { fetchPresentationComments } from "../../store/comments";
-import { createLike } from "../../store/likes";
+import { createLike, deleteLike } from "../../store/likes";
 
 const PresentationFooter =({presentation})=>{
     const presentationId = presentation._id
@@ -18,21 +18,39 @@ const PresentationFooter =({presentation})=>{
         setShowComments(!showComments);
         // fetch comments for the post with presentationId
     }
-
+    const [show, setShow] = useState(true);
     const [isLiked, setIsLiked] = useState(false);
     const HandleAddLike = (e) => {
         e.preventDefault();
-         const like = {
+        
+        if (isLiked) {
+     
+          dispatch(deleteLike(presentation._id))
+            .then(() => {
+              setIsLiked(false);
+              setShow(false)
+            });
+        } else {
+        
+          const like = {
             liker: presentation.author._id,
             likeId: presentation._id,
             likeType: 'Presentation'
-         }
-    
-         dispatch(createLike(like))
-         .then(() => {
-            setIsLiked(true); 
-          })
-      }
+          };
+      
+          dispatch(createLike(like))
+            .then(() => {
+              setIsLiked(true);
+            });
+        }
+      };
+      
+      
+      
+      
+      
+      
+      
     return (
         <div className='footer-container'>
             <div className="like-comment-buttons">
