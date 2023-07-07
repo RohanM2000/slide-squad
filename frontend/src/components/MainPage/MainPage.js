@@ -1,5 +1,5 @@
 import './MainPage.css'
-import MainCarousel from './Carousel';
+import MainCarousel from './Carousel.js';
 
 
 function MainPage() {
