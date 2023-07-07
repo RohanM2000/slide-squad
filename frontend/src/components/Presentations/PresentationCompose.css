@@ -94,6 +94,16 @@
     
 }
 
+.add-like-button button {
+    border: none;
+    background-color: transparent;
+    margin-top: .7vw;
+}
+
+.add-like-button fa-solid fa-heart {
+ color: red 
+}
+
 .save-button {
     width: 30vw;
     height: 5vh;

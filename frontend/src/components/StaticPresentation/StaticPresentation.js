@@ -25,6 +25,7 @@ function StaticPresentation ({presentation}) {
     return ()=> window.removeEventListener("resize",handleResize);
   },[]);
 
+  const [isLiked, setIsLiked] = useState(false);
 
   const HandleAddLike = (e) => {
     e.preventDefault();
@@ -35,6 +36,9 @@ function StaticPresentation ({presentation}) {
      }
 
      dispatch(createLike(like))
+     .then(() => {
+        setIsLiked(true); 
+      })
   }
 
   const presentationState = useSelector(state=>state.presentations[presentationId]?.slides);
@@ -150,7 +154,9 @@ function StaticPresentation ({presentation}) {
           </div> */}
         </div>
         <div className='add-like-button'>
-          <button onClick={HandleAddLike}>Like</button>
+          <button onClick={HandleAddLike}>
+            <i className={`fa-regular fa-heart fa-xl ${isLiked ? 'fa-solid fa-heart' : ''}`}></i>
+          </button>
         </div>
           <PresentationFooter presentationId={presentationId} />
       </div>
