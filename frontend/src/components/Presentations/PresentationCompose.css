@@ -5,7 +5,17 @@
     border: 1px solid black;
     border-radius: 4px;
     width: 54vw;
-    height: 52vh
+    height: 52vh;
+    background-color: white;
+}
+.static-canvas {
+    position: relative;
+    overflow:hidden;
+    border: 1px solid black;
+    border-radius: 4px;
+    width: 42vw;
+    height: 42vh;
+    background-color: white;
 }
 
 .selection {
@@ -156,16 +166,18 @@
 }
 
 .presentation-container {
-    padding: 5px;
-    margin: 10px 0px;
+    padding: 1.5vw;
+    margin: 10px 17vw;
 }
 
 .presentation-show-container{
     display: flex;
     flex-direction: column;
-
+    border-radius: 8px;
+    background-color: rgb(202, 240, 253);
     align-items: center;
-    width: 80vw;
+    width: 50vw;
+    padding: 2vw 0px;
 }
 
 .presentation-show-container h3 {
@@ -181,6 +193,16 @@
     font-weight: 700;
     margin-bottom: .8vw;
     
+}
+
+.static-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(101, 216, 255);
+    padding: 1vw 0px;
+    border-radius: 8px;
+    width: 30vw;
 }
 
 .like-comment-buttons {
