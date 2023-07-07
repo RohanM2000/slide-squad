@@ -160,9 +160,15 @@ function PresentationCompose () {
     const newState = {
       ...presentationState
     }
+    const newPage={}
     delete newState[slideNumber][onFocus];
-    setPresentationState(newState);
+    Object.values(newState[slideNumber]).forEach((ele,index)=>{
+      newPage[index+1]=ele
+    })
+    setOnFocus(null);
+    setPresentationState({...newState,[slideNumber]: newPage});
   }
+  console.log(presentationState);
   const nextPage = Object.values(presentationState).length+1;
   const handlePageAdd = ()=>{
     setPresentationState(state=>{
