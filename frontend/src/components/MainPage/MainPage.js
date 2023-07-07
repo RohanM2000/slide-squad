@@ -1,5 +1,5 @@
 import './MainPage.css'
-import MainCarousel from './Carousel';
+import MainCarousel from './Carousel.js';
 
 
 function MainPage() {
@@ -19,6 +19,12 @@ function MainPage() {
           </div>
         </div>
         <MainCarousel />
+        <div className='caro-icon-container'>
+          <img src='../icons/presentation.gif'/>
+          <img src='../icons/diagram.gif'/>
+          <img src='../icons/presentation2.gif'/>
+
+        </div>
         {/* <footer>
           Copyright &copy; 2023 SlideSquad
         </footer> */}
