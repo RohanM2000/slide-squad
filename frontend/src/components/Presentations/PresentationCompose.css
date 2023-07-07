@@ -207,16 +207,15 @@
 
 .like-comment-buttons {
     display: flex;
- 
 }
 
 .footer-toggle {
     margin-top: 1.2vw;
     display: flex;
     flex-direction: column;
-
-
 }
+
+
 .footer-container {
     display: flex;
     flex-direction: column;
