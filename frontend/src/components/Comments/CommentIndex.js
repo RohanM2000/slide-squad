@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
@@ -36,6 +36,7 @@ const CommentsIndex = ({presentationId}) => {
                     )
                 })}
             </div>
+            <CommentInput presentationId={presentationId} />
         </div>
     )
     // button to click to display comments
@@ -73,7 +74,7 @@ export const CommentShow = (comment) => {
                 </button>
             </div>
         </div>
-        <CommentInput presentationId={presentationId} />
+        
         </>
 
     )
@@ -83,7 +84,7 @@ const CommentInput =({presentationId})=>{
     const dispatch = useDispatch();
     const currentUser = useSelector((state)=>state.session.user);
     const [content,setContent] = useState('');
-    handleSubmit = (event) =>{
+    const handleSubmit = (event) =>{
         event.preventDefault();
 
         const body = {user: currentUser.id,presentation: presentationId, content: content}
