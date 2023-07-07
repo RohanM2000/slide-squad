@@ -122,6 +122,7 @@ const CommentInput =({presentationId})=>{
         const body = {presentationId: presentationId, content: content}
 
         dispatch(createComment(body));
+        setContent("");
 
     }
 
