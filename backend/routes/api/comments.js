@@ -118,7 +118,7 @@ router.get('/presentation/:presentationId', async (req, res, next) => {
       throw error;
     }
 
-    const comments = await Comment.find({ presentation: presentationId }); // need to be changed to presentationId after update 
+    const comments = await Comment.find({ presentation: presentationId }).populate('user', '_id username'); // need to be changed to presentationId after update 
 
     res.json(comments);
   } catch (error) {
