@@ -16,7 +16,6 @@ const CommentsIndex = ({presentationId}) => {
     useEffect(() => {
         dispatch(fetchPresentationComments(presentationId))
     }, [dispatch])
-
     if (!presentationComments) return(
         <div className='loading'>
             <div className='loading-animation'>
@@ -55,13 +54,13 @@ export const CommentShow = (comment) => {
     const dispatch = useDispatch();
     const [show, setShow] = useState(true);
     const [edit,setEdit] = useState(false);
-    const [updateComment,setUpdateComment] = useState(comment.comment.content);
-
+    const [updatedComment,setUpdatedComment] = useState(comment.comment.content);
+    const sessionUser = useSelector(state=> state.session.user);
     const handleUpdate =(event) =>{
         event.preventDefault();
-        const body = {id: comment.comment.id, content: updateComment};
-
-    }
+        dispatch(updateComment(comment.comment._id,updatedComment));
+        setEdit(false);
+    }   
     // need to add a button to delete
     return show && (
         <>
@@ -72,14 +71,29 @@ export const CommentShow = (comment) => {
                 </div>
                 <div className='comment-content'>
                     <div className='comment-body'>
-                        <p className='comment-text'>
+                        {!edit && <p className='comment-text'>
                             {comment.comment.content}
-                            {comment.comment.content}
-                        </p>
+                        </p>}
+                        {edit &&
+                        <>
+                            <div className='comment-edit-body'>
+                                <input 
+                                    value={updatedComment}
+                                    onChange={event=> setUpdatedComment(event.target.value)}
+                                    className='update-comment-input'
+                                >
+                                </input>
+                                <button onClick={event=>handleUpdate(event)}>
+                                    update
+                                </button>
+
+                            </div>
+                        </>
+                        }
                     </div>
                 </div>
             </div>
-
+            {!edit && sessionUser._id === comment.comment.user._id &&
             <div className='comment-buttons'>
                 <button onClick={() => {
                     dispatch(deleteComment(comment.comment._id));
@@ -91,6 +105,7 @@ export const CommentShow = (comment) => {
                     <i className="fa-solid fa-pen-to-square"></i>
                 </button>
             </div>
+            }
         </div>
         
         </>
