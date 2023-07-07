@@ -157,12 +157,12 @@ function StaticPresentation ({presentation}) {
           </div> */}
         </div>
         <div className='like-comment-buttons'>
-          <div className='add-like-button'>
+          {/* <div className='add-like-button'>
             <button onClick={HandleAddLike}>
               <i className={`fa-regular fa-heart fa-xl ${isLiked ? 'fa-solid fa-heart' : ''}`}></i>
             </button>
-          </div>
-            <PresentationFooter presentationId={presentationId} />
+          </div> */}
+            <PresentationFooter presentation={presentation} />
 
         </div>
       </div>

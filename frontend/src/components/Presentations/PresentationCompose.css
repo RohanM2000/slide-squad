@@ -213,13 +213,19 @@
     margin-top: 1.2vw;
     display: flex;
     flex-direction: column;
+
+    
 }
 
 
 .footer-container {
     display: flex;
     flex-direction: column;
-    text-align: center;
+    text-align: left;
+    justify-content: left;
+    width: 45vw;
+    margin-left: 2vw;
+    
 }
 
 .button-remove-ele{
@@ -246,4 +252,8 @@
     display: inline;
     margin-left: 10px;
   
+}
+
+.up-arrow {
+    margin-left: 20vw;
 }
