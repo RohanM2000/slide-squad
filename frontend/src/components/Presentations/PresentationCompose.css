@@ -183,7 +183,6 @@
     
 }
 
-<<<<<<< HEAD
 .like-comment-buttons {
     display: flex;
  
@@ -194,10 +193,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-=======
+
+}
 .footer-container {
     display: flex;
     flex-direction: column;
     text-align: center;
->>>>>>> 0c6f04d1770bc9701a4c96f132efddc972dd3e09
 }
