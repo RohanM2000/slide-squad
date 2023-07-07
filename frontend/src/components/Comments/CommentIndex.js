@@ -83,9 +83,14 @@ export const CommentShow = (comment) => {
                                     className='update-comment-input'
                                 >
                                 </input>
-                                <button onClick={event=>handleUpdate(event)}>
-                                    update
-                                </button>
+                                <div className='update-comment-buttons-body'>
+                                    <button className='update-comment-buttons' onClick={event=>handleUpdate(event)}>
+                                        <i className="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button className='update-comment-buttons' onClick={()=>setEdit(false)}>
+                                        <i class="fa-solid fa-x"></i>
+                                    </button>
+                                </div>
 
                             </div>
                         </>
