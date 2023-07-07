@@ -7,6 +7,7 @@ import '../Presentations/PresentationCompose.css';
 import StaticText from '../StaticElements/StaticText';
 import StaticRectangle from '../StaticElements/StaticRectangle';
 import PresentationFooter from './StaticPresentationFooter';
+import { createLike } from '../../store/likes';
 // import './Static.css'
 
 function StaticPresentation ({presentation}) {
@@ -23,6 +24,18 @@ function StaticPresentation ({presentation}) {
     dispatch(fetchPresentation(presentationId));
     return ()=> window.removeEventListener("resize",handleResize);
   },[]);
+
+
+  const HandleAddLike = (e) => {
+    e.preventDefault();
+     const like = {
+        liker: presentation.author._id,
+        likeId: presentation._id,
+        likeType: 'Presentation'
+     }
+
+     dispatch(createLike(like))
+  }
 
   const presentationState = useSelector(state=>state.presentations[presentationId]?.slides);
   
@@ -135,6 +148,9 @@ function StaticPresentation ({presentation}) {
             <h3>Previous Presentation</h3>
             {newPresentation ? <PresentationBox presentation={newPresentation} /> : undefined}
           </div> */}
+        </div>
+        <div className='add-like-button'>
+          <button onClick={HandleAddLike}>Like</button>
         </div>
           <PresentationFooter presentationId={presentationId} />
       </div>
