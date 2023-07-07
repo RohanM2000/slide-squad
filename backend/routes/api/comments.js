@@ -61,8 +61,9 @@ router.patch('/:commentId', requireUser, async (req, res, next) => {
 
     comment.content = content;
     const updatedComment = await comment.save();
+    const populatedComment = await updatedComment.populate('user', '_id username');
 
-    return res.json(updatedComment);
+    return res.json(populatedComment);
   } catch (err) {
     next(err);
   }
