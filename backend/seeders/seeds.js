@@ -3,12 +3,14 @@ const { mongoURI: db } = require("../config/keys.js");
 const User = require('../models/User');
 const Like = require('../models/Like');
 const Presentation = require('../models/Presentation');
+const Comment = require('../models/Comment');
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 
 const NUM_SEED_USERS = 10;
 const NUM_SEED_PRESENTATIONS = 10;
 const NUM_SEED_LIKES = 10;
+const NUM_SEED_COMMENTS = 10;
 
 
 // Create users
@@ -103,6 +105,21 @@ for (let i = 0; i < NUM_SEED_LIKES; i++) {
   )
 }
 
+// Create Comments 
+
+const comments = [];
+
+
+for (let i = 0; i < NUM_SEED_COMMENTS; i++) {
+  comments.push(
+    new Comment ({
+      user: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+      content: faker.lorem.sentence(),
+      presentation: presentations[Math.floor(Math.random() * NUM_SEED_PRESENTATIONS)]._id
+    })
+  )
+}
+
 
 mongoose
   .connect(db, { useNewUrlParser: true })
@@ -120,10 +137,12 @@ const insertSeeds = () => {
 
   User.collection.drop()
                  .then(() => Presentation.collection.drop())
-                 .then(()=> Like.collection.drop())
+                 .then(() => Like.collection.drop())
+                 .then(() => Comment.collection.drop())
                  .then(() => User.insertMany(users))
                  .then(() => Presentation.insertMany(presentations))
                  .then(() => Like.insertMany(likes))
+                 .then(() => Comment.insertMany(comments))
                  .then(() => {
                    console.log("Done!");
                    mongoose.disconnect();
