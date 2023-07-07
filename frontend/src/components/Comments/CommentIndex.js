@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
-import { fetchComments, fetchPresentationComments } from "../../store/comments";
+import { fetchPresentationComments } from "../../store/comments";
 import './Comments.css'
 
 const CommentsIndex = ({presentationId}) => {
@@ -40,6 +40,7 @@ export default CommentsIndex;
 
 
 export const CommentShow = (comment) => {
+    const dispatch = useDispatch();
    
     // need to add a button to delete
     return (
