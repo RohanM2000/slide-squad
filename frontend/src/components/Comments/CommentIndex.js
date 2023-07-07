@@ -120,7 +120,7 @@ const CommentInput =({presentationId})=>{
                 </div>
                 <div className='left-side'>
                     <button className='create-comment' onClick={event=>handleSubmit(event)}>
-                        Enter
+                        Comment
                     </button>
 
                 </div>

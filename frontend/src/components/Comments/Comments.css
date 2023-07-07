@@ -38,3 +38,39 @@
 .comment-text {
     width: 30vw;
 }
+.inputcomment-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2vw;
+   
+
+}
+
+.inputcomment-container input {
+    background-color: rgb(196, 196, 242);
+    border-radius: 5px;
+    width: 25vw;
+    border: 1px solid rgb(196, 196, 242);
+    justify-content: center;
+    overflow-wrap: normal;
+    min-height: 2vw;
+    font-size: 1vw;
+}
+
+.right-side {
+    display: flex;
+    align-items: center;
+}
+
+.left-side button {
+    margin-left: 2vw;
+    background-color: rgb(196, 196, 242);
+    border-radius: 5px;
+    border: 1px solid rgb(196, 196, 242);
+
+}
+
+.user-info {
+    margin-right: 2vw;
+}
