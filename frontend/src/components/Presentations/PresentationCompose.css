@@ -224,7 +224,8 @@
     text-align: left;
     justify-content: left;
     width: 45vw;
-    margin-left: 2vw;
+    margin-left: 2.5vw;
+    margin-top: .3vw;
     
 }
 
@@ -256,4 +257,8 @@
 
 .up-arrow {
     margin-left: 20vw;
+}
+
+.add-like-button button {
+    margin-right: .5vw;
 }
