@@ -75,6 +75,7 @@ export const composePresentation = data => async dispatch => {
     });
     const presentation = await res.json();
     dispatch(receivePresentation(presentation));
+    return res;
   } catch(err) {
     const resBody = await err.json();
     if (resBody.statusCode === 400) {
