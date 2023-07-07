@@ -78,3 +78,31 @@
 .user-info {
     margin-right: 2vw;
 }
+
+.comment-edit-body{
+    display: flex;
+    justify-content: space-between;
+    width: 35vw;
+    
+}
+
+.update-comment-input{
+    background-color: rgb(196, 196, 242);
+    border-radius: 5px;
+    width: 25vw;
+    border: 1px solid rgb(196, 196, 242);
+    justify-content: center;
+    overflow-wrap: normal;
+    min-height: 2vw;
+    font-size: 1vw;
+}
+
+.update-comment-buttons-body{
+    display: flex;
+}
+
+.update-comment-buttons{
+    background-color: transparent;
+    border: none;
+    
+}
