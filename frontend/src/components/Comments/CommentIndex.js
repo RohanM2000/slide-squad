@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { fetchPresentationComments } from "../../store/comments";
-import { deleteComment,createComment } from "../../store/comments";
+import { deleteComment,createComment,updateComment } from "../../store/comments";
 import './Comments.css'
 
 
@@ -54,6 +54,14 @@ export default CommentsIndex;
 export const CommentShow = (comment) => {
     const dispatch = useDispatch();
     const [show, setShow] = useState(true);
+    const [edit,setEdit] = useState(false);
+    const [updatedComment,setUpdatedComment]=useState(comment.comment.content);
+    const currentUser = useSelector(state=> state.session.user);
+    const handleUpdate = (event)=>{
+        event.preventDefault();
+        const body ={id: comment.comment.id, content: updatedComment};
+        dispatch(updateComment(body));
+    }
     // need to add a button to delete
     return show && (
         <>
@@ -64,10 +72,24 @@ export const CommentShow = (comment) => {
                 </div>
                 <div className='comment-content'>
                     <div className='comment-body'>
+                    {!edit &&
                         <p className='comment-text'>
                             {comment.comment.content}
-                            {comment.comment.content}
                         </p>
+                    }
+                    {edit && 
+                        <>
+                        <div className='comment-edit-container'>
+                        <input value={updatedComment}
+                                onChange={event=>setUpdatedComment(event.target.value)}
+                                className='comment-edit'>
+                        </input>
+                        <button className='update-comment-button' onClick={event=>handleUpdate(event)}>
+                            Update
+                        </button>
+                        </div>
+                        </>
+                    }
                     </div>
                 </div>
             </div>
@@ -79,7 +101,7 @@ export const CommentShow = (comment) => {
                     }}>
                     <i className="fa-solid fa-trash"></i>
                 </button>
-                <button>
+                <button onClick={event=>setEdit(true)}>
                     <i className="fa-solid fa-pen-to-square"></i>
                 </button>
             </div>
