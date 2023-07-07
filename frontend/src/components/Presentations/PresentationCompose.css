@@ -222,3 +222,29 @@
     flex-direction: column;
     text-align: center;
 }
+
+.button-remove-ele{
+    background-color: rgb(197, 235, 251);
+    border-radius: 3px;
+    border: 1px solid rgb(197, 235, 251);
+    margin-top: 12px;
+    font-size: 1vw;
+    margin-right: 10px;
+    margin-left:50px;
+}
+
+.button-remove-page{
+    background-color: rgb(197, 235, 251);
+    border-radius: 3px;
+    border: 1px solid rgb(197, 235, 251);
+    margin-top: 12px;
+    font-size: 1vw;
+    margin-left:10px;
+}
+
+
+.slide-number-container{
+    display: inline;
+    margin-left: 10px;
+  
+}
