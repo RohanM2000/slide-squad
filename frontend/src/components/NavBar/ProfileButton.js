@@ -17,7 +17,8 @@ function ProfileButton({ user }) {
     <div className="profile-dropdown">
       <button className="profile-button">
     
-          <span className="user-greeting">Hi, {user.username}</span>
+      <i class="fa-solid fa-circle-user"></i>
+      <p>{user.username}</p>
         
       </button>
     

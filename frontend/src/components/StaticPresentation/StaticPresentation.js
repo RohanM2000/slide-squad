@@ -25,6 +25,7 @@ function StaticPresentation ({presentation}) {
     return ()=> window.removeEventListener("resize",handleResize);
   },[]);
 
+  const [isLiked, setIsLiked] = useState(false);
 
   const HandleAddLike = (e) => {
     e.preventDefault();
@@ -35,6 +36,9 @@ function StaticPresentation ({presentation}) {
      }
 
      dispatch(createLike(like))
+     .then(() => {
+        setIsLiked(true); 
+      })
   }
 
   const presentationState = useSelector(state=>state.presentations[presentationId]?.slides);
@@ -95,12 +99,15 @@ function StaticPresentation ({presentation}) {
       {/* <form className="compose-presentation" onSubmit={handleSubmit}> */}
       {/* decide how the input will be taken */}
       <div className='presentation-show-container'>
-        <b>Title:</b>
-        <h3> {presentation.title}</h3>
+        <div className='static-title'>
+          <b>Title:</b>
+          <h3> {presentation.title}</h3>
+
+        </div>
         <div className='compose-container'>
           {/* canvas frame to house the canvas and display possible overflows */}
           <div className='canvas-frame'>
-            <div className='presentation-canvas' >
+            <div className='static-canvas' >
                 {presentationState[slideNumber]&& Object.values(presentationState[slideNumber]).map((obj)=>{
                   if (obj.type === "text") return <StaticText 
                                                   key={`${slideNumber}-${obj.id}`}
@@ -149,10 +156,15 @@ function StaticPresentation ({presentation}) {
             {newPresentation ? <PresentationBox presentation={newPresentation} /> : undefined}
           </div> */}
         </div>
-        <div className='add-like-button'>
-          <button onClick={HandleAddLike}>Like</button>
+        <div className='like-comment-buttons'>
+          <div className='add-like-button'>
+            <button onClick={HandleAddLike}>
+              <i className={`fa-regular fa-heart fa-xl ${isLiked ? 'fa-solid fa-heart' : ''}`}></i>
+            </button>
+          </div>
+            <PresentationFooter presentationId={presentationId} />
+
         </div>
-          <PresentationFooter presentationId={presentationId} />
       </div>
     </>
   ) : null;

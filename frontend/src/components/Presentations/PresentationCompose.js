@@ -333,9 +333,11 @@ function PresentationCompose () {
         <button disabled={Object.keys(presentationState).length===1}  className='button-remove-page' onClick={handlePageRemove}>
           Remove Page
         </button>
-        <span>
-          {`page ${slideNumber}/${Object.keys(presentationState).length}`}
-        </span>
+        <div className='slide-number-container'>
+          <span className='slide-number'>
+            {`page ${slideNumber}/${Object.keys(presentationState).length}`}
+          </span>
+        </div>
         </div>
         <button className='save-button'onClick={handleSave}>
           save
