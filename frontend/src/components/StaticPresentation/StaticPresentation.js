@@ -104,7 +104,7 @@ function StaticPresentation ({presentation, swap, disappear}) {
           <h3> {presentation.title}</h3>
 
         </div>
-        <div className='compose-container'>
+        <div className='static-container'>
           {/* canvas frame to house the canvas and display possible overflows */}
           <div className='canvas-frame'>
             <div className='static-canvas' >
