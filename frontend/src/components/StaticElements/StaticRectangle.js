@@ -1,4 +1,4 @@
-export default function StaticRectangle ({startLeft, id, startTop, startWidth, startHeight, windowHeight, windowWidth, bg}) {
+export default function StaticRectangle ({startLeft, id, startTop, startWidth, startHeight, windowHeight, windowWidth, bg, presentationSize}) {
     return (
         <div
             style={{position: "absolute", 
@@ -6,10 +6,10 @@ export default function StaticRectangle ({startLeft, id, startTop, startWidth, s
                     "justify-content": "flex-end",
                     "align-items": "flex-end",
                     backgroundColor: bg,
-                    top: (startTop*windowHeight) + "px", 
-                    left: (startLeft*windowWidth) + "px", 
-                    width: (startWidth*windowWidth) + "px",
-                    height: (startHeight*windowHeight) + "px"}}
+                    top: (startTop*windowHeight*presentationSize) + "px", 
+                    left: (startLeft*windowWidth*presentationSize) + "px", 
+                    width: (startWidth*windowWidth*presentationSize) + "px",
+                    height: (startHeight*windowHeight*presentationSize) + "px"}}
         >
         </div>
     );

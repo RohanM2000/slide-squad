@@ -5,7 +5,7 @@
     border: 1px solid black;
     border-radius: 4px;
     width: 54vw;
-    height: 52vh;
+    height: 54vh;
     background-color: white;
 }
 
@@ -116,7 +116,7 @@
 .save-button {
     width: 30vw;
     height: 5vh;
-    margin-top: 25px;
+    margin-top: 2vh;
     background-color: rgb(202, 12, 12);
     border: 1px solid  rgb(202, 12, 12);
     border-radius: 3px;

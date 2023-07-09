@@ -21,7 +21,7 @@ const LikesIndexItem = ({ like, swap } ) => {
     return show && (
         <>
         <div className='presentation-container'>
-            <StaticPresentation presentation={presentation} swap={swap} disappear={setShow}/>
+            <StaticPresentation presentation={presentation} swap={swap} disappear={setShow} presentationSize={46/52}/>
             <button 
                     className='delete-like-button'
                                    onClick={() => {

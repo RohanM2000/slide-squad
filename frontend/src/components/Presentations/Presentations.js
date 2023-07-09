@@ -114,7 +114,7 @@ function Presentations () {
                     <div className='slide'>
                       {/* <PresentationBox key={presentation._id} presentation={presentation} /> */}
                       <div className='inner_content'>
-                        <StaticPresentation presentation={presentation} idx={idx} scrollChecker={scrollChecker}/>
+                        <StaticPresentation presentation={presentation} idx={idx} scrollChecker={scrollChecker} presentationSize={46/52}/>
 
                       </div>
 
