@@ -14,20 +14,23 @@ li a.active{
 }
 
 ul {
-    height: 40vh;
+    height: 65vh;
     overflow-y: scroll;
 }
 
 
 .slider{
     background-color: rgb(105, 208, 255);
-    max-width: 1400px;
+    width: 100%;
+
     color: black;
     border-radius: 3px;
-
     grid-template-columns: 35% 65%;
     position: relative;
     display: grid;
+    height: 100vh;
+    margin-bottom: 1vw;
+    margin-right: 1vw;
 
 }
 
@@ -35,7 +38,7 @@ ul {
     padding: 40px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-color: white;
-    height: 80vh;
+    height: 100vh;
     
 }
 
@@ -54,7 +57,7 @@ ul {
 
 .slider .slides{
     overflow-y: auto;
-    max-height: 80vh;
+    max-height: 100vh;
     scrollbar-width: none;
 }
 
@@ -63,8 +66,7 @@ ul {
 }
 
 .slider .slides .slide{
-    min-height: vh;
-    height: 80vh;
+    height: 100vh;
     background-color: rgba(1, 77, 125);
     display: flex;
     padding: 40px;
