@@ -64,6 +64,7 @@ ul {
 
 .slider .slides .slide{
     min-height: vh;
+    height: 80vh;
     background-color: rgba(1, 77, 125);
     display: flex;
     padding: 40px;

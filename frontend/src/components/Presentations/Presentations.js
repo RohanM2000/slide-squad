@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearPresentationErrors, fetchPresentations } from '../../store/presentations';
 import StaticPresentation from '../StaticPresentation/StaticPresentation';
@@ -11,7 +11,7 @@ import '../Slider/Slider.css'
 function Presentations () {
   const dispatch = useDispatch();
   const presentations = useSelector(state => Object.values(state.presentations));
-  
+  const scrollChecker = useRef();
   const vertical_slider = {
 
     slider_class: ".slider",
@@ -77,7 +77,11 @@ function Presentations () {
  
 
   if (presentations.length === 0) return <div>There are no Presentations</div>;
-  
+  // const tempSlideCheck = document.querySelector('.slides');
+  // console.log(tempSlideCheck);
+  // if (scrollChecker.current) {
+  //   console.log(scrollChecker.current.scrollTop);
+  // }
   return (
     <>
     <div className='all-presentations-container'>
@@ -101,13 +105,16 @@ function Presentations () {
               </ul>
 
             </div>
-              <div className='slides'>
-                  {presentations.map(presentation => (
+              <div className='slides'
+               ref={scrollChecker}
+              //  onScroll={()=>console.log(scrollChecker.current.scrollTop, 0.8 * window.innerHeight)}
+              >
+                  {presentations.map((presentation, idx) => (
                     <>
                     <div className='slide'>
                       {/* <PresentationBox key={presentation._id} presentation={presentation} /> */}
                       <div className='inner_content'>
-                        <StaticPresentation presentation={presentation} />
+                        <StaticPresentation presentation={presentation} idx={idx} scrollChecker={scrollChecker}/>
 
                       </div>
 
