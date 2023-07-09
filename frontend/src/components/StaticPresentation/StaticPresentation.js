@@ -10,7 +10,7 @@ import PresentationFooter from './StaticPresentationFooter';
 import { createLike } from '../../store/likes';
 // import './Static.css'
 
-function StaticPresentation ({presentation, swap, disappear}) {
+function StaticPresentation ({presentation, swap, disappear, idx, scrollChecker}) {
   const dispatch = useDispatch();
   const presentationId = presentation._id
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
@@ -45,6 +45,7 @@ function StaticPresentation ({presentation, swap, disappear}) {
   
   const [slideNumber,setSlideNumber] = useState(1);
   function handleSlideChange (e){
+    if (idx !== Math.floor(scrollChecker.current.scrollTop / (window.innerHeight * 0.8))) return;
     if (e.key ==='ArrowLeft'){
       setSlideNumber(state=>{
         if(state===1){
@@ -68,7 +69,7 @@ function StaticPresentation ({presentation, swap, disappear}) {
   useEffect(()=>{
     document.addEventListener('keydown',handleSlideChange);
     return ()=>document.removeEventListener('keydown',handleSlideChange);
-  },[presentationState])
+  });
   // when the arrow is pressed, the next slide will be displayed
   // need to work out presentation preview or show presentaiton data
 
