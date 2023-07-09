@@ -8,3 +8,19 @@
     font-size: 1.2vw;
     color: black;
 }
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-top: 0;
+    padding: 0px 1vw;
+    background-color:  rgb(105, 208, 255); 
+}
+
+.profile-container h2 {
+    font-size: 2vw;
+    margin-top: 2vw;
+}

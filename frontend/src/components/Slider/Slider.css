@@ -1,0 +1,76 @@
+li{
+    display: block;
+    font-size: 1vw;
+    margin-top: 1vw;
+}
+
+li a {
+    color: black;
+    
+}
+
+li a.active{
+    font-weight: bold;
+}
+
+ul {
+    height: 40vh;
+    overflow-y: scroll;
+}
+
+
+.slider{
+    background-color: rgb(105, 208, 255);
+    max-width: 1400px;
+    color: black;
+    border-radius: 3px;
+
+    grid-template-columns: 35% 65%;
+    position: relative;
+    display: grid;
+
+}
+
+.content_container{
+    padding: 40px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: white;
+    height: 80vh;
+    
+}
+
+.content_container h1 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-bottom: 1.5vw;
+    font-size: 2vw;
+    font-weight: 700;
+}
+
+.slide_navigation h3{
+    font-size: 1.5vw;
+    margin-top: 1vw;
+   
+}
+
+.slider .slides{
+    overflow-y: auto;
+    max-height: 80vh;
+    scrollbar-width: none;
+}
+
+.slider .slides::-webkit-scrollbar{
+    display: none;
+}
+
+.slider .slides .slide{
+    min-height: vh;
+    background-color: rgba(1, 77, 125);
+    display: flex;
+    padding: 40px;
+    color: #333;
+    align-items: center;
+}
+
+.slider .slides .slide:nth-child(even){
+    background-color: rgb(202, 12, 12);
+}

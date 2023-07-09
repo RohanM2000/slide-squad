@@ -38,7 +38,7 @@ function Profile () {
   } else {
     return (
       <>
-      <div className='all-presentations-container'>
+      <div className='profile-container'>
         <h2>All of {currentUser.username}'s Presentations</h2>
         {filteredPresentations.map(presentation => (
           <div key={presentation._id} >

@@ -2,30 +2,121 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearPresentationErrors, fetchPresentations } from '../../store/presentations';
 import StaticPresentation from '../StaticPresentation/StaticPresentation';
+import '../Slider/Slider.css'
+
+
+
+
 
 function Presentations () {
   const dispatch = useDispatch();
   const presentations = useSelector(state => Object.values(state.presentations));
   
+  const vertical_slider = {
+
+    slider_class: ".slider",
+
+
+    show_slide: function (slide_id, context_item) {
+      const slide_container = context_item
+        .closest(this.slider_class)
+        .querySelector(".slides");
+      if (slide_container) {
+        const slides = slide_container.querySelectorAll(".slide");
+        if (slides && slides[slide_id]) {
+         
+          slide_container.scrollTo({
+            top: slides[slide_id].offsetTop,
+            behavior: "smooth"
+          });
+
+
+          const active_context_item = context_item
+            .closest(".slide_navigation")
+            .querySelector(".active");
+          if (active_context_item) {
+            active_context_item.classList.remove("active");
+          }
+
+          context_item.classList.add("active");
+        }
+      }
+    },
+
+
+    init_slider: function (slider) {
+      const navigation_items = slider.querySelectorAll(".slide_navigation a");
+
+      if (navigation_items) {
+        Object.keys(navigation_items).forEach(function (key) {
+          navigation_items[key].onclick = function (e) {
+            e.preventDefault();
+
+            vertical_slider.show_slide(key, navigation_items[key]);
+          };
+        });
+      }
+    },
+
+  
+    init: function () {
+
+      document
+        .querySelectorAll(this.slider_class)
+        .forEach((slider) => this.init_slider(slider));
+    }
+  };
+
+
+  vertical_slider.init();
+  
   useEffect(() => {
     dispatch(fetchPresentations());
     return () => dispatch(clearPresentationErrors());
   }, [dispatch])
+ 
 
   if (presentations.length === 0) return <div>There are no Presentations</div>;
   
   return (
     <>
     <div className='all-presentations-container'>
-      <h2>All Presentations</h2>
-      {presentations.map(presentation => (
-        <>
-          {/* <PresentationBox key={presentation._id} presentation={presentation} /> */}
-          <div className='presentation-container'>
-            <StaticPresentation presentation={presentation} />
-          </div>
-        </>
-      ))}
+          <script src="slider.js"></script>
+          <section className='slider'>
+            <div className='content_container'>
+              <h1>Discover a treasure trove of knowledge and creativity!</h1>
+              <p>From informative lectures to stunning visual journeys, each presentation is a gateway to inspiration. Explore, learn, and unlock new perspectives as you dive into the diverse world of presentations created and shared by our vibrant community of users.</p>
+
+              <ul class="slide_navigation">
+                <h3>Presentations</h3>
+                
+                {presentations.map(presentation => (
+                    <>
+                    <li><a href="#slide_1" className="active">{presentation.title}</a></li>
+                    
+                    </>
+
+                ))}
+                  
+              </ul>
+
+            </div>
+              <div className='slides'>
+                  {presentations.map(presentation => (
+                    <>
+                    <div className='slide'>
+                      {/* <PresentationBox key={presentation._id} presentation={presentation} /> */}
+                      <div className='inner_content'>
+                        <StaticPresentation presentation={presentation} />
+
+                      </div>
+
+                    </div>
+                    </>
+                  ))}
+            </div>
+         
+          </section>
     </div>
     </>
   );
