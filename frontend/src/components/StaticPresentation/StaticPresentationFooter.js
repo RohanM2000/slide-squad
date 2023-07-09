@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { fetchPresentationComments } from "../../store/comments";
 import { createLike, deleteLike } from "../../store/likes";
 
-const PresentationFooter =({presentation})=>{
+const PresentationFooter =({presentation, swap, disappear})=>{
     const presentationId = presentation._id
     const [showComments,setShowComments] = useState(false);
     const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const PresentationFooter =({presentation})=>{
         // fetch comments for the post with presentationId
     }
     const [show, setShow] = useState(true);
-    const [isLiked, setIsLiked] = useState(false);
+    const [isLiked, setIsLiked] = useState(swap);
     const HandleAddLike = (e) => {
         e.preventDefault();
         
@@ -28,7 +28,7 @@ const PresentationFooter =({presentation})=>{
           dispatch(deleteLike(presentation._id))
             .then(() => {
               setIsLiked(false);
-              setShow(false)
+              setShow(false);
             });
         } else {
         
