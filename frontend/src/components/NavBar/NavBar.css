@@ -1,15 +1,17 @@
 .nav-wrapper {
-    height: 1000vh;
-    width: 15vw;
-    background-color: rgb(197, 235, 251);
+    height: 800vh;
+    width: 12vw;
+
     margin-top: 0px;
-    
+    background-color: rgb(105, 208, 255);
 }
 
 .nav-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+
  
 
 }
@@ -22,6 +24,7 @@
 .link-nav {
     color: black;
     font-family: 'Telex', sans-serif;
+    text-decoration: none;
 }
 
 
@@ -39,10 +42,9 @@
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     margin-bottom: 10px;
     width: 10vw;
-    border: 1px solid rgb(101, 216, 255);
-    background-color: rgb(101, 216, 255);
+    background-color: transparent;
     border-radius: 2px;
-    text-align: center;
+    text-align: left;
     margin-left: auto;
     margin-right: auto;
     padding: 7px;
@@ -76,7 +78,7 @@
     align-items: center;
     font-size: 3vw;
     border-radius: 99999px;
-    margin: 2vw 5.5vw;
+
   }
 
   .profile-button p {
@@ -102,7 +104,7 @@
     z-index: 1;
     width: 100%;
     color: black;
-    transform: translateX(calc(10vw));
+    transform: translateX(calc(5vw));
   }
 
   .dropdown-content button {
@@ -110,6 +112,15 @@
     margin-top: 1vw;
     border-radius: 3px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+
+  .compose-button {
+    padding: 1vw;
+    border-radius: 3px;
+    background-color: rgb(202, 12, 12);
+    border: 1px solid  rgb(202, 12, 12);
+    margin-top: 2vh;
+
   }
 
 

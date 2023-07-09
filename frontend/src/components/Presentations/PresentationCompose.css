@@ -16,6 +16,7 @@
     width: 42vw;
     height: 42vh;
     background-color: white;
+    margin-top: 1vw;
 }
 
 .selection {
@@ -82,9 +83,12 @@
 .compose-container {
     display: flex;
     flex-direction: column;
-    margin: 0px auto;
+    /* margin: 0px auto; */
     padding-top: 3vw;
+    padding-left: 17vw;
+    padding-right: 17vw;
     align-items: center;
+    background-color:  rgb(105, 208, 255); 
 }
 
 .title-compose {
@@ -154,7 +158,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0px auto;
+    padding-right: 10vw;
+    background-color:  rgb(105, 208, 255); 
 }
 
 .all-presentations-container h2 {
@@ -194,6 +199,7 @@
     margin-bottom: .8vw;
     
 }
+
 
 .static-title {
     display: flex;
