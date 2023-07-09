@@ -35,6 +35,9 @@ function ProfileButton({ user }) {
         </ul>
   
     </div>
+    <div className='compose-button'>
+      <NavLink to={'/presentations/compose'} className='link-nav'>Compose</NavLink>
+    </div>
     </>
   );
 }

@@ -24,6 +24,7 @@
 .link-nav {
     color: black;
     font-family: 'Telex', sans-serif;
+    text-decoration: none;
 }
 
 
@@ -103,7 +104,7 @@
     z-index: 1;
     width: 100%;
     color: black;
-    transform: translateX(calc(10vw));
+    transform: translateX(calc(5vw));
   }
 
   .dropdown-content button {
@@ -111,6 +112,15 @@
     margin-top: 1vw;
     border-radius: 3px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+
+  .compose-button {
+    padding: 1vw;
+    border-radius: 3px;
+    background-color: rgb(202, 12, 12);
+    border: 1px solid  rgb(202, 12, 12);
+    margin-top: 2vh;
+
   }
 
 
