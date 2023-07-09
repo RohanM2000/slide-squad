@@ -1,0 +1,16 @@
+div.about-us {
+    display: flex;
+    flex-direction: column;
+}
+
+div.about-us a{
+    margin-top: 10vh;
+    font-size: 5vh;
+    text-decoration: none;
+    display: block;
+}
+
+div.about-us p{
+    font-size: 2vh;
+    margin-top: 2vh;
+}
