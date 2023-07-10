@@ -6,12 +6,12 @@ import { fetchPresentation } from '../../store/presentations';
 import StaticPresentation from '../StaticPresentation/StaticPresentation';
 
 const LikesIndexItem = ({ like, swap } ) => {
-    const presentation = useSelector(state => state.presentations[like.likeId] );
+    const presentation = useSelector(state => state.presentations[like.likeId._id] );
     const dispatch = useDispatch();
     const [show, setShow] = useState(true);
     useEffect(() => {
-        dispatch(fetchPresentation(like.likeId))
-    }, [dispatch, like.likeId])
+        dispatch(fetchPresentation(like.likeId._id))
+    }, [dispatch, like.likeId._id])
 
     if (presentation === undefined) {
         return null 

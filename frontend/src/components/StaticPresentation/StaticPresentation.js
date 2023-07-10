@@ -100,11 +100,6 @@ function StaticPresentation ({presentation, swap, disappear, idx, scrollChecker}
       {/* <form className="compose-presentation" onSubmit={handleSubmit}> */}
       {/* decide how the input will be taken */}
       <div className='presentation-show-container'>
-        <div className='static-title'>
-          <b>Title:</b>
-          <h3> {presentation.title}</h3>
-
-        </div>
         <div className='static-container'>
           {/* canvas frame to house the canvas and display possible overflows */}
           <div className='canvas-frame'>
@@ -138,19 +133,23 @@ function StaticPresentation ({presentation, swap, disappear, idx, scrollChecker}
                 })}
             </div>
           </div>
+          <div className='static-title'>
+            <h3> {presentation.title}</h3>
+  
+          </div>
             {/* <input 
               type="textarea"
               value={text}
               onChange={update}
               placeholder="Write your tweet..."
               required
-            />
-            <div className="errors">{errors?.text}</div>
-            <input type="submit" value="Submit" />
-          </form>
-          <div className="presentation-preview">
-            <h3>Presentation Preview</h3>
-            {text ? <PresentationBox presentation={{text, author}} /> : undefined}
+              />
+              <div className="errors">{errors?.text}</div>
+              <input type="submit" value="Submit" />
+              </form>
+              <div className="presentation-preview">
+              <h3>Presentation Preview</h3>
+              {text ? <PresentationBox presentation={{text, author}} /> : undefined}
           </div>
           <div className="previous-presentation">
             <h3>Previous Presentation</h3>

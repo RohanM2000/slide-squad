@@ -28,7 +28,8 @@ const likeSchema = new Schema(
     },
     likeId: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true
+      required: true,
+      refPath: 'likedType'
     },
     likedType: {
       type: String,

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './profile.css';
 import { fetchUserPresentations, clearPresentationErrors } from '../../store/presentations';
@@ -12,18 +12,72 @@ function Profile () {
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.user);
   const userPresentations = useSelector(state => Object.values(state.presentations))
+  const scrollChecker = useRef();
   
   useEffect(() => {
     dispatch(fetchPresentations());
     return () => dispatch(clearPresentationErrors());
   }, [currentUser, dispatch]);
 
+  const vertical_slider = {
 
-  // return (
-  //   <>
-  //   <h1>{currentUser.username}</h1>
-  //   </>
-  // )
+    slider_class: ".slider",
+
+
+    show_slide: function (slide_id, context_item) {
+      const slide_container = context_item
+        .closest(this.slider_class)
+        .querySelector(".slides");
+      if (slide_container) {
+        const slides = slide_container.querySelectorAll(".slide");
+        if (slides && slides[slide_id]) {
+         
+          slide_container.scrollTo({
+            top: slides[slide_id].offsetTop,
+            behavior: "smooth"
+          });
+
+
+          const active_context_item = context_item
+            .closest(".slide_navigation")
+            .querySelector(".active");
+          if (active_context_item) {
+            active_context_item.classList.remove("active");
+          }
+
+          context_item.classList.add("active");
+        }
+      }
+    },
+
+
+    init_slider: function (slider) {
+      const navigation_items = slider.querySelectorAll(".slide_navigation a");
+
+      if (navigation_items) {
+        Object.keys(navigation_items).forEach(function (key) {
+          navigation_items[key].onclick = function (e) {
+            e.preventDefault();
+
+            vertical_slider.show_slide(key, navigation_items[key]);
+          };
+        });
+      }
+    },
+
+  
+    init: function () {
+
+      document
+        .querySelectorAll(this.slider_class)
+        .forEach((slider) => this.init_slider(slider));
+    }
+  };
+
+
+  vertical_slider.init();
+
+
   let filteredPresentations = [];
   if (userPresentations && userPresentations.length > 0) {
     userPresentations.forEach(presentation=> {
@@ -39,20 +93,48 @@ function Profile () {
     return (
       <>
       <div className='profile-container'>
-        <h2>All of {currentUser.username}'s Presentations</h2>
-        {filteredPresentations.map(presentation => (
-          <div key={presentation._id} >
-            {/* <PresentationShowPage
-            
-            /> */}
-              <div key={presentation._id} className='presentation-container'>
-                <button className='edit-button-presentation'>
-                  <Link to={`/presentations/${presentation._id}/edit`}>Edit</Link>
-                </button>
-                <StaticPresentation presentation={presentation} />
-              </div>
-          </div>
-        ))}
+      <script src="slider.js"></script>
+          <section className='slider'>
+            <div className='content_container'>
+              <h1>{currentUser.username}</h1>
+              <p>Explore your collection of presentations. Dont't forget to read comments, and feedback other users have left and update your presentation for even more likes! </p>
+
+              <ul class="slide_navigation">
+                <h3>Presentations</h3>
+                
+                {filteredPresentations.map(presentation => (
+                    <>
+                    <li><a href="#slide_1" className="active">{presentation.title}</a></li>
+                    
+                    </>
+
+                ))}
+                  
+              </ul>
+
+            </div>
+              <div className='slides'
+               ref={scrollChecker}
+              //  onScroll={()=>console.log(scrollChecker.current.scrollTop, 0.8 * window.innerHeight)}
+              >
+                  {filteredPresentations.map((presentation, idx) => (
+                    <>
+                    <div className='slide'>
+                      {/* <PresentationBox key={presentation._id} presentation={presentation} /> */}
+                      <div className='inner_content'>
+                      <button className='edit-button-presentation'>
+                        <Link to={`/presentations/${presentation._id}/edit`}>Edit</Link>
+                      </button>
+                        <StaticPresentation presentation={presentation} idx={idx} scrollChecker={scrollChecker}/>
+
+                      </div>
+
+                    </div>
+                    </>
+                  ))}
+            </div>
+         
+          </section>
       </div>
         
       </>

@@ -8,16 +8,6 @@
     height: 52vh;
     background-color: white;
 }
-.static-canvas {
-    position: relative;
-    overflow:hidden;
-    border: 1px solid black;
-    border-radius: 4px;
-    width: 42vw;
-    height: 42vh;
-    background-color: white;
-    margin-top: 1vw;
-}
 
 .selection {
     margin-bottom: 10px;
@@ -27,7 +17,7 @@
     background-color: rgb(197, 235, 251);
     padding: 5px 0px;
     border-radius: 3px;
-   
+    
 }
 
 .selection img {
@@ -37,7 +27,7 @@
 
 .selection i {
     padding: .7vw 0px;
- 
+    
 }
 
 .selection button {
@@ -72,8 +62,8 @@
 .color-dropdown button {
     display: flex;
     flex-direction: column;
-  
-  
+    
+    
 }
 
 .selection button:hover {
@@ -83,12 +73,16 @@
 .compose-container {
     display: flex;
     flex-direction: column;
-    /* margin: 0px auto; */
-    padding-top: 3vw;
-    padding-left: 17vw;
-    padding-right: 17vw;
+    margin: 1vw auto;
+    padding-top: 1vw;
+    padding-bottom: .5vw;
+    padding-left: 15vw;
+    padding-right: 15vw;
     align-items: center;
     background-color:  rgb(105, 208, 255); 
+    border-radius: 5px;
+    
+ 
 }
 
 .title-compose {
@@ -112,11 +106,11 @@
     border: none;
     background-color: transparent;
     margin-top: .5vw;
-   
+    
 }
 
 /* .add-like-button fa-solid fa-heart {
- color: red 
+    color: red 
 } */
 
 .save-button {
@@ -145,7 +139,7 @@
     z-index: 1;
     color: black;
     margin-top: 4.4vh;
-  }
+}
 
 .color-dropdown:hover .color-dropdown-content {
     display: flex;
@@ -159,10 +153,7 @@
     align-items: center;
     display: flex;
     height: 100vh;
-    margin: 0;
-    padding: 0px 1vw;
-    background-color:  rgb(105, 208, 255); 
-    height: 100vh;
+    background-color:  white; 
 }
 
 .all-presentations-container h2 {
@@ -170,12 +161,14 @@
     font-size: 1.7vw;
     font-weight: 700;
     margin-top: 1vw;
-
+    
 }
 
 .presentation-container {
-    padding: 1.5vw;
-    margin: 10px 17vw;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding-top: 8vw;
 }
 
 .presentation-show-container{
@@ -190,28 +183,36 @@
 
 .presentation-show-container h3 {
     font-size: 1.4vw;
-    margin-bottom: 10px;
     font-weight: 700;
-    width: 68%;
-    text-align: center;
+    text-align: left;
+   
     
 }
 
-.presentation-show-container b {
-    font-weight: 700;
-    margin-bottom: .8vw;
-    
-}
 
 
 .static-title {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: white;
+    align-items: left;
+    text-align: left;
+    background-color: transparent;
     padding: 1vw 0px;
     border-radius: 8px;
-    width: 30vw;
+    width: 42vw;
+    color: black;
+    margin-left: 2vw;
+}
+
+.static-canvas {
+    position: relative;
+    overflow:hidden;
+    border: 1px solid black;
+    border-radius: 4px;
+    width: 46vw;
+    height: 46vh;
+    background-color: white;
+    margin-left: 2vw;
+
 }
 
 .like-comment-buttons {
