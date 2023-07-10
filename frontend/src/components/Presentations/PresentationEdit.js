@@ -230,11 +230,11 @@ useEffect(()=>{
 
         <div className='selection'>
           <button onClick={event=>addTextElement(event)}>
-            <img src='../icons/text-box.png'></img>
+            <img src='/icons/text-box.png'></img>
             Text-Box
           </button>
           <button onClick={event=>addRectangleElement(event)}>
-            <img src='../icons/rectangle-vector.png'></img>
+            <img src='/icons/rectangle-vector.png'></img>
             Rectangle
           </button>
           <button className='photo-upload-container' onClick={()=>document.getElementById('photo-input').click()} >
@@ -252,7 +252,7 @@ useEffect(()=>{
           </button>
           <div className='color-dropdown'>
             <button onMouseEnter={()=>setShowSwatch({reveal:true,type:'text'})} className='color-button'>
-              <img src='../icons/color-text.png'></img>
+              <img src='/icons/color-text.png'></img>
               Text Color
             </button>
             <div className='color-dropdown-content'>
@@ -274,7 +274,7 @@ useEffect(()=>{
             </div>
           <div className='color-dropdown'>
             <button onMouseEnter={()=>setShowSwatch({reveal:true,type:'shape'})}>
-              <img src='../icons/bucket.png'></img>
+              <img src='/icons/bucket.png'></img>
               Shape Color
             </button>
             <div className='color-dropdown-content'>
