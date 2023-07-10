@@ -6,11 +6,12 @@
     height: 98vh;
     background-color:  white; 
     padding-left: 1vw;
+    
  
 }
 
 .likes-container h2 {
-    padding: .3vw;
+    margin-bottom: 2vw;
     font-size: 1.7vw;
     font-weight: 700;
     margin-top: 1vw;

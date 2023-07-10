@@ -167,7 +167,8 @@
 .presentation-container {
     display: flex;
     flex-direction: column;
-    height: 99vh;
+    height: 100vh;
+    padding-top: 8vw;
 }
 
 .presentation-show-container{
