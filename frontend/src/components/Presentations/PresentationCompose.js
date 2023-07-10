@@ -150,19 +150,24 @@ function PresentationCompose () {
   }
   const handleSave = async ()=>{
     console.log('saved');
+    const saveButton = document.querySelector(".save-button");
+    saveButton.disabled = true;
+    setTimeout(async ()=>{
+      const res = await savePresentation(savedObject, dispatch, title);
+      if (res.ok) {
+        history.push('/presentations');
+        console.log("successful creation");
+      } else {
+        console.log("did not work here")
+        saveButton.disabled = false;
+      }
+    }, 2000);
     let savedObject=JSON.parse(JSON.stringify(presentationState));
     // [1:{},2:{}]
     // Object.values(presentationState).forEach((ele)=>{
     //   savedObject[ele.id] = ele;
     // })
     // console.log(savedObject);
-    const res = await savePresentation(savedObject, dispatch, title);
-    if (res.ok) {
-      history.push('/presentations');
-      console.log("successful creation");
-    } else {
-      console.log("did not work here")
-    }
   }
   const handleEleRemove = () =>{
     const newState = {
