@@ -10,7 +10,7 @@ import PresentationFooter from './StaticPresentationFooter';
 import { createLike } from '../../store/likes';
 // import './Static.css'
 
-function StaticPresentation ({presentation, swap, disappear, idx, scrollChecker}) {
+function StaticPresentation ({presentation, swap, disappear, idx, scrollChecker, presentationSize}) {
   const dispatch = useDispatch();
   const presentationId = presentation._id
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
@@ -117,6 +117,7 @@ function StaticPresentation ({presentation, swap, disappear, idx, scrollChecker}
                                                   startTop={obj.startTop} 
                                                   windowHeight={windowHeight}
                                                   windowWidth={windowWidth}
+                                                  presentationSize={46/54}
                                                   />
                   if (obj.type === "rectangle") return <StaticRectangle 
                                                   key={`${slideNumber}-${obj.id}`}
@@ -129,6 +130,7 @@ function StaticPresentation ({presentation, swap, disappear, idx, scrollChecker}
                                                   windowHeight={windowHeight}
                                                   windowWidth={windowWidth}
                                                   bg={obj.bg}
+                                                  presentationSize={46/54}
                                                   />
                 })}
             </div>

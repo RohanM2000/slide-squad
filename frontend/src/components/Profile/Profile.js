@@ -125,7 +125,7 @@ function Profile () {
                       <button className='edit-button-presentation'>
                         <Link to={`/presentations/${presentation._id}/edit`}>Edit</Link>
                       </button>
-                        <StaticPresentation presentation={presentation} idx={idx} scrollChecker={scrollChecker}/>
+                        <StaticPresentation presentation={presentation} idx={idx} scrollChecker={scrollChecker} presentationSize={46/52}/>
 
                       </div>
 

@@ -99,6 +99,7 @@ function CarouselItem ({presentation}) {
                                                   startTop={obj.startTop} 
                                                   windowHeight={windowHeight}
                                                   windowWidth={windowWidth}
+                                                  presentationSize={21/54}
                                                   />
                   if (obj.type === "rectangle") return <StaticRectangle 
                                                   key={`${slideNumber}-${obj.id}`}
@@ -111,6 +112,7 @@ function CarouselItem ({presentation}) {
                                                   windowHeight={windowHeight}
                                                   windowWidth={windowWidth}
                                                   bg={obj.bg}
+                                                  presentationSize={21/54}
                                                   />
                 })}
             </div>
