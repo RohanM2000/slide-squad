@@ -164,11 +164,42 @@ useEffect(()=>{
   if (presentationState) {
       nextPage = Object.values(presentationState).length+1;
   }
+  const handleEleRemove = () =>{
+    const newState = {
+      ...presentationState
+    }
+    const newPage={}
+    delete newState[slideNumber][onFocus];
+    Object.values(newState[slideNumber]).forEach((ele,index)=>{
+      ele.id = index+1;
+      newPage[index+1]=ele
+    })
+    setOnFocus(null);
+    setPresentationState({...newState,[slideNumber]: newPage});
+  }
+  const handlePageRemove = () =>{
+    const deletePage = slideNumber;
+    const newState={...presentationState}
+    delete newState[slideNumber];
+    const updatedPages={};
+    Object.values(newState).forEach((page,index)=>{
+        updatedPages[index+1]=page;
+    })
+    if(deletePage>Object.keys(updatedPages).length){
+      setSlideNumber(deletePage-1);
+    } else {
+    setSlideNumber(deletePage);
+    }
+    setPresentationState(updatedPages);
+    
+    
+  }
   const handlePageAdd = ()=>{
     setPresentationState(state=>{
       return {...state,[nextPage]:{}}
     })
   }
+  
   // slidetext: click and drag, when placed within the presentation canvas (top > canvas top, bottom < canvas bottom, right < canvas right, left > canvas left)
   // spawn it into the center
   // when SlideText is out of the slidetext container, render a new one
@@ -302,9 +333,22 @@ useEffect(()=>{
               })}
           </div>
         </div>
+        <div>
+        <button className='button-remove-ele' onClick={handleEleRemove}>
+              Delete Selected Item
+        </button>
         <button onClick={handlePageAdd} className='button-add-page'>
           Add Page
         </button>
+        <button disabled={Object.keys(presentationState).length===1}  className='button-remove-page' onClick={handlePageRemove}>
+          Remove Page
+        </button>
+        <div className='slide-number-container'>
+          <span className='slide-number'>
+            {`page ${slideNumber}/${Object.keys(presentationState).length}`}
+          </span>
+        </div>
+        </div>
         <button className='save-button'onClick={handleSave}>
           save edits
         </button>
