@@ -97,7 +97,7 @@ function Profile () {
           <section className='slider'>
             <div className='content_container'>
               <h1>{currentUser.username}</h1>
-              <p>Explore {currentUser.username}'s collection of presentations. Don't forget to leave comments, and feedback on the presentations that resonate with you! </p>
+              <p>Explore your collection of presentations. Dont't forget to read comments, and feedback other users have left and update your presentation for even more likes! </p>
 
               <ul class="slide_navigation">
                 <h3>Presentations</h3>
@@ -122,6 +122,9 @@ function Profile () {
                     <div className='slide'>
                       {/* <PresentationBox key={presentation._id} presentation={presentation} /> */}
                       <div className='inner_content'>
+                      <button className='edit-button-presentation'>
+                        <Link to={`/presentations/${presentation._id}/edit`}>Edit</Link>
+                      </button>
                         <StaticPresentation presentation={presentation} idx={idx} scrollChecker={scrollChecker}/>
 
                       </div>
