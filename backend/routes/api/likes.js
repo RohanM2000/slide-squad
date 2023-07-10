@@ -30,7 +30,8 @@ router.get('/user/:userId', async (req, res, next) => {
   try {
       const likes = await Like.find({ liker: user._id })
                                   .sort({ createdAt: -1 })
-                                  .populate("liker", "_id username");
+                                  .populate("liker", "_id username")
+                                  .populate('likeId', 'title');
       return res.json(likes);
   }
   catch(err) {

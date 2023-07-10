@@ -161,8 +161,9 @@
 }
 
 .presentation-container {
-    padding: 1.5vw;
-    margin: 10px 17vw;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
 .presentation-show-container{
@@ -172,7 +173,6 @@
     background-color: transparent;
     align-items: center;
     width: 50vw;
-    height: 100vh;
     padding: 2vw 0px;
 }
 
