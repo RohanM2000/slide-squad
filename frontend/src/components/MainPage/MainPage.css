@@ -22,14 +22,14 @@
     margin-left: 5vw;
     margin-right: 10vw;
     width: 60vw;
-
     padding-top: 5vw;
 }
 
 .mainpage-heading h1 {
-    font-size: 3vw;
+    font-size: 4vw;
     padding: 10px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    width: 40vw;
 }
 
 .mainpage-heading {
@@ -37,7 +37,7 @@
     display: flex;
     font-size: 1vw;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
 }
 
 .side-line {
@@ -69,8 +69,8 @@
 }
 
 .caro-canvas {
-    width: 20vw;
-    height: 20vh;
+    width: 21vw;
+    height: 21vh;
     background-color: white;
     position: relative;
     overflow:hidden;
@@ -87,7 +87,7 @@
     border-radius: 8px;
     background-color: rgb(249, 243, 133);
     align-items: center;
-    width: 20vw;
+    width: 22vw;
   
 }
 
@@ -124,11 +124,11 @@
   position: relative;
   width: 100%;
   height: 50vh;
-  max-width: 500px;
+  width: 50vw;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin-top: 10vh;
+  margin-top: 8vh;
  
 }
 
@@ -139,8 +139,8 @@
   flex-direction: column;
   align-items: left;
   position: absolute;
-  width: 23vw;
-  padding: 1vw 1.5vw;
+  width: 25vw;
+  padding: 2vw 1.5vw;
   opacity: 0;
   filter: drop-shadow(0 2px 2px #555);
   will-change: transform, opacity;
