@@ -73,12 +73,16 @@
 .compose-container {
     display: flex;
     flex-direction: column;
-    /* margin: 0px auto; */
-    padding-top: 3vw;
-    padding-left: 17vw;
-    padding-right: 17vw;
+    margin: 1vw auto;
+    padding-top: 1vw;
+    padding-bottom: .5vw;
+    padding-left: 15vw;
+    padding-right: 15vw;
     align-items: center;
     background-color:  rgb(105, 208, 255); 
+    border-radius: 5px;
+    
+ 
 }
 
 .title-compose {
