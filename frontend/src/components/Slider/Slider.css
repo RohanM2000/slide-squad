@@ -69,7 +69,7 @@ ul {
 
 .slider .slides .slide{
     height: 98vh;
-    background-color: rgba(133, 237, 255, 0.997);
+    background-color: rgba(183, 230, 238, 0.997);
     display: flex;
     padding: 40px;
     color: #333;
@@ -78,5 +78,5 @@ ul {
 }
 
 .slider .slides .slide:nth-child(even){
-    background-color: rgb(202, 12, 12);
+    background-color: rgb(212, 255, 251);
 }
