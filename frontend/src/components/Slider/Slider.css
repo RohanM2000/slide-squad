@@ -20,7 +20,7 @@ ul {
 
 
 .slider{
-    background-color: rgb(105, 208, 255);
+    background-color: white;
     width: 100%;
 
     color: black;
@@ -28,9 +28,11 @@ ul {
     grid-template-columns: 35% 65%;
     position: relative;
     display: grid;
-    height: 100vh;
-    margin-bottom: 1vw;
+    height: 98vh;
+    margin-top: .5vw;
     margin-right: 1vw;
+  
+
 
 }
 
@@ -57,7 +59,7 @@ ul {
 
 .slider .slides{
     overflow-y: auto;
-    max-height: 100vh;
+    max-height: 98vh;
     scrollbar-width: none;
 }
 
@@ -66,12 +68,13 @@ ul {
 }
 
 .slider .slides .slide{
-    height: 100vh;
-    background-color: rgba(1, 77, 125);
+    height: 98vh;
+    background-color: rgba(133, 237, 255, 0.997);
     display: flex;
     padding: 40px;
     color: #333;
     align-items: center;
+   
 }
 
 .slider .slides .slide:nth-child(even){

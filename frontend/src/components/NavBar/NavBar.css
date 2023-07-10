@@ -3,7 +3,7 @@
     width: 12vw;
 
     margin-top: 0px;
-    background-color: rgb(105, 208, 255);
+    background-color: white;
 }
 
 .nav-container {
@@ -115,12 +115,21 @@
   }
 
   .compose-button {
-    padding: 1vw;
+    padding: .8vw;
     border-radius: 3px;
     background-color: rgb(202, 12, 12);
     border: 1px solid  rgb(202, 12, 12);
     margin-top: 2vh;
+    width: 10vw;
+    text-align: center;
 
   }
+
+  .logout-button button  {
+    font-size: 1vw;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+
+ 
 
 

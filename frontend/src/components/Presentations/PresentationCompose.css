@@ -149,7 +149,7 @@
     align-items: center;
     display: flex;
     height: 100vh;
-    background-color:  rgb(105, 208, 255); 
+    background-color:  white; 
 }
 
 .all-presentations-container h2 {
@@ -163,7 +163,7 @@
 .presentation-container {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 99vh;
 }
 
 .presentation-show-container{
@@ -194,7 +194,7 @@
     padding: 1vw 0px;
     border-radius: 8px;
     width: 42vw;
-    color: white;
+    color: black;
     margin-left: 2vw;
 }
 
