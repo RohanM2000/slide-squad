@@ -63,12 +63,13 @@ router.post('/presentation/:presentationId/like', requireUser, async (req, res, 
     
     // Save the new Like object
     const savedLike = await newLike.save();
-    
+    const populatedLike = await savedLike.populate("liker", "_id username")
+    .populate('likeId', 'title');
     // Update the presentation's like count
     presentation.likeCount += 1;
     await presentation.save();
     
-    return res.json(savedLike);
+    return res.json(populatedLike);
   } catch (err) {
     return next(err);
   }

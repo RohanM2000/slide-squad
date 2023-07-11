@@ -59,9 +59,10 @@ const PresentationFooter =({presentation, swap, loadedLikes})=>{
         const likeToDelete = likes.find((like) => like.likeId._id === presentation._id);
         if (likeToDelete) {
           dispatch(deleteLike(likeToDelete._id)).then(() => {
-            setIsLiked(false);
+            // setIsLiked(false);
             // setPushable(true);
           });
+          setIsLiked(false);
         }
       } else {
       
@@ -73,9 +74,10 @@ const PresentationFooter =({presentation, swap, loadedLikes})=>{
     
         dispatch(createLike(like))
           .then(() => {
-            setIsLiked(true);
+            // setIsLiked(true);
             // setPushable(true);
           });
+        setIsLiked(true);
       }
   };
   

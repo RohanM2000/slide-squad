@@ -1,5 +1,5 @@
 import './Likes.css';
-import { useState,useEffect } from 'react';
+import { useState,useEffect,useRef } from 'react';
 import {useSelector, useDispatch } from 'react-redux';
 import { fetchPresentations } from '../../store/presentations';
 import { fetchUserLikes, fetchLikes } from '../../store/likes';
@@ -13,6 +13,7 @@ const LikesIndex = () => {
     const { userId } = useParams();
     const dispatch = useDispatch();
     const [newLikes, setNewLikes] = useState([])
+    const scrollChecker = useRef();
     const likes = useSelector(state => {
       // console.log(state.likes);
       if (Object.values(state.likes).length !== newLikes.length) {
@@ -124,7 +125,7 @@ const LikesIndex = () => {
 
             </div>
               <div className='slides'
-              //  ref={scrollChecker}
+               ref={scrollChecker}
               //  onScroll={()=>console.log(scrollChecker.current.scrollTop, 0.8 * window.innerHeight)}
               >
                   {filteredLikes.map((like, idx) => (
@@ -134,7 +135,7 @@ const LikesIndex = () => {
                       <div className='inner_content'>
                         {/* <StaticPresentation presentation={presentation} idx={idx} scrollChecker={scrollChecker}/> */}
               
-                        <LikesIndexItem key={like._id} like={like} swap={true}/>
+                        <LikesIndexItem key={like._id} like={like} swap={true} scrollChecker={scrollChecker} idx={idx}/>
 
                       </div>
 
