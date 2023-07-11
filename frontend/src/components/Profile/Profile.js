@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './profile.css';
 import { fetchUserPresentations, clearPresentationErrors } from '../../store/presentations';
+import { fetchUserLikes } from '../../store/likes';
 import { fetchPresentations } from '../../store/presentations';
 import StaticPresentation from '../StaticPresentation/StaticPresentation';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
@@ -13,8 +14,10 @@ function Profile () {
   const currentUser = useSelector(state => state.session.user);
   const userPresentations = useSelector(state => Object.values(state.presentations))
   const scrollChecker = useRef();
+  const [loadedLikes, setLoadedLikes] = useState(false);
   
   useEffect(() => {
+    dispatch(fetchUserLikes(currentUser._id)).then(()=>{setLoadedLikes(true)}).catch((err)=>console.log(err));
     dispatch(fetchPresentations());
     return () => dispatch(clearPresentationErrors());
   }, [currentUser, dispatch]);
@@ -125,7 +128,7 @@ function Profile () {
                       <button className='edit-button-presentation'>
                         <Link to={`/presentations/${presentation._id}/edit`}>Edit</Link>
                       </button>
-                        <StaticPresentation presentation={presentation} idx={idx} scrollChecker={scrollChecker} presentationSize={46/52}/>
+                        <StaticPresentation presentation={presentation} idx={idx} scrollChecker={scrollChecker} presentationSize={46/52} loadedLikes={loadedLikes}/>
 
                       </div>
 

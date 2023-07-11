@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearPresentationErrors, fetchPresentations } from '../../store/presentations';
 import StaticPresentation from '../StaticPresentation/StaticPresentation';
@@ -14,6 +14,7 @@ function Presentations () {
   const currentUser = useSelector(state => state.session.user)
   const presentations = useSelector(state => Object.values(state.presentations));
   const scrollChecker = useRef();
+  const [loadedLikes, setLoadedLikes] = useState(false);
   const vertical_slider = {
 
     slider_class: ".slider",
@@ -73,7 +74,7 @@ function Presentations () {
   vertical_slider.init();
   
   useEffect(() => {
-    dispatch(fetchUserLikes(currentUser._id));
+    dispatch(fetchUserLikes(currentUser._id)).then(()=>setLoadedLikes(true)).catch((err)=>console.log(err));
     dispatch(fetchPresentations());
     return () => dispatch(clearPresentationErrors());
   }, [dispatch])
@@ -117,7 +118,7 @@ function Presentations () {
                     <div className='slide'>
                       {/* <PresentationBox key={presentation._id} presentation={presentation} /> */}
                       <div className='inner_content'>
-                        <StaticPresentation presentation={presentation} idx={idx} scrollChecker={scrollChecker} presentationSize={46/52} swap={false} />
+                        <StaticPresentation presentation={presentation} idx={idx} scrollChecker={scrollChecker} presentationSize={46/52} swap={false} loadedLikes={loadedLikes}/>
 
                       </div>
 
