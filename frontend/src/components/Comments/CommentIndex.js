@@ -14,6 +14,7 @@ const CommentsIndex = ({presentationId}) => {
     const currentUser = useSelector(state=>state.session.user);
 
     useEffect(() => {
+        console.log('fetched');
         dispatch(fetchPresentationComments(presentationId))
     }, [dispatch])
     if (!presentationComments) return(
