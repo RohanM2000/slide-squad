@@ -45,8 +45,8 @@ function PresentationCompose () {
   // const newPresentation = useSelector(state => state.presentations.new);
   // const errors = useSelector(state => state.errors.presentations);
   const [presentationState, setPresentationState] =useState({ 
-   1:{ 1:{id:1, startLeft:0/windowWidth,startTop:0/windowHeight, text:'', type: "text",bold:false,color:'black',fontsize: 16/windowWidth}},
-   2:{ 1:{id:1, startLeft:0/windowWidth,startTop:0/windowHeight, text:'', type: "text",bold:false,color:'black',fontsize: 16/windowWidth}}
+   1:{ 1:{id:1, startWidth:50/windowWidth, startLeft:0/windowWidth,startTop:0/windowHeight, text:'', type: "text",bold:false,color:'black',fontsize: 16/windowWidth}},
+   2:{ 1:{id:1, startWidth:50/windowWidth, startLeft:0/windowWidth,startTop:0/windowHeight, text:'', type: "text",bold:false,color:'black',fontsize: 16/windowWidth}}
   });
   
   const [slideNumber,setSlideNumber] = useState(1);
@@ -95,7 +95,7 @@ function PresentationCompose () {
   const addTextElement = (event) =>{
     // event.preventDefault();
     setPresentationState(state=>{
-      return {...state,[slideNumber]:{...state[slideNumber],[nextId]: {text: '',startLeft:0/windowWidth,startTop:0/windowHeight,id: nextId, type: "text", bold:false,color:'black',fontsize: 16/windowWidth}}
+      return {...state,[slideNumber]:{...state[slideNumber],[nextId]: {startWidth:50/windowWidth, text: '',startLeft:0/windowWidth,startTop:0/windowHeight,id: nextId, type: "text", bold:false,color:'black',fontsize: 16/windowWidth}}
     }})
   } 
 
