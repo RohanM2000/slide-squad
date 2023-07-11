@@ -6,6 +6,7 @@ export default function SlideText ({slideNumber,fontsize,color,setOnFocus, bold,
     const [left, setLeft] = useState(0);
     const [selected,setSelected] = useState(false);
     const preText = useRef(text);
+    const typedYet = useRef(false);
     const prevPos = useRef({
         top: 0,
         left: 0
@@ -40,84 +41,40 @@ export default function SlideText ({slideNumber,fontsize,color,setOnFocus, bold,
                 }
             }) 
     }
-    const handleKeyDown = (e)=> {
-        if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
-            reassignState();
-        }
-    }
-    useEffect(()=>{
-        document.addEventListener("keydown", handleKeyDown);
-        return ()=> document.removeEventListener("keydown", handleKeyDown);
-    })
+    // const handleKeyDown = (e)=> {
+    //     // e.preventDefault();
+    //     console.log("state save");
+    //     // if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+    //     //     reassignState();
+    //     //     console.log("getting here")
+    //     // }
+    // }
+    // useEffect(()=>{
+    //     document.addEventListener("keydown", handleKeyDown);
+    //     return ()=> document.removeEventListener("keydown", handleKeyDown);
+    // })
     const handleMouseUp = (e) => {
+        e.preventDefault();
         isClicked.current = false;
-        handleRefInput(true);
-            // setPresentationState(state=>{
-            //     const tempLeft = left;
-            //     const tempTop = top;
-            //     setTop(0);
-            //     setLeft(0);
-            //     return {...state,
-            //         [slideNumber]:{
-            //             ...state[slideNumber],
-            //             [id]: {
-            //                 ...state[slideNumber][id],
-            //                 startTop: startTop + tempTop/windowHeight,
-            //                 startLeft: startLeft + tempLeft/windowWidth,
-            //             }}
-            //         }
-            //     })
-            
+        // handleRefInput(true);     
+        reassignState();
     };
 
-    const handleOnFocus = () => {
+    const handleOnFocus = (e) => {
+        e.preventDefault();
         //we'll update a prop passed down 
         // to let the presentationcompose know this
         // is the text to change??
         setOnFocus(id);
     }
-    const handleInput = (e)=>{
-        setPresentationState(state=>{
-            const tempLeft = left;
-            const tempTop = top;
-            setTop(0);
-            setLeft(0);
-            let obj = JSON.parse(JSON.stringify(state));
-            let ele = obj[slideNumber][id];
-            return {...state,
-                [slideNumber]:{
-                    ...state[slideNumber],
-                    [id]: {
-                        ...state[slideNumber][id],
-                        startTop: startTop + tempTop/windowHeight,
-                        startLeft: startLeft + tempLeft/windowWidth,
-                    }}
-            }
-        })
-    }
     const handleMouseLeave = (e) => {
         isClicked.current = false;
-        handleRefInput(true);
-        // setPresentationState(state=>{
-        //     const tempLeft = left;
-        //     const tempTop = top;
-        //     setTop(0);
-        //     setLeft(0);
-        //     return {...state,
-        //         [slideNumber]:{
-        //             ...state[slideNumber],
-        //             [id]: {
-        //                 ...state[slideNumber][id],
-        //                 startTop: startTop + tempTop/windowHeight,
-        //                 startLeft: startLeft + tempLeft/windowWidth
-        //             }}
-        //         }
-        //     })
-        
-
+        // handleRefInput(true);
+        reassignState();
     };
 
     const handleMouseMove = (e) => {
+        e.preventDefault();
         if (!isClicked.current) return;
         setTop(e.clientY - prevPos.current.top);
         setLeft(e.clientX - prevPos.current.left);
@@ -140,11 +97,14 @@ export default function SlideText ({slideNumber,fontsize,color,setOnFocus, bold,
             suppressContentEditableWarning='true'
             contentEditable='true'
             className='input-text'
-            value={text}
+            value={preText.current}
             // onInput={handleDebounceInput}
             onInput={(e)=> {
+                typedYet.current = true;
                 preText.current=e.target.innerText;
-                handleRefInput();
+                // handleRefInput();
+                reassignState();
+                console.log(preText.current);
             }
             }
             // onChange={(e)=>{
@@ -162,7 +122,7 @@ export default function SlideText ({slideNumber,fontsize,color,setOnFocus, bold,
             fontSize: (fontsize*windowWidth) + "px"
             }}
         >
-        {preText.current}
+        {!typedYet.current && preText.current}
         </p>
         </div>
     );

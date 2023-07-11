@@ -51,6 +51,7 @@ function PresentationCompose () {
   
   const [slideNumber,setSlideNumber] = useState(1);
   function handleSlideChange (e){
+    console.log("slide number here")
     if (e.key ==='ArrowLeft'){
       setSlideNumber(state=>{
         if(state===1){
