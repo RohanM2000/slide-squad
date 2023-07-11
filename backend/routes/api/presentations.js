@@ -4,9 +4,11 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 // const Tweet = mongoose.model('Tweet');
 const Presentation = mongoose.model('Presentation');
+const Like =  mongoose.model('Like');
+const Comment = mongoose.model('Comment');
 const { requireUser } = require('../../config/passport');
 const validatePresentationInput = require('../../validations/presentation');
-
+const { multipleFilesUpload, multipleMulterUpload } = require("../../awsS3");
 /* GET tweets listing. */
 // router.get('/', async (req, res) => {
 //     try {
@@ -125,10 +127,9 @@ router.get('/:id', async (req, res, next) => {
 
 
 
-router.post('/', requireUser, validatePresentationInput, async (req, res, next) => {
+router.post('/',requireUser, validatePresentationInput, async (req, res, next) => {
 // router.post('/', requireUser, async (req, res, next) => {
     try {
-
         const { title, category, slides } = req.body;
 
         const newPresentation = new Presentation({
@@ -190,6 +191,36 @@ router.patch('/:presentationId', async (req, res, next) => {
       next(err);
     }
   });
-  
+
+router.delete('/:presentationId',requireUser,async(req,res,next)=>{
+    try{
+        const presentationId = req.params.presentationId;
+
+        const presentation = await Presentation.findById(presentationId);
+
+        if(!presentation){
+            const error = new Error('Presentation not Found');
+            error.statusCode = 404;
+            error.errors= {message: 'No presentation found with that id'};
+            return next(error);
+        }
+
+        if(presentation.author._id.toString()!==req.user._id.toString()){
+            const error = new Error('Unauthorized');
+            error.statusCode = 401;
+            error.errors={message:'You are not authorized to delete this comment'};
+            return next(error);
+
+        }
+        for (let collection of [Comment,Like]){
+            await collection.deleteMany({presentation: presentationId});
+        }
+        await presentation.deleteOne();
+        return res.json({message: 'Presentation deleted successfully'});
+
+    } catch(err){
+        next(err);
+    }
+})
 
 module.exports = router;
