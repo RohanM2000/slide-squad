@@ -14,9 +14,9 @@ const PresentationFooter =({presentation, swap, disappear})=>{
     const [showComments,setShowComments] = useState(false);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(fetchPresentationComments(presentationId));
-    }, [dispatch, presentationId])
+    // useEffect(() => {
+    //     dispatch(fetchPresentationComments(presentationId));
+    // }, [dispatch, presentationId])
 
     useEffect(() => {
       fetchUserLikes(currentUser._id)
