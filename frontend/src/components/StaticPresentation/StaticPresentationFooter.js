@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min"
 import CommentsIndex from "../Comments/CommentIndex";
 import { useDispatch } from "react-redux";
 import { fetchPresentationComments } from "../../store/comments";
-import { createLike, deleteLike } from "../../store/likes";
+import { createLike, deleteLike, fetchLikes } from "../../store/likes";
 
 const PresentationFooter =({presentation, swap, disappear})=>{
+
+    const likes = useSelector(state => Object.values(state.likes))
     const presentationId = presentation._id
     const [showComments,setShowComments] = useState(false);
     const dispatch = useDispatch();
@@ -13,6 +16,12 @@ const PresentationFooter =({presentation, swap, disappear})=>{
     useEffect(() => {
         dispatch(fetchPresentationComments(presentationId));
     }, [dispatch, presentationId])
+
+    useEffect(() => {
+      fetchLikes()
+    })
+
+ console.log(likes);
 
     const handleToggle=()=>{
         setShowComments(!showComments);
@@ -24,12 +33,14 @@ const PresentationFooter =({presentation, swap, disappear})=>{
         e.preventDefault();
         
         if (isLiked) {
-     
-          dispatch(deleteLike(presentation._id))
-            .then(() => {
+          const likeToDelete = likes.find((like) => like.likeId._id === presentation._id);
+          console.log(likeToDelete);
+          if (likeToDelete) {
+            dispatch(deleteLike(likeToDelete._id)).then(() => {
               setIsLiked(false);
               setShow(false);
             });
+          }
         } else {
         
           const like = {

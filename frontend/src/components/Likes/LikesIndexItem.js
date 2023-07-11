@@ -16,18 +16,19 @@ const LikesIndexItem = ({ like, swap } ) => {
     if (presentation === undefined) {
         return null 
     }
-    // console.log("like", like);
+    
 
     return show && (
         <>
         <div className='presentation-container'>
-            <StaticPresentation presentation={presentation} swap={swap} disappear={setShow} presentationSize={46/52}/>
-            <button 
+            <StaticPresentation presentation={presentation} swap={swap} disappear={setShow}/>
+            {/* <button 
                     className='delete-like-button'
                                    onClick={() => {
                                     dispatch(deleteLike(like._id));
                                     setShow(false);
-                                   }}>Unlike</button>
+                                   }}>Unlike
+            </button> */}
         </div>
         </>
     )
