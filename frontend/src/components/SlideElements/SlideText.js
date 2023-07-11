@@ -113,7 +113,7 @@ export default function SlideText ({slideNumber,fontsize,color,setOnFocus, bold,
                 // handleRefInput();
                 reassignState();
                 // console.log(preText.current);
-                console.log(text);
+                // console.log(text);
             }
             }
             // onChange={(e)=>{
