@@ -14,7 +14,7 @@ const PresentationFooter =({presentation, swap, loadedLikes})=>{
     const [showComments,setShowComments] = useState(false);
     const [checked, setChecked] = useState(false);
     const dispatch = useDispatch();
-    const [pushable, setPushable] = useState(true);
+    // const [pushable, setPushable] = useState(true);
     // useEffect(() => {
     //     dispatch(fetchPresentationComments(presentationId));
     // }, [dispatch, presentationId])
@@ -50,8 +50,8 @@ const PresentationFooter =({presentation, swap, loadedLikes})=>{
 
     const HandleAddLike = (e) => {
       e.preventDefault();
-      if (!pushable) return;
-      setPushable(false);
+      // if (!pushable) return;
+      // setPushable(false);
       // const alreadyLiked = likes.some(
       //   (like) => like.likeId._id === presentation._id && like.liker === currentUser._id
       // );
@@ -60,7 +60,7 @@ const PresentationFooter =({presentation, swap, loadedLikes})=>{
         if (likeToDelete) {
           dispatch(deleteLike(likeToDelete._id)).then(() => {
             setIsLiked(false);
-            setPushable(true);
+            // setPushable(true);
           });
         }
       } else {
@@ -74,7 +74,7 @@ const PresentationFooter =({presentation, swap, loadedLikes})=>{
         dispatch(createLike(like))
           .then(() => {
             setIsLiked(true);
-            setPushable(true);
+            // setPushable(true);
           });
       }
   };
