@@ -212,9 +212,8 @@ router.delete('/:presentationId',requireUser,async(req,res,next)=>{
             return next(error);
 
         }
-        for (let collection of [Comment,Like]){
-            await collection.deleteMany({presentation: presentationId});
-        }
+        await Like.deleteMany({likeType: 'presentation',likeId: presentationId});
+        await Comment.deleteMany({presentation: presentationId});
         await presentation.deleteOne();
         return res.json({message: 'Presentation deleted successfully'});
 
