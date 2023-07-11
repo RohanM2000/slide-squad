@@ -12,6 +12,7 @@ export default function SlideText ({slideNumber,fontsize,color,setOnFocus, bold,
         left: 0
     });
     const isClicked = useRef(false);
+    const textArea = useRef();
     // const assignedLocation = useRef(false);
     const handleMouseDown = (e) => {
         // e.preventDefault();
@@ -91,6 +92,12 @@ export default function SlideText ({slideNumber,fontsize,color,setOnFocus, bold,
             }
         }, 2000);
     }
+    const populateText = ()=> {
+        textArea.current.innerText = text;
+    }
+    useEffect(()=>{
+        populateText();
+    },[]);
     return (
         <div className='input-container'>
         <p
@@ -98,13 +105,15 @@ export default function SlideText ({slideNumber,fontsize,color,setOnFocus, bold,
             contentEditable='true'
             className='input-text'
             value={preText.current}
+            ref={textArea}
             // onInput={handleDebounceInput}
             onInput={(e)=> {
-                typedYet.current = true;
+                // typedYet.current = true;
                 preText.current=e.target.innerText;
                 // handleRefInput();
                 reassignState();
-                console.log(preText.current);
+                // console.log(preText.current);
+                console.log(text);
             }
             }
             // onChange={(e)=>{
@@ -122,7 +131,7 @@ export default function SlideText ({slideNumber,fontsize,color,setOnFocus, bold,
             fontSize: (fontsize*windowWidth) + "px"
             }}
         >
-        {!typedYet.current && preText.current}
+        {/* {!typedYet.current && preText.current} */}
         </p>
         </div>
     );
