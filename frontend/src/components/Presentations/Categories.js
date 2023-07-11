@@ -34,12 +34,10 @@ export default function Categories ({setStateCategories}) {
     }
 
     const handleRemove = (event) =>{
-        console.log(event.target.dataset.type);
         let target = parseInt(event.target.dataset.type);
         let newState=categories.filter((c,index)=>index!==target);
         setCategories(newState);
     }
-    console.log(categories);
    return (
     <>
     <h3 className="heading-categories">Categories</h3>

@@ -15,6 +15,7 @@ import Presentations from './components/Presentations/Presentations';
 import StaticPresentation from './components/StaticPresentation/StaticPresentation';
 import LikesIndex from './components/Likes/LikesIndex';
 import PresentationEdit from './components/Presentations/PresentationEdit';
+import AboutUs from './components/AboutUs/AboutUs';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -31,6 +32,7 @@ function App() {
         <AuthRoute exact path="/" component={MainPage} />
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
+        <AuthRoute exact path="/about-us" component={AboutUs} />
 
         <ProtectedRoute exact path="/profile" component={Profile} />
         <ProtectedRoute exact path="/presentations" component={Presentations} />

@@ -40,9 +40,18 @@ export default function SlideText ({slideNumber,fontsize,color,setOnFocus, bold,
                 }
             }) 
     }
+    const handleKeyDown = (e)=> {
+        if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+            reassignState();
+        }
+    }
+    useEffect(()=>{
+        document.addEventListener("keydown", handleKeyDown);
+        return ()=> document.removeEventListener("keydown", handleKeyDown);
+    })
     const handleMouseUp = (e) => {
         isClicked.current = false;
-        handleRefInput();
+        handleRefInput(true);
             // setPresentationState(state=>{
             //     const tempLeft = left;
             //     const tempTop = top;
@@ -88,7 +97,7 @@ export default function SlideText ({slideNumber,fontsize,color,setOnFocus, bold,
     }
     const handleMouseLeave = (e) => {
         isClicked.current = false;
-        handleRefInput();
+        handleRefInput(true);
         // setPresentationState(state=>{
         //     const tempLeft = left;
         //     const tempTop = top;
@@ -115,14 +124,15 @@ export default function SlideText ({slideNumber,fontsize,color,setOnFocus, bold,
     };
     let stack = 0;
 
-    const handleRefInput = function() {
+    const handleRefInput = function(override) {
+        if (override) return reassignState();
         stack +=1
         setTimeout(()=>{
             stack -=1;
             if (stack === 0) {
                 reassignState();
             }
-        }, 700);
+        }, 2000);
     }
     return (
         <div className='input-container'>
