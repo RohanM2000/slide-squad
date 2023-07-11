@@ -93,7 +93,9 @@ router.delete('/:commentId', requireUser, async (req, res, next) => {
     }
 
     // Delete the comment
-    await comment.remove();
+    // await comment.remove();
+    await Comment.deleteOne({ _id: commentId });
+
 
     return res.json({ message: 'Comment deleted successfully' });
   } catch (err) {
