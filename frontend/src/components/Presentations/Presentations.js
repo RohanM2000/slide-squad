@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearPresentationErrors, fetchPresentations } from '../../store/presentations';
 import StaticPresentation from '../StaticPresentation/StaticPresentation';
 import '../Slider/Slider.css'
+import { fetchLikes, fetchUserLikes } from '../../store/likes';
 
 
 
@@ -10,6 +11,7 @@ import '../Slider/Slider.css'
 
 function Presentations () {
   const dispatch = useDispatch();
+  const currentUser = useSelector(state => state.session.user)
   const presentations = useSelector(state => Object.values(state.presentations));
   const scrollChecker = useRef();
   const vertical_slider = {
@@ -71,6 +73,7 @@ function Presentations () {
   vertical_slider.init();
   
   useEffect(() => {
+    dispatch(fetchUserLikes(currentUser._id));
     dispatch(fetchPresentations());
     return () => dispatch(clearPresentationErrors());
   }, [dispatch])
@@ -114,7 +117,7 @@ function Presentations () {
                     <div className='slide'>
                       {/* <PresentationBox key={presentation._id} presentation={presentation} /> */}
                       <div className='inner_content'>
-                        <StaticPresentation presentation={presentation} idx={idx} scrollChecker={scrollChecker} presentationSize={46/52}/>
+                        <StaticPresentation presentation={presentation} idx={idx} scrollChecker={scrollChecker} presentationSize={46/52} swap={false} />
 
                       </div>
 

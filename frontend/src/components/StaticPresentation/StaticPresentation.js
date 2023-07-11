@@ -25,21 +25,8 @@ function StaticPresentation ({presentation, swap, disappear, idx, scrollChecker,
     return ()=> window.removeEventListener("resize",handleResize);
   },[]);
 
-  const [isLiked, setIsLiked] = useState(false);
 
-  const HandleAddLike = (e) => {
-    e.preventDefault();
-     const like = {
-        liker: presentation.author._id,
-        likeId: presentation._id,
-        likeType: 'Presentation'
-     }
 
-     dispatch(createLike(like))
-     .then(() => {
-        setIsLiked(true); 
-      })
-  }
 
   const presentationState = useSelector(state=>state.presentations[presentationId]?.slides);
   
