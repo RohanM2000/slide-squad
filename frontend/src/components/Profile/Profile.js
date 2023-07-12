@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './profile.css';
-import { fetchUserPresentations, clearPresentationErrors } from '../../store/presentations';
 import { fetchUserLikes } from '../../store/likes';
+import { fetchUserPresentations, clearPresentationErrors, deletePresentation } from '../../store/presentations';
 import { fetchPresentations } from '../../store/presentations';
 import StaticPresentation from '../StaticPresentation/StaticPresentation';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
@@ -128,8 +128,10 @@ function Profile () {
                       <button className='edit-button-presentation'>
                         <Link to={`/presentations/${presentation._id}/edit`}>Edit</Link>
                       </button>
+                      <button onClick={()=>dispatch(deletePresentation(presentation._id))} className='delete-presentation-button'>
+                        Delete
+                      </button>
                         <StaticPresentation presentation={presentation} idx={idx} scrollChecker={scrollChecker} presentationSize={46/52} loadedLikes={loadedLikes}/>
-
                       </div>
 
                     </div>

@@ -5,7 +5,12 @@ const RECEIVE_PRESENTATIONS = "presentations/RECEIVE_PRESENTATIONS";
 const RECEIVE_PRESENTATION = "presentations/RECEIVE_PRESENTATOIN";
 const RECEIVE_PRESENTATION_ERRORS = "presentations/RECEIVE_PRESENTATION_ERRORS";
 const CLEAR_PRESENTATION_ERRORS = "presentations/CLEAR_PRESENTATION_ERRORS";
+const REMOVE_PRESENTATION = "presentations/REMOVE_PRESENTATION";
 
+const removePresentation = presentationId => ({
+  type: REMOVE_PRESENTATION,
+  presentationId
+})
 const receivePresentations = presentations => ({
   type: RECEIVE_PRESENTATIONS,
   presentations
@@ -26,6 +31,19 @@ export const clearPresentationErrors = errors => ({
     errors
 });
 
+export const deletePresentation = (presentationId) => async dispatch => {
+  try{
+    const res = await jwtFetch(`/api/presentations/${presentationId}`,{
+      method: "DELETE"
+    });
+    dispatch(removePresentation(presentationId));
+  } catch(err){
+    const resBody = await err.json();
+    if (resBody.statusCode===400){
+      return dispatch(receiveErrors(resBody.errors));
+    }
+  }
+}
 export const fetchPresentations = () => async dispatch => {
   try {
     const res = await jwtFetch ('/api/presentations/');
@@ -127,6 +145,10 @@ const presentationsReducer = (state = {}, action) => {
       return { ...state, [action.presentation._id]: action.presentation};
     case RECEIVE_USER_LOGOUT:
       return { };
+    case REMOVE_PRESENTATION:
+      newState={...state};
+      delete newState[action.presentationId];
+      return newState;
     default:
       return state;
   }
