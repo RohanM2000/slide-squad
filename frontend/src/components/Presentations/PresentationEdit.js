@@ -320,20 +320,20 @@ useEffect(()=>{
                                                 setOnFocus={setOnFocus}
                                                 bg={obj.bg}
                                                 />
-                if (obj.type === "photo") return <SlidePhoto
-                                                key={`${slideNumber}-${obj.id}`}
-                                                slideNumber={slideNumber}
-                                                setPresentationState={setPresentationState} 
-                                                id={obj.id} 
-                                                startHeight={obj.startHeight} 
-                                                startWidth={obj.startWidth} 
-                                                startLeft={obj.startLeft} 
-                                                startTop={obj.startTop} 
-                                                windowHeight={windowHeight}
-                                                windowWidth={windowWidth}
-                                                setOnFocus={setOnFocus}
-                                                photo= {obj.photo}
-                                                />
+                // if (obj.type === "photo") return <SlidePhoto
+                //                                 key={`${slideNumber}-${obj.id}`}
+                //                                 slideNumber={slideNumber}
+                //                                 setPresentationState={setPresentationState} 
+                //                                 id={obj.id} 
+                //                                 startHeight={obj.startHeight} 
+                //                                 startWidth={obj.startWidth} 
+                //                                 startLeft={obj.startLeft} 
+                //                                 startTop={obj.startTop} 
+                //                                 windowHeight={windowHeight}
+                //                                 windowWidth={windowWidth}
+                //                                 setOnFocus={setOnFocus}
+                //                                 photo= {obj.photo}
+                //                                 />
               })}
           </div>
         </div>
