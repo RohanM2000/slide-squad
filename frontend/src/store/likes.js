@@ -90,6 +90,23 @@ export const deleteLike= (likeId) => async (dispatch) => {
     }
 }
 
+export const deleteLikeByPresentation= (presentationId) => async (dispatch) => {
+  try {
+      const res = await jwtFetch(`/api/likes/presentation/${presentationId}`, {
+        method: 'DELETE',
+      });
+      const like = await res.json();
+      // console.log("RESULT", like)
+      dispatch(removeLike(like));
+  } catch(err) {
+      // console.log("DELETED THE THING", err);
+      const resBody = await err.json();
+      if (resBody.statusCode === 400) {
+        return dispatch(receiveErrors(resBody.errors));
+      }
+  }
+}
+
 
 const nullErrors = null;
 

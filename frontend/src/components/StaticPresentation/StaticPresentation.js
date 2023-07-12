@@ -10,7 +10,7 @@ import PresentationFooter from './StaticPresentationFooter';
 import { createLike } from '../../store/likes';
 // import './Static.css'
 
-function StaticPresentation ({presentation, swap, disappear, idx, scrollChecker, presentationSize}) {
+function StaticPresentation ({presentation, swap, disappear, idx, scrollChecker, presentationSize, loadedLikes}) {
   const dispatch = useDispatch();
   const presentationId = presentation._id
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
@@ -151,7 +151,7 @@ function StaticPresentation ({presentation, swap, disappear, idx, scrollChecker,
               <i className={`fa-regular fa-heart fa-xl ${isLiked ? 'fa-solid fa-heart' : ''}`}></i>
             </button>
           </div> */}
-            <PresentationFooter presentation={presentation} swap={swap} disappear={disappear}/>
+            <PresentationFooter presentation={presentation} swap={swap} disappear={disappear} loadedLikes={loadedLikes}/>
 
         </div>
       </div>

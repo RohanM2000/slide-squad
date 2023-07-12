@@ -1,6 +1,7 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './profile.css';
+import { fetchUserLikes } from '../../store/likes';
 import { fetchUserPresentations, clearPresentationErrors, deletePresentation } from '../../store/presentations';
 import { fetchPresentations } from '../../store/presentations';
 import StaticPresentation from '../StaticPresentation/StaticPresentation';
@@ -13,8 +14,10 @@ function Profile () {
   const currentUser = useSelector(state => state.session.user);
   const userPresentations = useSelector(state => Object.values(state.presentations))
   const scrollChecker = useRef();
+  const [loadedLikes, setLoadedLikes] = useState(false);
   
   useEffect(() => {
+    dispatch(fetchUserLikes(currentUser._id)).then(()=>{setLoadedLikes(true)}).catch((err)=>console.log(err));
     dispatch(fetchPresentations());
     return () => dispatch(clearPresentationErrors());
   }, [currentUser, dispatch]);
@@ -128,7 +131,7 @@ function Profile () {
                       <button onClick={()=>dispatch(deletePresentation(presentation._id))} className='delete-presentation-button'>
                         Delete
                       </button>
-                        <StaticPresentation presentation={presentation} idx={idx} scrollChecker={scrollChecker} presentationSize={46/52}/>
+                        <StaticPresentation presentation={presentation} idx={idx} scrollChecker={scrollChecker} presentationSize={46/52} loadedLikes={loadedLikes}/>
                       </div>
 
                     </div>
