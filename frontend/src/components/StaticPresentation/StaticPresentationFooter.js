@@ -55,23 +55,23 @@ const PresentationFooter =({presentation, swap, loadedLikes})=>{
       // const alreadyLiked = likes.some(
       //   (like) => like.likeId._id === presentation._id && like.liker === currentUser._id
       // );
-      console.log("hit it!")
-      console.log("likes", likes)
+      // console.log("hit it!")
+      // console.log("likes", likes)
       if (isLiked) {
-        console.log("deleting the like!")
+        // console.log("deleting the like!")
         // console.log("all likes", likes)
         const likeToDelete = likes.find((like) => like.likeId._id === presentation._id);
-        console.log("like to delete", likeToDelete)
+        // console.log("like to delete", likeToDelete)
         if (likeToDelete) {
           dispatch(deleteLike(likeToDelete._id)).then(() => {
             // setIsLiked(false);
             // setPushable(true);
-            console.log("deleted!")
+            // console.log("deleted!")
           });
           setIsLiked(false);
         }
       } else {
-        console.log("adding the like")
+        // console.log("adding the like")
         const like = {
           liker: presentation.author._id,
           likeId: presentation._id,
@@ -82,7 +82,7 @@ const PresentationFooter =({presentation, swap, loadedLikes})=>{
           .then(() => {
             // setIsLiked(true);
             // setPushable(true);
-            console.log("added!")
+            // console.log("added!")
             // console.log(likes)
           });
         setIsLiked(true);
