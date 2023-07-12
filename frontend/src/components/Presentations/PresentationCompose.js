@@ -72,7 +72,7 @@ function PresentationCompose () {
 
   }
 
-  function handleRotate(type){
+function handleRotate(type){
     switch (type) {
       case 'minus':
           if(onFocus){
@@ -182,10 +182,10 @@ function PresentationCompose () {
     )
   }
   const prepareCategories = ()=>{
-    if (stateCategories.length>0){
+    if (stateCategories.length>1){
       return stateCategories.join('#');
-    }else{
-      return '';
+    }else if (stateCategories.length===1){
+      return stateCategories[0];
     }
   }
   const handleSave = async ()=>{

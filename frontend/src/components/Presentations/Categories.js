@@ -1,7 +1,14 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import './Categories.css';
-export default function Categories ({setStateCategories}) {
+export default function Categories ({preCategories, setStateCategories}) {
    const [categories,setCategories] = useState(['']);
+   useEffect(()=>{
+       if (preCategories){
+            setCategories(preCategories);
+       
+       }
+
+   },[])
     const handleKeyDown = (event)=>{
         
         if (event.key==='Enter'){

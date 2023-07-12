@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { useParams,useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 // import { clearPresentationErrors, composePresentation } from '../../store/presentations';
 import PresentationBox from './PresentationBox';
 import './PresentationCompose.css';
@@ -21,6 +21,7 @@ function PresentationEdit () {
   const dispatch = useDispatch();
   const [bold,setBold] = useState(false);
   const [stateCategories,setStateCategories] = useState(['']);
+  const history = useHistory();
   const [showSwatch,setShowSwatch] = useState({
     reveal:false,
   type:null});
@@ -28,6 +29,7 @@ function PresentationEdit () {
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const oldPresentationState = useSelector(state=>state.presentations[presentationId]?.slides);
+  const oldTitle= useSelector(state=> state.presentations[presentationId]?.title);
   const oldCategories = useSelector(state=>state.presentations[presentationId]?.category);
   const [presentationState, setPresentationState] =useState({});
   useEffect(()=>{
@@ -38,15 +40,26 @@ function PresentationEdit () {
     window.addEventListener("resize", handleResize);
     return ()=> window.removeEventListener("resize",handleResize);
 },[]);
-useEffect(()=>{
-    dispatch(fetchPresentation(presentationId));
-},[presentationId])
+  useEffect(()=>{
+      dispatch(fetchPresentation(presentationId));
+  },[presentationId])
   useEffect(()=>{
     setPresentationState(oldPresentationState);
   },[oldPresentationState])
   useEffect(()=>{
-    setStateCategories(oldCategories.split('#'))
+    if(oldCategories) {
+      if(oldCategories.includes('#')){
+      setStateCategories(oldCategories.split('#'))
+    } else {
+      setStateCategories([oldCategories])
+    }
+  }
   },[oldCategories]);
+  useEffect(()=>{
+    if(oldTitle){
+      setTitle(oldTitle)
+    }
+  },[oldTitle])
   // const author = useSelector(state => state.session.user);
   // const newPresentation = useSelector(state => state.presentations.new);
   // const errors = useSelector(state => state.errors.presentations);
@@ -101,16 +114,48 @@ useEffect(()=>{
   const addTextElement = (event) =>{
     // event.preventDefault();
     setPresentationState(state=>{
-      return {...state,[slideNumber]:{...state[slideNumber],[nextId]: {text: '',startLeft:0/windowWidth,startTop:0/windowHeight,id: nextId, type: "text", bold:false,color:'black',fontsize: 16/windowWidth}}
+      return {...state,[slideNumber]:{...state[slideNumber],[nextId]: {rotate:0,text: '',startLeft:0/windowWidth,startTop:0/windowHeight,id: nextId, type: "text", bold:false,color:'black',fontsize: 16/windowWidth}}
     }})
   } 
 
   const addRectangleElement = (event) =>{
     // event.preventDefault();
     setPresentationState(state=>{
-     return {...state,[slideNumber]: {...state[slideNumber],[nextId]: {startWidth:50/windowWidth,startHeight:50/windowHeight,startLeft:0,startTop:0,id: nextId, type: "rectangle", bg:'grey'}}}
+     return {...state,[slideNumber]: {...state[slideNumber],[nextId]: {rotate:0,startWidth:50/windowWidth,startHeight:50/windowHeight,startLeft:0,startTop:0,id: nextId, type: "rectangle", bg:'grey'}}}
     })
     } 
+  function handleRotate(type){
+    switch (type) {
+      case 'minus':
+          if(onFocus){
+            setPresentationState(state=>{
+              return{
+                ...state,
+                [slideNumber]:{...state[slideNumber],
+                [onFocus]:{...state[slideNumber][onFocus],
+                  rotate: (presentationState[slideNumber][onFocus].rotate-1)}
+                }
+              }
+            })
+            }
+          break;
+      case 'plus':
+        if(onFocus){
+        setPresentationState(state=>{
+          return{
+            ...state,
+            [slideNumber]:{...state[slideNumber],
+            [onFocus]:{...state[slideNumber][onFocus],
+              rotate: (presentationState[slideNumber][onFocus].rotate+1)}
+            }
+          }
+        })
+      }
+        break;
+      default:
+          break;
+    }
+    }
     const handleFontChange = (type) =>{
       
       switch (type) {
@@ -154,15 +199,26 @@ useEffect(()=>{
       }
     )
   }
-  const handleSave = ()=>{
+  const prepareCategories = ()=>{
+    if (stateCategories.length>1){
+      return stateCategories.join('#');
+    }else if (stateCategories.length===1){
+      return stateCategories[0];
+    }
+  }
+  const handleSave = async ()=>{
     console.log('saved');
+    const saveButton = document.querySelector(".save-button");
+    const categories = prepareCategories();
+    saveButton.disabled = true;
+    
     let savedObject=JSON.parse(JSON.stringify(presentationState));
+    saveUpdatePresentation(savedObject, dispatch, title,presentationId,categories);
     // [1:{},2:{}]
     // Object.values(presentationState).forEach((ele)=>{
     //   savedObject[ele.id] = ele;
     // })
     // console.log(savedObject);
-    saveUpdatePresentation(savedObject, dispatch, title, presentationId);
   }
   let nextPage = 1;
   if (presentationState) {
@@ -230,7 +286,7 @@ useEffect(()=>{
             className="presentation-title-input"
           />
         </div>
-        <Categories setStateCategories={setStateCategories}/>
+        <Categories preCategories={oldCategories.split('#')} setStateCategories={setStateCategories}/>
 
         <div className='selection'>
           <button onClick={event=>addTextElement(event)}>
@@ -276,6 +332,33 @@ useEffect(()=>{
                 <i className="fa-solid fa-minus"></i>
               </button>
             </div>
+            <div className='rotate-container'>
+              <button 
+              onMouseDown={()=>handleRotate('minus')} 
+              className='rotate-buttons' o>
+                  <i className="fa-solid fa-rotate-left"></i>
+              </button>
+              <div>
+              {presentationState[slideNumber][onFocus] && 
+                <input className='rotate-input' type='number' value={presentationState[slideNumber][onFocus].rotate}
+                onChange={(e)=>setPresentationState(state=>{
+              return{
+                ...state,
+                [slideNumber]:{...state[slideNumber],
+                [onFocus]:{...state[slideNumber][onFocus],
+                  rotate: e.target.value}
+                }
+              }
+                })}
+                ></input>
+              }
+                {/* {presentationState[slideNumber][onFocus] && 
+                <span>{Math.round(presentationState[slideNumber][onFocus].rotate)} deg</span>} */}
+              </div>
+              <button onClick={()=>handleRotate('plus')} className='rotate-buttons'>
+                <i className="fa-solid fa-rotate-right"></i>
+              </button>   
+          </div>
           <div className='color-dropdown'>
             <button onMouseEnter={()=>setShowSwatch({reveal:true,type:'shape'})}>
               <img src='/icons/bucket.png'></img>
@@ -305,6 +388,7 @@ useEffect(()=>{
                                                 startTop={obj.startTop} 
                                                 windowHeight={windowHeight}
                                                 windowWidth={windowWidth}
+                                                rotate={obj.rotate}
                                                 />
                 if (obj.type === "rectangle") return <SlideRectangle 
                                                 key={`${slideNumber}-${obj.id}`}
@@ -319,6 +403,7 @@ useEffect(()=>{
                                                 windowWidth={windowWidth}
                                                 setOnFocus={setOnFocus}
                                                 bg={obj.bg}
+                                                rotate={obj.rotate}
                                                 />
                 // if (obj.type === "photo") return <SlidePhoto
                 //                                 key={`${slideNumber}-${obj.id}`}
