@@ -8,7 +8,6 @@ const Like =  mongoose.model('Like');
 const Comment = mongoose.model('Comment');
 const { requireUser } = require('../../config/passport');
 const validatePresentationInput = require('../../validations/presentation');
-const { multipleFilesUpload, multipleMulterUpload } = require("../../awsS3");
 /* GET tweets listing. */
 // router.get('/', async (req, res) => {
 //     try {
