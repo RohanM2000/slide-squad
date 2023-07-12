@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { useParams,useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 // import { clearPresentationErrors, composePresentation } from '../../store/presentations';
 import PresentationBox from './PresentationBox';
 import './PresentationCompose.css';
@@ -21,6 +21,7 @@ function PresentationEdit () {
   const dispatch = useDispatch();
   const [bold,setBold] = useState(false);
   const [stateCategories,setStateCategories] = useState(['']);
+  const history = useHistory();
   const [showSwatch,setShowSwatch] = useState({
     reveal:false,
   type:null});
@@ -28,6 +29,7 @@ function PresentationEdit () {
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const oldPresentationState = useSelector(state=>state.presentations[presentationId]?.slides);
+  const oldTitle= useSelector(state=> state.presentations[presentationId]?.title);
   const oldCategories = useSelector(state=>state.presentations[presentationId]?.category);
   const [presentationState, setPresentationState] =useState({});
   useEffect(()=>{
@@ -38,15 +40,26 @@ function PresentationEdit () {
     window.addEventListener("resize", handleResize);
     return ()=> window.removeEventListener("resize",handleResize);
 },[]);
-useEffect(()=>{
-    dispatch(fetchPresentation(presentationId));
-},[presentationId])
+  useEffect(()=>{
+      dispatch(fetchPresentation(presentationId));
+  },[presentationId])
   useEffect(()=>{
     setPresentationState(oldPresentationState);
   },[oldPresentationState])
   useEffect(()=>{
-    setStateCategories(oldCategories.split('#'))
+    if(oldCategories) {
+      if(oldCategories.includes('#')){
+      setStateCategories(oldCategories.split('#'))
+    } else {
+      setStateCategories(oldCategories)
+    }
+  }
   },[oldCategories]);
+  useEffect(()=>{
+    if(oldTitle){
+      setTitle(oldTitle)
+    }
+  },[oldTitle])
   // const author = useSelector(state => state.session.user);
   // const newPresentation = useSelector(state => state.presentations.new);
   // const errors = useSelector(state => state.errors.presentations);
@@ -154,15 +167,26 @@ useEffect(()=>{
       }
     )
   }
-  const handleSave = ()=>{
+  const prepareCategories = ()=>{
+    if (stateCategories.length>1){
+      return stateCategories.join('#');
+    }else if (stateCategories.length===1){
+      return stateCategories[0];
+    }
+  }
+  const handleSave = async ()=>{
     console.log('saved');
+    const saveButton = document.querySelector(".save-button");
+    const categories = prepareCategories();
+    saveButton.disabled = true;
+    
     let savedObject=JSON.parse(JSON.stringify(presentationState));
+    saveUpdatePresentation(savedObject, dispatch, title,presentationId,categories);
     // [1:{},2:{}]
     // Object.values(presentationState).forEach((ele)=>{
     //   savedObject[ele.id] = ele;
     // })
     // console.log(savedObject);
-    saveUpdatePresentation(savedObject, dispatch, title, presentationId);
   }
   let nextPage = 1;
   if (presentationState) {
@@ -230,7 +254,7 @@ useEffect(()=>{
             className="presentation-title-input"
           />
         </div>
-        <Categories setStateCategories={setStateCategories}/>
+        <Categories preCategories={oldCategories.split('#')} setStateCategories={setStateCategories}/>
 
         <div className='selection'>
           <button onClick={event=>addTextElement(event)}>

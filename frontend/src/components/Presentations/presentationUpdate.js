@@ -1,8 +1,8 @@
 import { updatePresentation } from "../../store/presentations";
-export default function saveUpdatePresentation(obj, dispatch, title, presentationId) {
+export default function saveUpdatePresentation(obj, dispatch, title, presentationId,categories) {
     dispatch(updatePresentation({
         title: title,
-        category: "temporary-filler-category",
+        category: categories,
         slides: obj
     }, presentationId));
 };
