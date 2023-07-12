@@ -1,18 +1,19 @@
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 import { clearPresentationErrors, fetchPresentations } from '../../store/presentations';
 import StaticPresentation from '../StaticPresentation/StaticPresentation';
 import '../Slider/Slider.css'
 import { fetchLikes, fetchUserLikes } from '../../store/likes';
-
-
-
-
+import { Switch, Route, Link, useHistory } from 'react-router-dom';
+import SearchBar from '../SearchBar/SearchBar';
 
 function Presentations () {
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.user)
   const presentations = useSelector(state => Object.values(state.presentations));
+ 
+
   const scrollChecker = useRef();
   const vertical_slider = {
 
@@ -88,6 +89,7 @@ function Presentations () {
   return (
     <>
     <div className='all-presentations-container'>
+
           <script src="slider.js"></script>
           <section className='slider'>
             <div className='content_container'>

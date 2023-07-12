@@ -67,6 +67,19 @@ export const fetchUserPresentations = id => async dispatch => {
   }
 };
 
+export const fetchSearchResults = query => async dispatch => {
+  try {
+    const res = await jwtFetch(`/api/presentations/search/${query}`);
+    const results = await res.json();
+    dispatch(receivePresentations(results));
+  } catch (err) {
+    const resBody = await err.json();
+    if (resBody.statusCode === 400) {
+      return dispatch(receiveErrors(resBody.errors));
+    }
+  }
+};
+
 export const composePresentation = data => async dispatch => {
   try {
     const res = await jwtFetch('/api/presentations/', {

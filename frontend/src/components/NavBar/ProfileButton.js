@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import { logout } from '../../store/session';
 import './NavBar.css';
+import SearchBar from '../SearchBar/SearchBar';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -48,6 +49,8 @@ function ProfileButton({ user }) {
      <button onClick={logoutUser} className='compose-button'>Logout</button>
 
     </div>
+
+<SearchBar />
    
     </>
   );
