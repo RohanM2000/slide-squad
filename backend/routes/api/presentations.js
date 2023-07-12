@@ -87,8 +87,7 @@ router.get('/search/:query', async (req, res, next) => {
     const query = req.params.query;
   
     try {
-      // Perform search logic based on the query
-      // Example: Search presentations by title or category using a case-insensitive regular expression
+
       const presentations = await Presentation.find({
         $or: [
           { title: { $regex: query, $options: 'i' } },
