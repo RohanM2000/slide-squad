@@ -26,7 +26,6 @@ const commentsRouter = require('./routes/api/comments');
 const csrfRouter = require('./routes/api/csrf');
 
 const app = express();
-app.use(upload);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
