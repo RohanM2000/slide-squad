@@ -274,3 +274,21 @@
     margin-left: 20vw;
 }
 
+.rotate-container{
+    display: flex;
+    align-items: center;
+}
+
+.rotate-input{
+    background-color: transparent;
+    border: none;
+    width: 35px;
+    overflow-x: auto;
+    text-align: center;
+   
+}
+.rotate-input::-webkit-outer-spin-button,
+.rotate-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
