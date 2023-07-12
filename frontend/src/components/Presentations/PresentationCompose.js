@@ -148,12 +148,21 @@ function PresentationCompose () {
       }
     )
   }
+  const prepareCategories = ()=>{
+    if (stateCategories.length>0){
+      return stateCategories.join('#');
+    }else{
+      return '';
+    }
+  }
   const handleSave = async ()=>{
     console.log('saved');
     const saveButton = document.querySelector(".save-button");
+    const categories = prepareCategories();
+    console.log(categories);
     saveButton.disabled = true;
     setTimeout(async ()=>{
-      const res = await savePresentation(savedObject, dispatch, title);
+      const res = await savePresentation(savedObject, dispatch, title,categories);
       if (res.ok) {
         history.push('/presentations');
         console.log("successful creation");
