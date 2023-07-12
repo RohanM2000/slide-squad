@@ -28,6 +28,7 @@ function PresentationEdit () {
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const oldPresentationState = useSelector(state=>state.presentations[presentationId]?.slides);
+  const oldCategories = useSelector(state=>state.presentations[presentationId]?.category);
   const [presentationState, setPresentationState] =useState({});
   useEffect(()=>{
     const handleResize = () => {
@@ -43,6 +44,9 @@ useEffect(()=>{
   useEffect(()=>{
     setPresentationState(oldPresentationState);
   },[oldPresentationState])
+  useEffect(()=>{
+    setStateCategories(oldCategories.split('#'))
+  },[oldCategories]);
   // const author = useSelector(state => state.session.user);
   // const newPresentation = useSelector(state => state.presentations.new);
   // const errors = useSelector(state => state.errors.presentations);

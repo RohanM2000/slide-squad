@@ -6,7 +6,6 @@ const cors = require('cors');
 const { isProduction } = require('./config/keys');
 const csurf = require('csurf');
 const debug = require('debug');
-const multer = require('multer');
 require('./models/User');
 require('./models/Presentation');
 
@@ -27,7 +26,6 @@ const commentsRouter = require('./routes/api/comments');
 const csrfRouter = require('./routes/api/csrf');
 
 const app = express();
-const upload = multer().any();
 app.use(upload);
 app.use(logger('dev'));
 app.use(express.json());
