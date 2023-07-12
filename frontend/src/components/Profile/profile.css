@@ -9,6 +9,12 @@
     color: black;
 }
 
+.delete-presentation-button{
+    background-color: red;
+    border-radius: .5vw;
+    font-size: 1.2vw;
+    margin-left: 5px;
+}
 .profile-container {
     display: flex;
     flex-direction: column;
