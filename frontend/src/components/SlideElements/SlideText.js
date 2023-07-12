@@ -1,7 +1,7 @@
 import { useState, useRef,useEffect } from "react";
 import myDebounce from "../Presentations/MyDebounce";
 import './SlideText.css';
-export default function SlideText ({slideNumber,fontsize,color,setOnFocus, bold, startLeft, id, startTop, text, setPresentationState, windowHeight, windowWidth}) {
+export default function SlideText ({rotate,slideNumber,fontsize,color,setOnFocus, bold, startLeft, id, startTop, text, setPresentationState, windowHeight, windowWidth}) {
     const [top, setTop] = useState(0);
     const [left, setLeft] = useState(0);
     const [selected,setSelected] = useState(false);
@@ -125,7 +125,7 @@ export default function SlideText ({slideNumber,fontsize,color,setOnFocus, bold,
             onMouseLeave={handleMouseLeave}
             onMouseMove={handleMouseMove}
             onFocus={handleOnFocus}
-            style={{position: "absolute", top: (startTop*windowHeight + top) + "px", left: (startLeft*windowWidth + left) + "px",
+            style={{rotate: (rotate)+'deg', position: "absolute", top: (startTop*windowHeight + top) + "px", left: (startLeft*windowWidth + left) + "px",
             fontWeight: bold ? '700' : 'normal',
             color: color,
             fontSize: (fontsize*windowWidth) + "px"

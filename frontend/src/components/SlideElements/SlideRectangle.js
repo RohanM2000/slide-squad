@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 
-export default function SlideRectangle ({slideNumber, startLeft, id, startTop, startWidth, startHeight, setPresentationState, windowHeight, windowWidth, setOnFocus, bg}) {
+export default function SlideRectangle ({rotate,slideNumber, startLeft, id, startTop, startWidth, startHeight, setPresentationState, windowHeight, windowWidth, setOnFocus, bg}) {
+    console.log(rotate,slideNumber, startLeft, id, startTop, startWidth, startHeight, setPresentationState, windowHeight, windowWidth, setOnFocus, bg)
     const [top, setTop] = useState(0);
     const [left, setLeft] = useState(0);
     const [width, setWidth] = useState(0);
@@ -52,6 +53,7 @@ export default function SlideRectangle ({slideNumber, startLeft, id, startTop, s
                 {
                 ...state[slideNumber],
                 [id]:{
+                    ...state[slideNumber][id],
                     startTop: startTop + tempTop/windowHeight,
                     startLeft: startLeft + tempLeft/windowWidth,
                     bg: bg,
@@ -81,6 +83,7 @@ export default function SlideRectangle ({slideNumber, startLeft, id, startTop, s
                 {
                 ...state[slideNumber],
                 [id]:{
+                    ...state[slideNumber][id],
                     startTop: startTop + tempTop/windowHeight,
                     startLeft: startLeft + tempLeft/windowWidth,
                     bg: bg,
@@ -111,7 +114,9 @@ export default function SlideRectangle ({slideNumber, startLeft, id, startTop, s
             onMouseLeave={handleMouseLeave}
             onMouseMove={handleMouseMove}
             onClick={handleClick}
-            style={{position: "absolute", 
+            style={{
+                    rotate: (rotate)+'deg',
+                    position: "absolute", 
                     display: "flex",
                     "justify-content": "flex-end",
                     "align-items": "flex-end",

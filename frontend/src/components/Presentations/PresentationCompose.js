@@ -45,8 +45,8 @@ function PresentationCompose () {
   // const newPresentation = useSelector(state => state.presentations.new);
   // const errors = useSelector(state => state.errors.presentations);
   const [presentationState, setPresentationState] =useState({ 
-   1:{ 1:{id:1, startLeft:0/windowWidth,startTop:0/windowHeight, text:'', type: "text",bold:false,color:'black',fontsize: 16/windowWidth}},
-   2:{ 1:{id:1, startLeft:0/windowWidth,startTop:0/windowHeight, text:'', type: "text",bold:false,color:'black',fontsize: 16/windowWidth}}
+   1:{ 1:{id:1, rotate:0,startLeft:0/windowWidth,startTop:0/windowHeight, text:'', type: "text",bold:false,color:'black',fontsize: 16/windowWidth}},
+   2:{ 1:{id:1, rotate:0, startLeft:0/windowWidth,startTop:0/windowHeight, text:'', type: "text",bold:false,color:'black',fontsize: 16/windowWidth}}
   });
   
   const [slideNumber,setSlideNumber] = useState(1);
@@ -70,6 +70,39 @@ function PresentationCompose () {
       })
     }
 
+  }
+
+  function handleRotate(type){
+    switch (type) {
+      case 'minus':
+          if(onFocus){
+            setPresentationState(state=>{
+              return{
+                ...state,
+                [slideNumber]:{...state[slideNumber],
+                [onFocus]:{...state[slideNumber][onFocus],
+                  rotate: (presentationState[slideNumber][onFocus].rotate-1)}
+                }
+              }
+            })
+            }
+          break;
+      case 'plus':
+        if(onFocus){
+        setPresentationState(state=>{
+          return{
+            ...state,
+            [slideNumber]:{...state[slideNumber],
+            [onFocus]:{...state[slideNumber][onFocus],
+              rotate: (presentationState[slideNumber][onFocus].rotate+1)}
+            }
+          }
+        })
+      }
+        break;
+      default:
+          break;
+  }
   }
   useEffect(()=>{
     document.addEventListener('keydown',handleSlideChange);
@@ -102,10 +135,10 @@ function PresentationCompose () {
   const addRectangleElement = (event) =>{
     // event.preventDefault();
     setPresentationState(state=>{
-     return {...state,[slideNumber]: {...state[slideNumber],[nextId]: {startWidth:50/windowWidth,startHeight:50/windowHeight,startLeft:0,startTop:0,id: nextId, type: "rectangle", bg:'grey'}}}
+     return {...state,[slideNumber]: {...state[slideNumber],[nextId]: {rotate:0,startWidth:50/windowWidth,startHeight:50/windowHeight,startLeft:0,startTop:0,id: nextId, type: "rectangle", bg:'grey'}}}
     })
     } 
-    const handleFontChange = (type) =>{
+  const handleFontChange = (type) =>{
       
       switch (type) {
           case 'minus':
@@ -283,7 +316,34 @@ function PresentationCompose () {
               <button onClick={()=>handleFontChange('minus')} className='font-buttons'>
                 <i className="fa-solid fa-minus"></i>
               </button>
-            </div>
+          </div>
+          <div className='rotate-container'>
+              <button 
+              onMouseDown={()=>handleRotate('minus')} 
+              className='rotate-buttons' o>
+                  <i className="fa-solid fa-rotate-left"></i>
+              </button>
+              <div>
+              {presentationState[slideNumber][onFocus] && 
+                <input className='rotate-input' type='number' value={presentationState[slideNumber][onFocus].rotate}
+                onChange={(e)=>setPresentationState(state=>{
+              return{
+                ...state,
+                [slideNumber]:{...state[slideNumber],
+                [onFocus]:{...state[slideNumber][onFocus],
+                  rotate: e.target.value}
+                }
+              }
+                })}
+                ></input>
+              }
+                {/* {presentationState[slideNumber][onFocus] && 
+                <span>{Math.round(presentationState[slideNumber][onFocus].rotate)} deg</span>} */}
+              </div>
+              <button onClick={()=>handleRotate('plus')} className='rotate-buttons'>
+                <i className="fa-solid fa-rotate-right"></i>
+              </button>   
+          </div>
           <div className='color-dropdown'>
             <button onMouseEnter={()=>setShowSwatch({reveal:true,type:'shape'})}>
               <img src='../icons/bucket.png'></img>
@@ -313,6 +373,7 @@ function PresentationCompose () {
                                                 startTop={obj.startTop} 
                                                 windowHeight={windowHeight}
                                                 windowWidth={windowWidth}
+                                                rotate={obj.rotate}
                                                 />
                 if (obj.type === "rectangle") return <SlideRectangle 
                                                 key={`${slideNumber}-${obj.id}`}
@@ -327,6 +388,7 @@ function PresentationCompose () {
                                                 windowWidth={windowWidth}
                                                 setOnFocus={setOnFocus}
                                                 bg={obj.bg}
+                                                rotate={obj.rotate}
                                                 />
                 if (obj.type === "photo") return <SlidePhoto
                                                 key={`${slideNumber}-${obj.id}`}
