@@ -112,7 +112,8 @@ export const deleteComment= (commentId) => async(dispatch) => {
         const res = await jwtFetch(`/api/comments/${commentId}`, {
           method: 'DELETE',
         });
-        dispatch(receiveComment(commentId));
+        const response = await res.json();
+        dispatch(removeComment(commentId));
     } catch(err) {
         const resBody = await err.json();
         if (resBody.statusCode === 400) {
@@ -147,8 +148,9 @@ const commentsReducer = (state = {}, action) => {
     case RECEIVE_COMMENT:
       return { ...state, [action.comment._id]: action.comment};
     case REMOVE_COMMENT:
-        delete newState[action.commentId]
-        return newState
+        newState={...state};
+        delete newState[action.commentId];
+        return newState;
     default:
       return state;
   }
