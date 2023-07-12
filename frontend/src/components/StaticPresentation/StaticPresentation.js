@@ -105,6 +105,7 @@ function StaticPresentation ({presentation, swap, disappear, idx, scrollChecker,
                                                   windowHeight={windowHeight}
                                                   windowWidth={windowWidth}
                                                   presentationSize={46/54}
+                                                  rotate={obj.rotate}
                                                   />
                   if (obj.type === "rectangle") return <StaticRectangle 
                                                   key={`${slideNumber}-${obj.id}`}
@@ -118,6 +119,7 @@ function StaticPresentation ({presentation, swap, disappear, idx, scrollChecker,
                                                   windowWidth={windowWidth}
                                                   bg={obj.bg}
                                                   presentationSize={46/54}
+                                                  rotate={obj.rotate}
                                                   />
                 })}
             </div>
