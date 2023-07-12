@@ -16,6 +16,7 @@ import StaticPresentation from './components/StaticPresentation/StaticPresentati
 import LikesIndex from './components/Likes/LikesIndex';
 import PresentationEdit from './components/Presentations/PresentationEdit';
 import AboutUs from './components/AboutUs/AboutUs';
+import SearchResults from './components/SearchBar/SearchIndex';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -40,6 +41,7 @@ function App() {
         <ProtectedRoute exact path="/presentations/:presentationId/edit" component={PresentationEdit} />
         <ProtectedRoute exact path="/presentations/:presentationId" component={StaticPresentation} />
         <ProtectedRoute exact path="/likes/user/:userId" component={LikesIndex} />
+        <ProtectedRoute exact path="/search/:title" component={SearchResults} />
       </Switch>
     </div>
     </>

@@ -2,23 +2,9 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
-// const Tweet = mongoose.model('Tweet');
 const Presentation = mongoose.model('Presentation');
 const { requireUser } = require('../../config/passport');
 const validatePresentationInput = require('../../validations/presentation');
-
-/* GET tweets listing. */
-// router.get('/', async (req, res) => {
-//     try {
-//         const tweets = await Tweet.find()
-//                                     .populate("author", "_id username")
-//                                     .sort({ createdAt: -1 });
-//         return res.json(tweets);
-//     }
-//     catch(err) {
-//         return res.json([]);
-//     }
-// });
 
 /* GET presentations listing. */
 router.get('/', async (req, res) => {
@@ -33,27 +19,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-// router.get('/user/:userId', async (req, res, next) => {
-//     let user;
-//     try {
-//         user = await User.findById(req.params.userId);
-//     }
-//     catch(err) {
-//         const error = new Error('User not found');
-//         error.statusCode = 404;
-//         error.errors = { message: "No user found with that id" };
-//         return next(error);
-//     }
-//     try {
-//         const tweets = await Tweet.find({ author: user._id })
-//                                     .sort({ createdAt: -1 })
-//                                     .populate("author", "_id username");
-//         return res.json(tweets);
-//     }
-//     catch(err) {
-//         return res.json([]);
-//     }
-// });
+
 
 // Get presentation of a specific user by their id. 
 router.get('/user/:userId', async (req, res, next) => {
@@ -78,19 +44,7 @@ router.get('/user/:userId', async (req, res, next) => {
     }
 });
 
-// router.get('/:id', async (req, res, next) => {
-//     try {
-//         const tweet = await Tweet.findById(req.params.id)
-//                                     .populate("author", "_id username");
-//         return res.json(tweet);
-//     }
-//     catch(err) {
-//         const error = new Error('Tweet not found');
-//         error.statusCode = 400;
-//         error.errors = { message: "No tweet found with that id" };
-//         return next(error);
-//     }
-// });
+
 
 // Get presentation by its Id. 
 router.get('/:id', async (req, res, next) => {
@@ -106,24 +60,6 @@ router.get('/:id', async (req, res, next) => {
         return next(error);
     }
 });
-
-// router.post('/', requireUser, validateTweetInput, async (req, res, next) => {
-//     try {
-//         const newTweet = new Tweet({
-//             text: req.body.text,
-//             author: req.user._id
-//         });
-
-//         let tweet = await newTweet.save();
-//         tweet = await tweet.populate('author', '_id username');
-//         return res.json(tweet);
-//     }
-//     catch(err) {
-//         next(err);
-//     }
-// });
-
-
 
 router.post('/', requireUser, validatePresentationInput, async (req, res, next) => {
 // router.post('/', requireUser, async (req, res, next) => {
@@ -146,6 +82,27 @@ router.post('/', requireUser, validatePresentationInput, async (req, res, next) 
         next(err);
     }
 });
+
+router.get('/search/:query', async (req, res, next) => {
+    const query = req.params.query;
+  
+    try {
+      // Perform search logic based on the query
+      // Example: Search presentations by title or category using a case-insensitive regular expression
+      const presentations = await Presentation.find({
+        $or: [
+          { title: { $regex: query, $options: 'i' } },
+          { category: { $regex: query, $options: 'i' } }
+        ]
+      })
+        .sort({ createdAt: -1 });
+  
+      return res.json(presentations);
+    } catch (err) {
+      next(err);
+    }
+  });
+
 
 // GET presentations by category
 router.get('/category/:category', async (req, res, next) => {

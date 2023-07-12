@@ -32,7 +32,10 @@ function StaticPresentation ({presentation, swap, disappear, idx, scrollChecker,
   
   const [slideNumber,setSlideNumber] = useState(1);
   function handleSlideChange (e){
-    if (idx !== Math.floor(scrollChecker.current.scrollTop / (window.innerHeight * 0.98))) return;
+    if (scrollChecker.current !== null) {
+      if (idx !== Math.floor(scrollChecker.current.scrollTop / (window.innerHeight * 0.98))) return;
+      // Rest of your code...
+    }
     if (e.key ==='ArrowLeft'){
       setSlideNumber(state=>{
         if(state===1){
