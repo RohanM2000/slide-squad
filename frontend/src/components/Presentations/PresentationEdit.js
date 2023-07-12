@@ -51,7 +51,7 @@ function PresentationEdit () {
       if(oldCategories.includes('#')){
       setStateCategories(oldCategories.split('#'))
     } else {
-      setStateCategories(oldCategories)
+      setStateCategories([oldCategories])
     }
   }
   },[oldCategories]);
@@ -114,16 +114,48 @@ function PresentationEdit () {
   const addTextElement = (event) =>{
     // event.preventDefault();
     setPresentationState(state=>{
-      return {...state,[slideNumber]:{...state[slideNumber],[nextId]: {text: '',startLeft:0/windowWidth,startTop:0/windowHeight,id: nextId, type: "text", bold:false,color:'black',fontsize: 16/windowWidth}}
+      return {...state,[slideNumber]:{...state[slideNumber],[nextId]: {rotate:0,text: '',startLeft:0/windowWidth,startTop:0/windowHeight,id: nextId, type: "text", bold:false,color:'black',fontsize: 16/windowWidth}}
     }})
   } 
 
   const addRectangleElement = (event) =>{
     // event.preventDefault();
     setPresentationState(state=>{
-     return {...state,[slideNumber]: {...state[slideNumber],[nextId]: {startWidth:50/windowWidth,startHeight:50/windowHeight,startLeft:0,startTop:0,id: nextId, type: "rectangle", bg:'grey'}}}
+     return {...state,[slideNumber]: {...state[slideNumber],[nextId]: {rotate:0,startWidth:50/windowWidth,startHeight:50/windowHeight,startLeft:0,startTop:0,id: nextId, type: "rectangle", bg:'grey'}}}
     })
     } 
+  function handleRotate(type){
+    switch (type) {
+      case 'minus':
+          if(onFocus){
+            setPresentationState(state=>{
+              return{
+                ...state,
+                [slideNumber]:{...state[slideNumber],
+                [onFocus]:{...state[slideNumber][onFocus],
+                  rotate: (presentationState[slideNumber][onFocus].rotate-1)}
+                }
+              }
+            })
+            }
+          break;
+      case 'plus':
+        if(onFocus){
+        setPresentationState(state=>{
+          return{
+            ...state,
+            [slideNumber]:{...state[slideNumber],
+            [onFocus]:{...state[slideNumber][onFocus],
+              rotate: (presentationState[slideNumber][onFocus].rotate+1)}
+            }
+          }
+        })
+      }
+        break;
+      default:
+          break;
+    }
+    }
     const handleFontChange = (type) =>{
       
       switch (type) {
@@ -300,6 +332,33 @@ function PresentationEdit () {
                 <i className="fa-solid fa-minus"></i>
               </button>
             </div>
+            <div className='rotate-container'>
+              <button 
+              onMouseDown={()=>handleRotate('minus')} 
+              className='rotate-buttons' o>
+                  <i className="fa-solid fa-rotate-left"></i>
+              </button>
+              <div>
+              {presentationState[slideNumber][onFocus] && 
+                <input className='rotate-input' type='number' value={presentationState[slideNumber][onFocus].rotate}
+                onChange={(e)=>setPresentationState(state=>{
+              return{
+                ...state,
+                [slideNumber]:{...state[slideNumber],
+                [onFocus]:{...state[slideNumber][onFocus],
+                  rotate: e.target.value}
+                }
+              }
+                })}
+                ></input>
+              }
+                {/* {presentationState[slideNumber][onFocus] && 
+                <span>{Math.round(presentationState[slideNumber][onFocus].rotate)} deg</span>} */}
+              </div>
+              <button onClick={()=>handleRotate('plus')} className='rotate-buttons'>
+                <i className="fa-solid fa-rotate-right"></i>
+              </button>   
+          </div>
           <div className='color-dropdown'>
             <button onMouseEnter={()=>setShowSwatch({reveal:true,type:'shape'})}>
               <img src='/icons/bucket.png'></img>
@@ -329,6 +388,7 @@ function PresentationEdit () {
                                                 startTop={obj.startTop} 
                                                 windowHeight={windowHeight}
                                                 windowWidth={windowWidth}
+                                                rotate={obj.rotate}
                                                 />
                 if (obj.type === "rectangle") return <SlideRectangle 
                                                 key={`${slideNumber}-${obj.id}`}
@@ -343,6 +403,7 @@ function PresentationEdit () {
                                                 windowWidth={windowWidth}
                                                 setOnFocus={setOnFocus}
                                                 bg={obj.bg}
+                                                rotate={obj.rotate}
                                                 />
                 if (obj.type === "photo") return <SlidePhoto
                                                 key={`${slideNumber}-${obj.id}`}

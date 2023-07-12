@@ -72,7 +72,7 @@ function PresentationCompose () {
 
   }
 
-  function handleRotate(type){
+function handleRotate(type){
     switch (type) {
       case 'minus':
           if(onFocus){
