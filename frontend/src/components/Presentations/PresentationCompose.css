@@ -292,3 +292,13 @@
   -webkit-appearance: none;
   margin: 0;
 }
+
+.error-body{
+    display: flex;
+    justify-content: center;
+    
+}
+.error-content{
+    color: red;
+    font-weight: 700;
+}
