@@ -22,7 +22,6 @@ ul {
 .slider{
     background-color: white;
     width: 100%;
-
     color: black;
     border-radius: 3px;
     grid-template-columns: 35% 65%;
@@ -75,7 +74,7 @@ ul {
     color: #333;
     align-items: center;
     border-radius: 35px;
-    margin-bottom: .5vw;
+   
    
 }
 

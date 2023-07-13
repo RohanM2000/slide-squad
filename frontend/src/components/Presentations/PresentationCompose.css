@@ -225,10 +225,9 @@
 
 
 .footer-toggle {
-
     display: flex;
     flex-direction: column;
-
+ 
     
 }
 
@@ -271,7 +270,7 @@
 }
 
 .up-arrow {
-    margin-left: 20vw;
+    margin-left: 22vw;
 }
 
 .rotate-container{
