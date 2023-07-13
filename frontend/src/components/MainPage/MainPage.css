@@ -4,7 +4,8 @@
     justify-content: center;
     width: 100vw;
     background:  white;
-    margin-top: 0px;
+    margin-left: 10vw;
+    height: 88vh;
 
 }
 
@@ -17,7 +18,7 @@
 .mainpage-header {
     display: flex;
     flex-direction: column;
-    margin-top: 30vh;
+    margin-top: 20vh;
     align-items: center;
     margin-left: 5vw;
     margin-right: 10vw;
@@ -113,11 +114,11 @@
 
 .wrapper {
   background-color: white;
-  height: 80vh;
+  height: 70vh;
   width: 100%;
   display: flex;
   justify-content: center;
-  margin: 20vh 0px;
+  margin: 10vh 0px;
 }
 
 .carousel {

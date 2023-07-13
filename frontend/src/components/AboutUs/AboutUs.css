@@ -1,11 +1,12 @@
 div.about-us {
     display: flex;
     flex-direction: column;
+    margin-left: 3vw;
 }
 
 div.about-us a{
-    margin-top: 10vh;
-    font-size: 5vh;
+    margin-top: 8vh;
+    font-size: 4vh;
     text-decoration: none;
     display: block;
 }
