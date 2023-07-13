@@ -6,7 +6,7 @@ const validatePresentationInput = [
       .exists({ checkFalsy: true })
       .isLength({ min: 5 })
       .withMessage("Presentation title must be at least 5 characters"),
-      check('slides')
+    check('slides')
       .custom((slides) => {
         if (!slides || Object.keys(slides).length === 0) {
           throw new Error("At least one slide is required");

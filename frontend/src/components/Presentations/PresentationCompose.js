@@ -194,11 +194,14 @@ function handleRotate(type){
       return stateCategories.join('#');
     }else if (stateCategories.length===1){
       return stateCategories[0];
+    } else{
+      return '';
     }
   }
   const handleSave = async ()=>{
     console.log('saved');
     const saveButton = document.querySelector(".save-button");
+    
     const categories = prepareCategories();
     console.log(categories);
     saveButton.disabled = true;
