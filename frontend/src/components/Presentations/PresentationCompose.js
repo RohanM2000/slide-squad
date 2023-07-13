@@ -49,7 +49,14 @@ function PresentationCompose () {
    1:{ 1:{id:1, rotate:0,startLeft:0/windowWidth,startTop:0/windowHeight, text:'', type: "text",bold:false,color:'black',fontsize: 16/windowWidth}},
    2:{ 1:{id:1, rotate:0, startLeft:0/windowWidth,startTop:0/windowHeight, text:'', type: "text",bold:false,color:'black',fontsize: 16/windowWidth}}
   });
-  
+  useEffect(()=>{
+    setTimeout(()=>{
+      if (errors.length>0){
+        setErrors([]);
+      }
+    },5000)
+
+  },[errors]);
   const [slideNumber,setSlideNumber] = useState(1);
   function handleSlideChange (e){
     if (e.key ==='ArrowLeft'){
