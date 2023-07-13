@@ -12,6 +12,7 @@ import Swatchy from './ColorSwatches';
 import Swatches from './Swatches';
 import Categories from './Categories';
 function PresentationCompose () {
+  const [errors,setErrors] = useState([]);
   const [onFocus,setOnFocus] = useState(null);
   const [text, setText] = useState('');
   const [title, setTitle] = useState('');
@@ -194,17 +195,17 @@ function handleRotate(type){
     const categories = prepareCategories();
     console.log(categories);
     saveButton.disabled = true;
-    setTimeout(async ()=>{
-      const res = await savePresentation(savedObject, dispatch, title,categories);
-      if (res.ok) {
-        history.push('/presentations');
-        console.log("successful creation");
-      } else {
-        console.log("did not work here")
-        saveButton.disabled = false;
-      }
-    }, 2000);
     let savedObject=JSON.parse(JSON.stringify(presentationState));
+    const res = await savePresentation(savedObject, dispatch, title,categories);
+    if (res.ok) {
+      history.push('/presentations');
+      console.log("successful creation");
+    } else {
+      setErrors(["Presentation title must be at least 5 characters"]);
+      console.log("did not work here")
+      saveButton.disabled = false;
+    }
+    
     // [1:{},2:{}]
     // Object.values(presentationState).forEach((ele)=>{
     //   savedObject[ele.id] = ele;
@@ -257,12 +258,21 @@ function handleRotate(type){
   const intObjects = Object.values(presentationState[slideNumber]);
   return (
     <>
+  
       {/* <form className="compose-presentation" onSubmit={handleSubmit}> */}
       {/* decide how the input will be taken */}
       
       <div className='compose-container'>
         <div className="title-compose">
           <h3> Presentation Title: </h3>
+      {errors.length>0 && 
+      <div className='error-container'>
+        <div className='error-body'>
+          <span className='error-content'>
+            {errors[0]}
+          </span>
+        </div>
+      </div>}
           <input
             type="text"
             value={title}
@@ -282,9 +292,9 @@ function handleRotate(type){
             <img src='../icons/rectangle-vector.png'></img>
             Rectangle
           </button>
-          <button className='photo-upload-container' onClick={()=>document.getElementById('photo-input').click()} >
+          <button disabled='true' className='photo-upload-container' onClick={()=>document.getElementById('photo-input').click()} >
             <i className="fa-solid fa-image fa-xl"></i>
-            <span className='photo-text'>Photo (max 1) </span>
+            <span className='photo-text'>Photo (work in progress) </span>
             <input style={{display: 'none'}} type='file' id='photo-input' onChange={event=>handleFile(event)}></input>
           </button>
           <button onClick={()=>setPresentationState(
