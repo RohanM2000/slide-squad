@@ -3,6 +3,7 @@
 /* TODO Add site wide styles */
 .app-container {
     display: flex;
+    flex-direction: column;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     /* background-color:  rgb(105, 208, 255); */
     height: 100%;

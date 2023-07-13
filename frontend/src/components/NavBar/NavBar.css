@@ -1,15 +1,15 @@
 .nav-wrapper {
-    height: 100vh;
-    width: 12vw;
+    /* height: 100vh; */
+    width: 100vw;
 
     margin-top: 0px;
-    background-color: white;
+    background-color: grey;
 }
 
 .nav-container {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    /* flex-direction: column; */
+    justify-content: space-around;
     align-items: center;
 
  
