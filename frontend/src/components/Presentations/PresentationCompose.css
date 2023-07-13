@@ -5,12 +5,12 @@
     border: 1px solid black;
     border-radius: 4px;
     width: 54vw;
-    height: 54vh;
+    height: 44vh;
     background-color: white;
 }
 
 .selection {
-    margin-bottom: 10px;
+    margin-bottom: 1vw;
     width: 100%;
     display: flex;
     justify-content: space-around;
@@ -73,7 +73,7 @@
 .compose-container {
     display: flex;
     flex-direction: column;
-    margin: 1vw auto;
+    margin: 0px auto;
     padding-top: 1vw;
     padding-bottom: .5vw;
     padding-left: 15vw;
@@ -81,12 +81,13 @@
     align-items: center;
     background-color:  rgb(105, 208, 255); 
     border-radius: 5px;
+    height: 80vh;
     
  
 }
 
 .title-compose {
-    margin-bottom: 30px;
+    margin-bottom: 1vw;
     text-align: center;
 }
 
@@ -167,8 +168,9 @@
 .presentation-container {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 98vh;
     padding-top: 8vw;
+    margin-left: -1vw;
 }
 
 .presentation-show-container{
@@ -179,6 +181,7 @@
     align-items: center;
     width: 50vw;
     padding: 2vw 0px;
+    margin-left: 3.5vw;
 }
 
 .presentation-show-container h3 {

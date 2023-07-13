@@ -1,37 +1,39 @@
 .nav-wrapper {
-    height: 100vh;
-    width: 12vw;
-
+    width: 100vw;
     margin-top: 0px;
     background-color: white;
+    height: 14vh;
 }
 
 .nav-container {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    /* flex-direction: column; */
+    justify-content: space-between;
     align-items: center;
-
- 
-
 }
 
 .links-nav {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: 1vw;
 }
 
 .link-nav {
     color: black;
     font-family: 'Telex', sans-serif;
     text-decoration: none;
+    margin-bottom: 1vw;
+    margin-top: 1vw;
+
 }
 
 
 .links-auth {
     display: flex;
-    flex-direction: column;
-    margin: 0px 10px;
+    /* flex-direction: column; */
+    margin: 0px 1vw;
     
    
 }
@@ -40,19 +42,16 @@
     color: black;
     text-decoration: none;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    margin-bottom: 10px;
     width: 10vw;
     background-color: transparent;
     border-radius: 2px;
     text-align: left;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 7px;
+    padding: 1vw;
 }
 
 
 .home-link {
-    padding: 10px;
+    padding: 1.5vw;
     font-size: 2vw;
     font-weight: 700;
     color: black;
@@ -66,6 +65,8 @@
 
 .profile-dropdown {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     
 }
 
@@ -76,8 +77,10 @@
     flex-direction: column;
     line-height: 1.25;
     align-items: center;
-    font-size: 3vw;
+    font-size: 2vw;
     border-radius: 99999px;
+    padding: 1.5vw;
+    margin-right: .8vw;
 
   }
 
@@ -92,19 +95,21 @@
     border-radius: 8px;
     flex-direction: column;
     width: 2vw;
+    align-items: center;
   }
   
 .dropdown-content {
     display: none;
     position: absolute;
     background-color: #fdf9f9;
-    min-width: 160px;
+    min-width: 16vw;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     padding: 12px 16px;
     z-index: 1;
-    width: 100%;
+   height: 30vh;
     color: black;
-    transform: translateX(calc(5vw));
+    transform: translateY(calc(6vw));
+   
   }
 
   .dropdown-content button {
@@ -114,21 +119,29 @@
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   }
 
+  .profile-links {
+    display: flex;
+    margin-right: 5vw;
+    justify-content: center;
+  }
+
   .compose-button {
-    padding: .8vw;
     border-radius: 3px;
-    background-color: rgb(202, 12, 12);
-    border: 1px solid  rgb(202, 12, 12);
-    margin-top: 2vh;
+    background-color: transparent;
+    border: 1px solid  transparent;
     width: 10vw;
     text-align: center;
     font-size: 1vw;
+    line-height: 1.25;
+    margin-top: 6vh;
+    text-decoration: underline;
 
   }
 
   .logout-button button  {
     font-size: 1vw;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border: none
   }
 
  
