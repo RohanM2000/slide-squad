@@ -5,6 +5,7 @@
     width: 100vw;
     background:  white;
     margin-left: 10vw;
+    height: 88vh;
 
 }
 
@@ -113,7 +114,7 @@
 
 .wrapper {
   background-color: white;
-  height: 80vh;
+  height: 70vh;
   width: 100%;
   display: flex;
   justify-content: center;
