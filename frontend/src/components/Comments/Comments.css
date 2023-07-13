@@ -1,8 +1,9 @@
 .comments-container {
-    background-color: rgb(218, 218, 246);
+    background-color: white;
     border-radius: 3px;
     width: 46vw;
     padding: 1vw;
+    margin-top: 1vw;
 }
 
 .comment-row {
@@ -46,15 +47,13 @@
     justify-content: center;
     align-items: center;
     margin-top: 2vw;
-   
-
 }
 
 .inputcomment-container input {
-    background-color: rgb(196, 196, 242);
+    background-color: rgba(248, 245, 245, 0.842);
     border-radius: 5px;
     width: 25vw;
-    border: 1px solid rgb(196, 196, 242);
+    border: 1px solid transparent;
     justify-content: center;
     overflow-wrap: normal;
     min-height: 2vw;
@@ -68,9 +67,9 @@
 
 .left-side button {
     margin-left: 2vw;
-    background-color: rgb(196, 196, 242);
+    background-color: transparent;
     border-radius: 5px;
-    border: 1px solid rgb(196, 196, 242);
+    border: 1px solid white;
     min-height: 2vw;
 
 }
