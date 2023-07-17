@@ -92,3 +92,7 @@
       transform:translateX(25%);
     }
   }
+
+input.session-form-button:hover {
+  cursor: pointer;
+}
