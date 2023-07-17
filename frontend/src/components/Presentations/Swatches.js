@@ -11,7 +11,7 @@ export default function Swatches ({type,onFocus,setPresentation,setShowSwatch,sl
                 });
                 break;
             case 'shape':
-                console.log(onFocus);
+                // console.log(onFocus);
                 setPresentation(state=>{
                     return{...state,[slideNumber]: {...state[slideNumber],[onFocus]:{...state[slideNumber][onFocus],bg: newColor}}}
                 });

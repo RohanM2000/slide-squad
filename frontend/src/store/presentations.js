@@ -64,7 +64,7 @@ export const fetchPresentation = (presentationId) => async dispatch => {
     dispatch(receivePresentation(presentation));
   } 
   catch (err) {
-    console.log(err)
+    // console.log(err)
     // const resBody = await err.json();
     // if (resBody.statusCode === 400) {
     //   dispatch(receiveErrors(resBody.errors));

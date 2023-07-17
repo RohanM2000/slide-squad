@@ -22,7 +22,7 @@ export default function Categories ({preCategories, setStateCategories}) {
     }
 }
     const handleChange  = (event)=>{
-        console.log(event);
+        // console.log(event);
         event.preventDefault();
         // each input will have a data-type identifier to update the state
         const updatedState=[...categories];
@@ -32,7 +32,7 @@ export default function Categories ({preCategories, setStateCategories}) {
             // setStateCategories(state=>{
             //     return categories.join('#');
             // })
-            console.log(categories);
+            // console.log(categories);
         }
     
     const handleClick = ()=>{

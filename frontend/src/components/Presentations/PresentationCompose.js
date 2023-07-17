@@ -199,20 +199,20 @@ function handleRotate(type){
     }
   }
   const handleSave = async ()=>{
-    console.log('saved');
+    // console.log('saved');
     const saveButton = document.querySelector(".save-button");
     
     const categories = prepareCategories();
-    console.log(categories);
+    // console.log(categories);
     saveButton.disabled = true;
     let savedObject=JSON.parse(JSON.stringify(presentationState));
     const res = await savePresentation(savedObject, dispatch, title,categories);
     if (res.ok) {
       history.push('/presentations');
-      console.log("successful creation");
+      // console.log("successful creation");
     } else {
       setErrors(["Presentation title must be at least 5 characters"]);
-      console.log("did not work here")
+      // console.log("did not work here")
       saveButton.disabled = false;
     }
     
