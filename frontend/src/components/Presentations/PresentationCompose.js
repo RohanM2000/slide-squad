@@ -384,11 +384,18 @@ function handleRotate(type){
             onMouseMove={e=>{
               // console.log(dragTarget.current);
               if (dragTarget.current !== 0) {
-                dragFunctions.current[slideNumber][dragTarget.current](e);
+                dragFunctions.current[slideNumber][dragTarget.current].move(e);
               }
             }}
             onMouseUp={(e)=>dragTarget.current = 0}
-            onMouseLeave={(e)=>dragTarget.current = 0}
+            onMouseLeave={(e)=>{
+              e.preventDefault();
+              // console.log("leave");
+              if (dragTarget.current !== 0) {
+                dragFunctions.current[slideNumber][dragTarget.current].leave(e);
+              }
+              dragTarget.current = 0;
+            }}
           >
               {intObjects.map((obj)=>{
                 if (obj.type === "text") return <SlideText 

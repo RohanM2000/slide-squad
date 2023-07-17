@@ -67,39 +67,39 @@ export default function SlideRectangle ({rotate,slideNumber, startLeft, id, star
         })
     };
 
-    // const handleMouseLeave = (e) => {
-    //     isClicked.current = false;
-    //     isResizeClicked.current = false;
-    //     setPresentationState(state=>{
-    //         const tempLeft = left;
-    //         const tempTop = top;
-    //         const tempHeight = height;
-    //         const tempWidth = width;
-    //         setTop(0);
-    //         setLeft(0);
-    //         setHeight(0);
-    //         setWidth(0);
-    //         return {...state,
-    //             [slideNumber]:
-    //             {
-    //             ...state[slideNumber],
-    //             [id]:{
-    //                 ...state[slideNumber][id],
-    //                 startTop: startTop + tempTop/windowHeight,
-    //                 startLeft: startLeft + tempLeft/windowWidth,
-    //                 bg: bg,
-    //                 id: id,
-    //                 startHeight: startHeight + tempHeight/windowHeight,
-    //                 startWidth: startWidth + tempWidth/windowWidth,
-    //                 type: "rectangle"
-    //             }
-    //             }}
-    //     })
-    // };
     const handleMouseLeave = (e) => {
         isClicked.current = false;
         isResizeClicked.current = false;
-    }
+        setPresentationState(state=>{
+            const tempLeft = left;
+            const tempTop = top;
+            const tempHeight = height;
+            const tempWidth = width;
+            setTop(0);
+            setLeft(0);
+            setHeight(0);
+            setWidth(0);
+            return {...state,
+                [slideNumber]:
+                {
+                ...state[slideNumber],
+                [id]:{
+                    ...state[slideNumber][id],
+                    startTop: startTop + tempTop/windowHeight,
+                    startLeft: startLeft + tempLeft/windowWidth,
+                    bg: bg,
+                    id: id,
+                    startHeight: startHeight + tempHeight/windowHeight,
+                    startWidth: startWidth + tempWidth/windowWidth,
+                    type: "rectangle"
+                }
+                }}
+        })
+    };
+    // const handleMouseLeave = (e) => {
+    //     isClicked.current = false;
+    //     isResizeClicked.current = false;
+    // }
 
     const handleMouseMove = (e) => {
         e.stopPropagation();
@@ -118,8 +118,8 @@ export default function SlideRectangle ({rotate,slideNumber, startLeft, id, star
         if (!dragFunctions.current[slideNumber]) {
             dragFunctions.current[slideNumber] = {};
         }
-        dragFunctions.current[slideNumber][id] = handleMouseMove;
-        dragFunctions.current[slideNumber][-id] = handleMouseMove;
+        dragFunctions.current[slideNumber][id] = {move: handleMouseMove, leave: handleMouseLeave};
+        dragFunctions.current[slideNumber][-id] = {move: handleMouseMove, leave: handleMouseLeave};
         // dragFunctions.current = ()=>console.log("hello world");
     })
 
@@ -127,7 +127,7 @@ export default function SlideRectangle ({rotate,slideNumber, startLeft, id, star
         <div
             onMouseDown={handleMouseDown}
             onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseLeave}
+            // onMouseLeave={handleMouseLeave}
             onMouseMove={handleMouseMove}
             onClick={handleClick}
             style={{
