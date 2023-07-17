@@ -14,6 +14,7 @@ import Swatches from './Swatches';
 import Categories from './Categories';
 import { fetchPresentation } from '../../store/presentations';
 function PresentationEdit () {
+  const [errors, setErrors] = useState([]);
   const { presentationId } = useParams();
   const [onFocus,setOnFocus] = useState(null);
   const [text, setText] = useState('');
@@ -214,8 +215,13 @@ function PresentationEdit () {
     saveButton.disabled = true;
     
     let savedObject=JSON.parse(JSON.stringify(presentationState));
-    await saveUpdatePresentation(savedObject, dispatch, title,presentationId,categories);
-    saveButton.disabled = false;
+    const res = await saveUpdatePresentation(savedObject, dispatch, title,presentationId,categories);
+    if (res.ok) {
+      history.push('/profile');
+    } else {
+      setErrors(["Presentation title must be at least 5 characters"]);
+      saveButton.disabled = false;
+    }
     // [1:{},2:{}]
     // Object.values(presentationState).forEach((ele)=>{
     //   savedObject[ele.id] = ele;
@@ -280,6 +286,14 @@ function PresentationEdit () {
       <div className='compose-container'>
         <div className="title-compose">
           <h3> Presentation Title: </h3>
+          {errors.length>0 && 
+          <div className='error-container'>
+            <div className='error-body'>
+              <span className='error-content'>
+                {errors[0]}
+              </span>
+            </div>
+          </div>}
           <input
             type="text"
             value={title}

@@ -212,7 +212,7 @@ router.delete('/:presentationId',requireUser,async(req,res,next)=>{
             return next(error);
 
         }
-        await Like.deleteMany({likeType: 'presentation',likeId: presentationId});
+        await Like.deleteMany({likeId: presentationId});
         await Comment.deleteMany({presentation: presentationId});
         await presentation.deleteOne();
         return res.json({message: 'Presentation deleted successfully'});
