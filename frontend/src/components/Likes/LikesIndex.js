@@ -12,7 +12,8 @@ const LikesIndex = () => {
   const currentUser = useSelector(state => state.session.user)
     const { userId } = useParams();
     const dispatch = useDispatch();
-    const [newLikes, setNewLikes] = useState([])
+    const [newLikes, setNewLikes] = useState([]);
+    const [loadedLikes, setLoadedLikes] = useState(false);
     const scrollChecker = useRef();
     const likes = useSelector(state => {
       // console.log(state.likes);
@@ -22,7 +23,7 @@ const LikesIndex = () => {
       return state.likes
     });
     useEffect(() => {
-      dispatch(fetchUserLikes(userId));
+      dispatch(fetchUserLikes(userId)).then(()=>setLoadedLikes(true)).catch(err=>console.log(err));
     }, [dispatch, userId])
 
 
@@ -135,7 +136,7 @@ const LikesIndex = () => {
                       <div className='inner_content'>
                         {/* <StaticPresentation presentation={presentation} idx={idx} scrollChecker={scrollChecker}/> */}
               
-                        <LikesIndexItem key={like._id} like={like} swap={true} scrollChecker={scrollChecker} idx={idx}/>
+                        <LikesIndexItem key={like._id} like={like} swap={true} scrollChecker={scrollChecker} idx={idx} loadedLikes={loadedLikes}/>
 
                       </div>
 
