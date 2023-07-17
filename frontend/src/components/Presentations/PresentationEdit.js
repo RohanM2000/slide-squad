@@ -207,13 +207,14 @@ function PresentationEdit () {
     }
   }
   const handleSave = async ()=>{
-    console.log('saved');
+    // console.log('saved');
     const saveButton = document.querySelector(".save-button");
     const categories = prepareCategories();
     saveButton.disabled = true;
     
     let savedObject=JSON.parse(JSON.stringify(presentationState));
-    saveUpdatePresentation(savedObject, dispatch, title,presentationId,categories);
+    await saveUpdatePresentation(savedObject, dispatch, title,presentationId,categories);
+    saveButton.disabled = false;
     // [1:{},2:{}]
     // Object.values(presentationState).forEach((ele)=>{
     //   savedObject[ele.id] = ele;

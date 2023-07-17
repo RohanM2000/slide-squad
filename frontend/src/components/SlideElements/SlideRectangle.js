@@ -33,7 +33,7 @@ export default function SlideRectangle ({rotate,slideNumber, startLeft, id, star
         // to let the presentationcompose know this
         // is the text to change??
         setOnFocus(id);
-        console.log('focused',id)
+        // console.log('focused',id)
     }
     const handleMouseUp = (e) => {
         isClicked.current = false;

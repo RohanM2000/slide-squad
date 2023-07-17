@@ -185,7 +185,8 @@ router.patch('/:presentationId', async (req, res, next) => {
       }
   
       const updatedPresentation = await presentation.save();
-      res.json(updatedPresentation);
+      const populatedPresentation = await updatedPresentation.populate("author", "_id username");
+      res.json(populatedPresentation);
     } catch (err) {
       next(err);
     }
