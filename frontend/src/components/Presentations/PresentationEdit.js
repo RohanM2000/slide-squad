@@ -297,11 +297,11 @@ function PresentationEdit () {
             <img src='/icons/rectangle-vector.png'></img>
             Rectangle
           </button>
-          <button className='photo-upload-container' onClick={()=>document.getElementById('photo-input').click()} >
+          {/* <button className='photo-upload-container' onClick={()=>document.getElementById('photo-input').click()} >
             <i className="fa-solid fa-image fa-xl"></i>
             <span className='photo-text'>Photo (max 1) </span>
             <input style={{display: 'none'}} type='file' id='photo-input' onChange={event=>handleFile(event)}></input>
-          </button>
+          </button> */}
           <button onClick={()=>setPresentationState(
             state=>{
               return {...state,[slideNumber]:{...state[slideNumber],[onFocus]:{...state[slideNumber][onFocus],bold: !presentationState[slideNumber][onFocus].bold}}}
