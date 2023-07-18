@@ -2,7 +2,7 @@
     width: 100vw;
     margin-top: 0px;
     background-color: white;
-    height: 14vh;
+    height: 10vh;
 }
 
 .nav-container {
@@ -18,6 +18,7 @@
     align-items: center;
     text-align: center;
     font-size: 1vw;
+
 }
 
 .link-nav {
@@ -33,7 +34,7 @@
 .links-auth {
     display: flex;
     /* flex-direction: column; */
-    margin: 0px 1vw;
+    margin: 2vh 1vw;
     
    
 }
@@ -51,7 +52,7 @@
 
 
 .home-link {
-    padding: 1.5vw;
+    padding-left: 1.5vw;
     font-size: 2vw;
     font-weight: 700;
     color: black;
@@ -79,7 +80,7 @@
     align-items: center;
     font-size: 2vw;
     border-radius: 99999px;
-    padding: 1.5vw;
+    margin-top: 1vh;
     margin-right: .8vw;
 
   }
@@ -108,7 +109,7 @@
     z-index: 1;
    height: 30vh;
     color: black;
-    transform: translateY(calc(6vw));
+    transform: translateY(calc(5.6vw));
    
   }
 

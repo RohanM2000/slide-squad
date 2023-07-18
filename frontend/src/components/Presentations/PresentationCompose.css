@@ -73,7 +73,7 @@
 .compose-container {
     display: flex;
     flex-direction: column;
-    margin: 0px auto;
+    margin: 1vh auto;
     padding-top: 1vw;
     padding-bottom: .5vw;
     padding-left: 15vw;
