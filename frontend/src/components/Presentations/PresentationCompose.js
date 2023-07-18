@@ -439,7 +439,7 @@ function handleRotate(type){
         </button>
         <div className='slide-number-container'>
           <span className='slide-number'>
-            {`page ${slideNumber}/${Object.keys(presentationState).length}`}
+            {`page ${slideNumber}/${Object.keys(presentationState).length}`} (Arrow Keys to Switch)
           </span>
         </div>
         </div>
