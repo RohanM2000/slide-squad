@@ -1,5 +1,7 @@
 # Slide Squad README
+## About
 
+Slide Squad is a social media based around creating and sharing presentations with others. It is a unique and innovative take on the standard social media, with the expressiveness of presentations inspiring the project.
 ## Technologies Used 
 
 * React
