@@ -1,10 +1,10 @@
 function getCookie(cookieName) {
     const cookies = document.cookie.split(';');
-    console.log(cookies);
+    // console.log(cookies);
     for (let cookie of cookies) {
         const [name, value] = cookie.split('=');
         if (name.trim() === cookieName) {
-          console.log(value);
+          // console.log(value);
           return value;
         }
     }

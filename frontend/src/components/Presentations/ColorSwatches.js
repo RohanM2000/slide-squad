@@ -30,7 +30,7 @@ export default function Swatchy(
         "#000000", "#525252", "#969696", "#D9D9D9", "#FFFFFF",
     ]
 ) {
-        console.log('ran');
+        // console.log('ran');
         hasSwatchyRun = true;
         let swatchyCount = document.querySelectorAll('.swatchy-trigger');
 

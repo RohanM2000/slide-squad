@@ -1,6 +1,6 @@
 import { updatePresentation } from "../../store/presentations";
-export default function saveUpdatePresentation(obj, dispatch, title, presentationId,categories) {
-    dispatch(updatePresentation({
+export default async function saveUpdatePresentation(obj, dispatch, title, presentationId,categories) {
+    return await dispatch(updatePresentation({
         title: title,
         category: categories,
         slides: obj
