@@ -25,7 +25,8 @@ function PresentationEdit () {
   const [showSwatch,setShowSwatch] = useState({
     reveal:false,
   type:null});
-
+  const dragFunctions = useRef({});
+  const dragTarget = useRef(0);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const oldPresentationState = useSelector(state=>state.presentations[presentationId]?.slides);
@@ -373,7 +374,21 @@ function PresentationEdit () {
         </div>
         {/* canvas frame to house the canvas and display possible overflows */}
         <div className='canvas-frame'>
-          <div className='presentation-canvas' >
+          <div className='presentation-canvas' 
+            onMouseMove={e=>{
+              if (dragTarget.current !== 0) {
+                dragFunctions.current[slideNumber][dragTarget.current].move(e);
+              }
+            }}
+            onMouseUp={(e)=>dragTarget.current = 0}
+            onMouseLeave={(e)=>{
+              e.preventDefault();
+              if (dragTarget.current !== 0) {
+                dragFunctions.current[slideNumber][dragTarget.current].leave(e);
+              }
+              dragTarget.current = 0;
+            }}
+          >
               {intObjects && intObjects.map((obj)=>{
                 if (obj.type === "text") return <SlideText 
                                                 key={`${slideNumber}-${obj.id}`}
@@ -390,6 +405,8 @@ function PresentationEdit () {
                                                 windowHeight={windowHeight}
                                                 windowWidth={windowWidth}
                                                 rotate={obj.rotate}
+                                                dragFunctions={dragFunctions}
+                                                dragTarget={dragTarget}
                                                 />
                 if (obj.type === "rectangle") return <SlideRectangle 
                                                 key={`${slideNumber}-${obj.id}`}
@@ -405,6 +422,8 @@ function PresentationEdit () {
                                                 setOnFocus={setOnFocus}
                                                 bg={obj.bg}
                                                 rotate={obj.rotate}
+                                                dragFunctions={dragFunctions}
+                                                dragTarget={dragTarget}
                                                 />
                 // if (obj.type === "photo") return <SlidePhoto
                 //                                 key={`${slideNumber}-${obj.id}`}

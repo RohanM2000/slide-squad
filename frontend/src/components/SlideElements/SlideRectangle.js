@@ -1,6 +1,6 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
-export default function SlideRectangle ({rotate,slideNumber, startLeft, id, startTop, startWidth, startHeight, setPresentationState, windowHeight, windowWidth, setOnFocus, bg}) {
+export default function SlideRectangle ({rotate,slideNumber, startLeft, id, startTop, startWidth, startHeight, setPresentationState, windowHeight, windowWidth, setOnFocus, bg, dragFunctions, dragTarget}) {
     const [top, setTop] = useState(0);
     const [left, setLeft] = useState(0);
     const [width, setWidth] = useState(0);
@@ -14,8 +14,9 @@ export default function SlideRectangle ({rotate,slideNumber, startLeft, id, star
     // const assignedLocation = useRef(false);
     const handleMouseDown = (e) => {
         e.preventDefault();
-        // e.stopPropogation();
+        e.stopPropagation();
         isClicked.current = true;
+        dragTarget.current = id;
         prevPos.current.top = e.clientY;
         prevPos.current.left = e.clientX;
     };
@@ -24,6 +25,7 @@ export default function SlideRectangle ({rotate,slideNumber, startLeft, id, star
         e.preventDefault();
         e.stopPropagation();
         isResizeClicked.current = true;
+        dragTarget.current = -id;
         prevPos.current.top = e.clientY;
         prevPos.current.left = e.clientX;
     };
@@ -94,23 +96,38 @@ export default function SlideRectangle ({rotate,slideNumber, startLeft, id, star
                 }}
         })
     };
+    // const handleMouseLeave = (e) => {
+    //     isClicked.current = false;
+    //     isResizeClicked.current = false;
+    // }
 
     const handleMouseMove = (e) => {
-        if (isClicked.current) {
+        e.stopPropagation();
+        e.preventDefault();
+        if (isClicked.current || dragTarget.current === id) {
             setTop(e.clientY - prevPos.current.top);
             setLeft(e.clientX - prevPos.current.left);
         }
-        if (isResizeClicked.current) {
+        if (isResizeClicked.current || dragTarget.current === -id) {
             setHeight(e.clientY - prevPos.current.top);
             setWidth(e.clientX - prevPos.current.left);
         }
     };
 
+    useEffect(()=>{
+        if (!dragFunctions.current[slideNumber]) {
+            dragFunctions.current[slideNumber] = {};
+        }
+        dragFunctions.current[slideNumber][id] = {move: handleMouseMove, leave: handleMouseLeave};
+        dragFunctions.current[slideNumber][-id] = {move: handleMouseMove, leave: handleMouseLeave};
+        // dragFunctions.current = ()=>console.log("hello world");
+    })
+
     return (
         <div
             onMouseDown={handleMouseDown}
             onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseLeave}
+            // onMouseLeave={handleMouseLeave}
             onMouseMove={handleMouseMove}
             onClick={handleClick}
             style={{

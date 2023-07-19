@@ -49,6 +49,9 @@ function PresentationCompose () {
    1:{ 1:{id:1, rotate:0,startLeft:0/windowWidth,startTop:0/windowHeight, text:'', type: "text",bold:false,color:'black',fontsize: 16/windowWidth}},
    2:{ 1:{id:1, rotate:0, startLeft:0/windowWidth,startTop:0/windowHeight, text:'', type: "text",bold:false,color:'black',fontsize: 16/windowWidth}}
   });
+  // const dragFunctions = useRef({1:{}, 2:{}});
+  const dragFunctions = useRef({});
+  const dragTarget = useRef(0);
   useEffect(()=>{
     setTimeout(()=>{
       if (errors.length>0){
@@ -377,7 +380,23 @@ function handleRotate(type){
         </div>
         {/* canvas frame to house the canvas and display possible overflows */}
         <div className='canvas-frame'>
-          <div className='presentation-canvas' >
+          <div className='presentation-canvas' 
+            onMouseMove={e=>{
+              // console.log(dragTarget.current);
+              if (dragTarget.current !== 0) {
+                dragFunctions.current[slideNumber][dragTarget.current].move(e);
+              }
+            }}
+            onMouseUp={(e)=>dragTarget.current = 0}
+            onMouseLeave={(e)=>{
+              e.preventDefault();
+              // console.log("leave");
+              if (dragTarget.current !== 0) {
+                dragFunctions.current[slideNumber][dragTarget.current].leave(e);
+              }
+              dragTarget.current = 0;
+            }}
+          >
               {intObjects.map((obj)=>{
                 if (obj.type === "text") return <SlideText 
                                                 key={`${slideNumber}-${obj.id}`}
@@ -394,6 +413,8 @@ function handleRotate(type){
                                                 windowHeight={windowHeight}
                                                 windowWidth={windowWidth}
                                                 rotate={obj.rotate}
+                                                dragFunctions={dragFunctions}
+                                                dragTarget={dragTarget}
                                                 />
                 if (obj.type === "rectangle") return <SlideRectangle 
                                                 key={`${slideNumber}-${obj.id}`}
@@ -409,6 +430,8 @@ function handleRotate(type){
                                                 setOnFocus={setOnFocus}
                                                 bg={obj.bg}
                                                 rotate={obj.rotate}
+                                                dragFunctions={dragFunctions}
+                                                dragTarget={dragTarget}
                                                 />
                 if (obj.type === "photo") return <SlidePhoto
                                                 key={`${slideNumber}-${obj.id}`}

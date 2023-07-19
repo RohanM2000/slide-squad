@@ -1,7 +1,7 @@
 import { useState, useRef,useEffect } from "react";
 import myDebounce from "../Presentations/MyDebounce";
 import './SlideText.css';
-export default function SlideText ({rotate,slideNumber,fontsize,color,setOnFocus, bold, startLeft, id, startTop, text, setPresentationState, windowHeight, windowWidth}) {
+export default function SlideText ({rotate,slideNumber,fontsize,color,setOnFocus, bold, startLeft, id, startTop, text, setPresentationState, windowHeight, windowWidth, dragFunctions, dragTarget}) {
     const [top, setTop] = useState(0);
     const [left, setLeft] = useState(0);
     const [selected,setSelected] = useState(false);
@@ -17,6 +17,7 @@ export default function SlideText ({rotate,slideNumber,fontsize,color,setOnFocus
     const handleMouseDown = (e) => {
         // e.preventDefault();
         isClicked.current = true;
+        dragTarget.current = id;
         prevPos.current.top = e.clientY;
         prevPos.current.left = e.clientX;
         setSelected(true);
@@ -75,23 +76,19 @@ export default function SlideText ({rotate,slideNumber,fontsize,color,setOnFocus
     };
 
     const handleMouseMove = (e) => {
-        e.preventDefault();
-        if (!isClicked.current) return;
-        setTop(e.clientY - prevPos.current.top);
-        setLeft(e.clientX - prevPos.current.left);
-    };
-    let stack = 0;
 
-    const handleRefInput = function(override) {
-        if (override) return reassignState();
-        stack +=1
-        setTimeout(()=>{
-            stack -=1;
-            if (stack === 0) {
-                reassignState();
-            }
-        }, 2000);
-    }
+        e.preventDefault();
+        if (isClicked.current || dragTarget.current === id) {
+            setTop(e.clientY - prevPos.current.top);
+            setLeft(e.clientX - prevPos.current.left);
+        }
+    };
+    useEffect(()=>{
+        if (!dragFunctions.current[slideNumber]) {
+            dragFunctions.current[slideNumber] = {};
+        }
+        dragFunctions.current[slideNumber][id] = {move: handleMouseMove, leave: handleMouseLeave};
+    })
     const populateText = ()=> {
         textArea.current.innerText = text;
     }
@@ -122,7 +119,7 @@ export default function SlideText ({rotate,slideNumber,fontsize,color,setOnFocus
             // }}      
             onMouseDown={handleMouseDown}
             onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseLeave}
+            // onMouseLeave={handleMouseLeave}
             onMouseMove={handleMouseMove}
             onFocus={handleOnFocus}
             style={{rotate: (rotate)+'deg', position: "absolute", top: (startTop*windowHeight + top) + "px", left: (startLeft*windowWidth + left) + "px",
