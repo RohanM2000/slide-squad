@@ -380,7 +380,13 @@ function PresentationEdit () {
                 dragFunctions.current[slideNumber][dragTarget.current].move(e);
               }
             }}
-            onMouseUp={(e)=>dragTarget.current = 0}
+            onMouseUp={(e)=>{
+              e.preventDefault();
+              if (dragTarget.current !== 0) {
+                dragFunctions.current[slideNumber][dragTarget.current].leave(e);
+              }
+              dragTarget.current = 0;
+            }}
             onMouseLeave={(e)=>{
               e.preventDefault();
               if (dragTarget.current !== 0) {
