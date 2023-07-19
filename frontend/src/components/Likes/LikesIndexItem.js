@@ -5,7 +5,7 @@ import { deleteLike } from '../../store/likes';
 import { fetchPresentation } from '../../store/presentations';
 import StaticPresentation from '../StaticPresentation/StaticPresentation';
 
-const LikesIndexItem = ({ like, swap, scrollChecker, idx} ) => {
+const LikesIndexItem = ({ like, swap, scrollChecker, idx, loadedLikes}) => {
     const presentation = useSelector(state => state.presentations[like.likeId._id] );
     const dispatch = useDispatch();
     const [show, setShow] = useState(true);
@@ -21,7 +21,7 @@ const LikesIndexItem = ({ like, swap, scrollChecker, idx} ) => {
     return show && (
         <>
         <div className='presentation-container'>
-            <StaticPresentation presentation={presentation} swap={swap} disappear={setShow} scrollChecker={scrollChecker} idx={idx}/>
+            <StaticPresentation presentation={presentation} swap={swap} disappear={setShow} scrollChecker={scrollChecker} idx={idx} loadedLikes={loadedLikes}/>
             {/* <button 
                     className='delete-like-button'
                                    onClick={() => {
