@@ -21,6 +21,7 @@ Slide Squad is a social media based around creating and sharing presentations wi
 * Full create, edit, delete, and showable comments on presentations
 * <img width="457" alt="image" src="https://github.com/RohanM2000/slide-squad/assets/15352286/f631b235-2289-47e2-a054-880b7a4c35d7">
 * Likes and viewing presentations that have been liked by the user
+* <img width="917" alt="image" src="https://github.com/RohanM2000/slide-squad/assets/15352286/e9b797f6-5643-43b9-a691-34c9d3304a12">
 * Carousel on index, profile, and likes pages
 * <img width="779" alt="image" src="https://github.com/RohanM2000/slide-squad/assets/15352286/7adc09ab-ed2b-484c-88d3-c1d0720c9da1">
 
