@@ -5,7 +5,7 @@ const RECEIVE_PRESENTATIONS = "presentations/RECEIVE_PRESENTATIONS";
 const RECEIVE_PRESENTATION = "presentations/RECEIVE_PRESENTATOIN";
 const RECEIVE_PRESENTATION_ERRORS = "presentations/RECEIVE_PRESENTATION_ERRORS";
 const CLEAR_PRESENTATION_ERRORS = "presentations/CLEAR_PRESENTATION_ERRORS";
-const REMOVE_PRESENTATION = "presentations/REMOVE_PRESENTATION";
+export const REMOVE_PRESENTATION = "presentations/REMOVE_PRESENTATION";
 
 const removePresentation = presentationId => ({
   type: REMOVE_PRESENTATION,
@@ -110,6 +110,7 @@ export const updatePresentation = (data, presentationId) => async dispatch => {
     });
     const presentation = await res.json();
     dispatch(receivePresentation(presentation));
+    return res;
   } catch(err) {
     const resBody = await err.json();
     if (resBody.statusCode === 400) {

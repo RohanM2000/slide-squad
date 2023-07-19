@@ -91,7 +91,7 @@ const LikesIndex = () => {
     if (newLikes) {
       newLikes.forEach((like)=> {
         // console.log("like", like)
-        if (like.liker._id === userId) {
+        if (like.liker._id === userId && like.likeId) {
           filteredLikes.push(like);
         }
       })

@@ -36,7 +36,7 @@ const PresentationFooter =({presentation, swap, loadedLikes})=>{
       likes.forEach(like=>{
               // console.log(like.likeId._id, presentationId);
               // console.log(like.likeId._id === presentation._id);
-              if (like.likeId._id === presentationId) {
+              if (like.likeId?._id === presentationId) {
                 setIsLiked(true);
               }
             })
@@ -89,7 +89,7 @@ const PresentationFooter =({presentation, swap, loadedLikes})=>{
       }
   };
   
-    return (
+    return loadedLikes ? (
         <div className='footer-container'>
             <div className="like-comment-buttons">
 
@@ -107,7 +107,7 @@ const PresentationFooter =({presentation, swap, loadedLikes})=>{
             </div>}
             {showComments && <CommentsIndex presentationId={presentationId} />}
         </div>
-    )
+    ) : null;
 }
 
 export default PresentationFooter;

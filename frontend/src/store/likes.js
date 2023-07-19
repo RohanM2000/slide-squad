@@ -1,5 +1,5 @@
 import jwtFetch from './jwt';
-
+import { REMOVE_PRESENTATION } from './presentations';
 const RECEIVE_LIKES = "likes/RECEIVE_LIKES";
 const RECEIVE_LIKE = "likes/RECEIVE_PRESENTATOIN";
 const REMOVE_LIKE = "likes/REMOVE_LIKE"
@@ -137,8 +137,23 @@ const likesReducer = (state = {}, action) => {
       return { ...state, [action.like._id]: action.like};
     case REMOVE_LIKE:
         newState = state;
-        delete newState[action.likeId]
-        return newState
+        delete newState[action.likeId];
+        return newState;
+    case REMOVE_PRESENTATION:
+      // console.log("hitting here");
+      newState = {}
+      const likes = Object.values(state);
+        // console.log("action", action);
+        // console.log("newState", newState);
+      likes.forEach((like)=>{
+        // console.log("like", like)
+        if (like.likeId && like.likeId._id !== action.presentationId) {
+          // delete newState[like._id];
+          // console.log("collision")
+          newState[like._id] = like;
+        }
+      })
+      return newState;
     default:
       return state;
   }
